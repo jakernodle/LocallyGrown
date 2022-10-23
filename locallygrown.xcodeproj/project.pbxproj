@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D1D68C21DF3C6B90D50E60B /* Pods_locallygrown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B64D7DBCFA83E47702CF104 /* Pods_locallygrown.framework */; };
+		3813D79929010527004AB4E9 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3813D79829010527004AB4E9 /* SignupView.swift */; };
+		3813D79B29010831004AB4E9 /* ShopperHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3813D79A29010830004AB4E9 /* ShopperHomeView.swift */; };
 		3850A20F28FF3E1E00C22844 /* locallygrownApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850A20E28FF3E1E00C22844 /* locallygrownApp.swift */; };
 		3850A21128FF3E1E00C22844 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850A21028FF3E1E00C22844 /* ContentView.swift */; };
 		3850A21328FF3E2200C22844 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3850A21228FF3E2200C22844 /* Assets.xcassets */; };
@@ -14,6 +17,32 @@
 		3850A22028FF3E2300C22844 /* locallygrownTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850A21F28FF3E2300C22844 /* locallygrownTests.swift */; };
 		3850A22A28FF3E2300C22844 /* locallygrownUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850A22928FF3E2300C22844 /* locallygrownUITests.swift */; };
 		3850A22C28FF3E2300C22844 /* locallygrownUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850A22B28FF3E2300C22844 /* locallygrownUITestsLaunchTests.swift */; };
+		387FD4182900988C009C9D58 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD4172900988C009C9D58 /* User.swift */; };
+		387FD41A290098F0009C9D58 /* Shopper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD419290098F0009C9D58 /* Shopper.swift */; };
+		387FD41D29009D53009C9D58 /* AppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD41C29009D53009C9D58 /* AppService.swift */; };
+		387FD41F29009E37009C9D58 /* Supplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD41E29009E37009C9D58 /* Supplier.swift */; };
+		387FD42129009EF7009C9D58 /* Farm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD42029009EF7009C9D58 /* Farm.swift */; };
+		387FD42329009F1B009C9D58 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD42229009F1B009C9D58 /* Product.swift */; };
+		387FD4252900A0A3009C9D58 /* Pricing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD4242900A0A3009C9D58 /* Pricing.swift */; };
+		387FD4282900A6D9009C9D58 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD4272900A6D9009C9D58 /* Order.swift */; };
+		387FD42A2900A75A009C9D58 /* ShoppingCartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD4292900A75A009C9D58 /* ShoppingCartItem.swift */; };
+		387FD42D2900AEF9009C9D58 /* UserDefaults+locallygrown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD42C2900AEF9009C9D58 /* UserDefaults+locallygrown.swift */; };
+		387FD42F2900B3EA009C9D58 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD42E2900B3EA009C9D58 /* UserService.swift */; };
+		387FD4322900C959009C9D58 /* ShopperAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD4312900C959009C9D58 /* ShopperAPIClient.swift */; };
+		387FD4342900C978009C9D58 /* SupplierAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD4332900C978009C9D58 /* SupplierAPIClient.swift */; };
+		387FD4362900CAF5009C9D58 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD4352900CAF5009C9D58 /* APIError.swift */; };
+		387FD4382900CB9B009C9D58 /* UserAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD4372900CB9B009C9D58 /* UserAPIClient.swift */; };
+		387FD43F2900D96A009C9D58 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD43E2900D96A009C9D58 /* LoginView.swift */; };
+		38AFE5B229024659003585A1 /* ShopperHomeViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFE5B129024659003585A1 /* ShopperHomeViewModels.swift */; };
+		38AFE5B429024C9A003585A1 /* ShopperFarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFE5B329024C9A003585A1 /* ShopperFarmView.swift */; };
+		38AFE5B629025915003585A1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFE5B529025915003585A1 /* MainView.swift */; };
+		38AFE5BA29027D25003585A1 /* ShopperAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFE5B929027D25003585A1 /* ShopperAccountView.swift */; };
+		38AFE5BC29045868003585A1 /* ShopperCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFE5BB29045867003585A1 /* ShopperCartView.swift */; };
+		38AFE5BE2904A54F003585A1 /* ShopperCartViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFE5BD2904A54F003585A1 /* ShopperCartViewModels.swift */; };
+		38AFE5C02904D899003585A1 /* ShopperOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFE5BF2904D899003585A1 /* ShopperOrderView.swift */; };
+		38AFE5C22904D94A003585A1 /* ShopperOrderViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFE5C12904D94A003585A1 /* ShopperOrderViewModels.swift */; };
+		B6D0859845FB86E3E4B2795A /* Pods_locallygrown_locallygrownUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04EC42CB017B5DEE0A6659C6 /* Pods_locallygrown_locallygrownUITests.framework */; };
+		EF9ED9393B4482754CF9E208 /* Pods_locallygrownTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67F9CF13874A0A2C0C93C3D0 /* Pods_locallygrownTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +63,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04EC42CB017B5DEE0A6659C6 /* Pods_locallygrown_locallygrownUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_locallygrown_locallygrownUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C4978CB2D7269A177AE472F /* Pods-locallygrownTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locallygrownTests.release.xcconfig"; path = "Target Support Files/Pods-locallygrownTests/Pods-locallygrownTests.release.xcconfig"; sourceTree = "<group>"; };
+		3813D79829010527004AB4E9 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
+		3813D79A29010830004AB4E9 /* ShopperHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperHomeView.swift; sourceTree = "<group>"; };
 		3850A20B28FF3E1E00C22844 /* locallygrown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = locallygrown.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3850A20E28FF3E1E00C22844 /* locallygrownApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locallygrownApp.swift; sourceTree = "<group>"; };
 		3850A21028FF3E1E00C22844 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +77,37 @@
 		3850A22528FF3E2300C22844 /* locallygrownUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = locallygrownUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3850A22928FF3E2300C22844 /* locallygrownUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locallygrownUITests.swift; sourceTree = "<group>"; };
 		3850A22B28FF3E2300C22844 /* locallygrownUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locallygrownUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		387FD4172900988C009C9D58 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		387FD419290098F0009C9D58 /* Shopper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shopper.swift; sourceTree = "<group>"; };
+		387FD41C29009D53009C9D58 /* AppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppService.swift; sourceTree = "<group>"; };
+		387FD41E29009E37009C9D58 /* Supplier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Supplier.swift; sourceTree = "<group>"; };
+		387FD42029009EF7009C9D58 /* Farm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Farm.swift; sourceTree = "<group>"; };
+		387FD42229009F1B009C9D58 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		387FD4242900A0A3009C9D58 /* Pricing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pricing.swift; sourceTree = "<group>"; };
+		387FD4272900A6D9009C9D58 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		387FD4292900A75A009C9D58 /* ShoppingCartItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartItem.swift; sourceTree = "<group>"; };
+		387FD42C2900AEF9009C9D58 /* UserDefaults+locallygrown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+locallygrown.swift"; sourceTree = "<group>"; };
+		387FD42E2900B3EA009C9D58 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		387FD4312900C959009C9D58 /* ShopperAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperAPIClient.swift; sourceTree = "<group>"; };
+		387FD4332900C978009C9D58 /* SupplierAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplierAPIClient.swift; sourceTree = "<group>"; };
+		387FD4352900CAF5009C9D58 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		387FD4372900CB9B009C9D58 /* UserAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPIClient.swift; sourceTree = "<group>"; };
+		387FD43E2900D96A009C9D58 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		38AFE5B129024659003585A1 /* ShopperHomeViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperHomeViewModels.swift; sourceTree = "<group>"; };
+		38AFE5B329024C9A003585A1 /* ShopperFarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperFarmView.swift; sourceTree = "<group>"; };
+		38AFE5B529025915003585A1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		38AFE5B929027D25003585A1 /* ShopperAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperAccountView.swift; sourceTree = "<group>"; };
+		38AFE5BB29045867003585A1 /* ShopperCartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperCartView.swift; sourceTree = "<group>"; };
+		38AFE5BD2904A54F003585A1 /* ShopperCartViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperCartViewModels.swift; sourceTree = "<group>"; };
+		38AFE5BF2904D899003585A1 /* ShopperOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperOrderView.swift; sourceTree = "<group>"; };
+		38AFE5C12904D94A003585A1 /* ShopperOrderViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperOrderViewModels.swift; sourceTree = "<group>"; };
+		67F9CF13874A0A2C0C93C3D0 /* Pods_locallygrownTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_locallygrownTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B64D7DBCFA83E47702CF104 /* Pods_locallygrown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_locallygrown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7800A26228E10965E9C8C22D /* Pods-locallygrown-locallygrownUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locallygrown-locallygrownUITests.debug.xcconfig"; path = "Target Support Files/Pods-locallygrown-locallygrownUITests/Pods-locallygrown-locallygrownUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		784FA78B58DE288238425AFD /* Pods-locallygrown-locallygrownUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locallygrown-locallygrownUITests.release.xcconfig"; path = "Target Support Files/Pods-locallygrown-locallygrownUITests/Pods-locallygrown-locallygrownUITests.release.xcconfig"; sourceTree = "<group>"; };
+		9B9B01C22C260229C431FD92 /* Pods-locallygrown.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locallygrown.release.xcconfig"; path = "Target Support Files/Pods-locallygrown/Pods-locallygrown.release.xcconfig"; sourceTree = "<group>"; };
+		D81CF2E8489CC73AEE9DAFA5 /* Pods-locallygrown.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locallygrown.debug.xcconfig"; path = "Target Support Files/Pods-locallygrown/Pods-locallygrown.debug.xcconfig"; sourceTree = "<group>"; };
+		E0C6BBABFA06AC247372E43E /* Pods-locallygrownTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locallygrownTests.debug.xcconfig"; path = "Target Support Files/Pods-locallygrownTests/Pods-locallygrownTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D1D68C21DF3C6B90D50E60B /* Pods_locallygrown.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF9ED9393B4482754CF9E208 /* Pods_locallygrownTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,12 +131,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6D0859845FB86E3E4B2795A /* Pods_locallygrown_locallygrownUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		244EF1D4F2C6D549A6BE63D3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6B64D7DBCFA83E47702CF104 /* Pods_locallygrown.framework */,
+				04EC42CB017B5DEE0A6659C6 /* Pods_locallygrown_locallygrownUITests.framework */,
+				67F9CF13874A0A2C0C93C3D0 /* Pods_locallygrownTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3850A20228FF3E1D00C22844 = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +155,8 @@
 				3850A21E28FF3E2300C22844 /* locallygrownTests */,
 				3850A22828FF3E2300C22844 /* locallygrownUITests */,
 				3850A20C28FF3E1E00C22844 /* Products */,
+				FE5E46E85EBC0DD217294F5A /* Pods */,
+				244EF1D4F2C6D549A6BE63D3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,6 +173,12 @@
 		3850A20D28FF3E1E00C22844 /* locallygrown */ = {
 			isa = PBXGroup;
 			children = (
+				387FD4302900C93E009C9D58 /* API */,
+				387FD42B2900AED9009C9D58 /* Extensions */,
+				387FD41B29009D3B009C9D58 /* Managers */,
+				387FD4152900983D009C9D58 /* Models */,
+				38AFE5AE290245CF003585A1 /* ViewModels */,
+				387FD43D2900D947009C9D58 /* Views */,
 				3850A20E28FF3E1E00C22844 /* locallygrownApp.swift */,
 				3850A21028FF3E1E00C22844 /* ContentView.swift */,
 				3850A21228FF3E2200C22844 /* Assets.xcassets */,
@@ -127,6 +212,135 @@
 			path = locallygrownUITests;
 			sourceTree = "<group>";
 		};
+		387FD4152900983D009C9D58 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				387FD4262900A6C1009C9D58 /* Order */,
+				387FD41629009856009C9D58 /* Users */,
+				387FD42029009EF7009C9D58 /* Farm.swift */,
+				387FD42229009F1B009C9D58 /* Product.swift */,
+				387FD4242900A0A3009C9D58 /* Pricing.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		387FD41629009856009C9D58 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				387FD4172900988C009C9D58 /* User.swift */,
+				387FD419290098F0009C9D58 /* Shopper.swift */,
+				387FD41E29009E37009C9D58 /* Supplier.swift */,
+			);
+			path = Users;
+			sourceTree = "<group>";
+		};
+		387FD41B29009D3B009C9D58 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				387FD41C29009D53009C9D58 /* AppService.swift */,
+				387FD42E2900B3EA009C9D58 /* UserService.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		387FD4262900A6C1009C9D58 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				387FD4272900A6D9009C9D58 /* Order.swift */,
+				387FD4292900A75A009C9D58 /* ShoppingCartItem.swift */,
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
+		387FD42B2900AED9009C9D58 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				387FD42C2900AEF9009C9D58 /* UserDefaults+locallygrown.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		387FD4302900C93E009C9D58 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				387FD4312900C959009C9D58 /* ShopperAPIClient.swift */,
+				387FD4332900C978009C9D58 /* SupplierAPIClient.swift */,
+				387FD4352900CAF5009C9D58 /* APIError.swift */,
+				387FD4372900CB9B009C9D58 /* UserAPIClient.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		387FD4392900D870009C9D58 /* SupplierViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SupplierViews;
+			sourceTree = "<group>";
+		};
+		387FD43A2900D888009C9D58 /* ShopperViews */ = {
+			isa = PBXGroup;
+			children = (
+				3813D79A29010830004AB4E9 /* ShopperHomeView.swift */,
+				38AFE5B329024C9A003585A1 /* ShopperFarmView.swift */,
+				38AFE5B929027D25003585A1 /* ShopperAccountView.swift */,
+				38AFE5BB29045867003585A1 /* ShopperCartView.swift */,
+				38AFE5BF2904D899003585A1 /* ShopperOrderView.swift */,
+			);
+			path = ShopperViews;
+			sourceTree = "<group>";
+		};
+		387FD43D2900D947009C9D58 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				387FD4392900D870009C9D58 /* SupplierViews */,
+				387FD43A2900D888009C9D58 /* ShopperViews */,
+				387FD43E2900D96A009C9D58 /* LoginView.swift */,
+				3813D79829010527004AB4E9 /* SignupView.swift */,
+				38AFE5B529025915003585A1 /* MainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		38AFE5AE290245CF003585A1 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				38AFE5B02902462F003585A1 /* ShopperViewModels */,
+				38AFE5AF29024624003585A1 /* SupplierViewModels */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		38AFE5AF29024624003585A1 /* SupplierViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SupplierViewModels;
+			sourceTree = "<group>";
+		};
+		38AFE5B02902462F003585A1 /* ShopperViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				38AFE5B129024659003585A1 /* ShopperHomeViewModels.swift */,
+				38AFE5BD2904A54F003585A1 /* ShopperCartViewModels.swift */,
+				38AFE5C12904D94A003585A1 /* ShopperOrderViewModels.swift */,
+			);
+			path = ShopperViewModels;
+			sourceTree = "<group>";
+		};
+		FE5E46E85EBC0DD217294F5A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D81CF2E8489CC73AEE9DAFA5 /* Pods-locallygrown.debug.xcconfig */,
+				9B9B01C22C260229C431FD92 /* Pods-locallygrown.release.xcconfig */,
+				7800A26228E10965E9C8C22D /* Pods-locallygrown-locallygrownUITests.debug.xcconfig */,
+				784FA78B58DE288238425AFD /* Pods-locallygrown-locallygrownUITests.release.xcconfig */,
+				E0C6BBABFA06AC247372E43E /* Pods-locallygrownTests.debug.xcconfig */,
+				1C4978CB2D7269A177AE472F /* Pods-locallygrownTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -134,9 +348,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3850A22F28FF3E2300C22844 /* Build configuration list for PBXNativeTarget "locallygrown" */;
 			buildPhases = (
+				0692F08609E934BFDC60C510 /* [CP] Check Pods Manifest.lock */,
 				3850A20728FF3E1D00C22844 /* Sources */,
 				3850A20828FF3E1D00C22844 /* Frameworks */,
 				3850A20928FF3E1D00C22844 /* Resources */,
+				29911DA1C8D6F0CC483FDBEF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -151,6 +367,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3850A23228FF3E2300C22844 /* Build configuration list for PBXNativeTarget "locallygrownTests" */;
 			buildPhases = (
+				06078570F024797376DB9572 /* [CP] Check Pods Manifest.lock */,
 				3850A21728FF3E2300C22844 /* Sources */,
 				3850A21828FF3E2300C22844 /* Frameworks */,
 				3850A21928FF3E2300C22844 /* Resources */,
@@ -169,9 +386,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3850A23528FF3E2300C22844 /* Build configuration list for PBXNativeTarget "locallygrownUITests" */;
 			buildPhases = (
+				7A73CBB12A3DE5257F1F2B1E /* [CP] Check Pods Manifest.lock */,
 				3850A22128FF3E2300C22844 /* Sources */,
 				3850A22228FF3E2300C22844 /* Frameworks */,
 				3850A22328FF3E2300C22844 /* Resources */,
+				8714252B8363B117EC284B5F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -252,13 +471,142 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		06078570F024797376DB9572 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-locallygrownTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0692F08609E934BFDC60C510 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-locallygrown-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		29911DA1C8D6F0CC483FDBEF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-locallygrown/Pods-locallygrown-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-locallygrown/Pods-locallygrown-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-locallygrown/Pods-locallygrown-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7A73CBB12A3DE5257F1F2B1E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-locallygrown-locallygrownUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8714252B8363B117EC284B5F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-locallygrown-locallygrownUITests/Pods-locallygrown-locallygrownUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-locallygrown-locallygrownUITests/Pods-locallygrown-locallygrownUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-locallygrown-locallygrownUITests/Pods-locallygrown-locallygrownUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3850A20728FF3E1D00C22844 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3813D79929010527004AB4E9 /* SignupView.swift in Sources */,
 				3850A21128FF3E1E00C22844 /* ContentView.swift in Sources */,
+				38AFE5B429024C9A003585A1 /* ShopperFarmView.swift in Sources */,
+				38AFE5C22904D94A003585A1 /* ShopperOrderViewModels.swift in Sources */,
+				387FD4342900C978009C9D58 /* SupplierAPIClient.swift in Sources */,
+				38AFE5BA29027D25003585A1 /* ShopperAccountView.swift in Sources */,
+				387FD42329009F1B009C9D58 /* Product.swift in Sources */,
+				387FD42129009EF7009C9D58 /* Farm.swift in Sources */,
+				387FD4252900A0A3009C9D58 /* Pricing.swift in Sources */,
+				38AFE5BE2904A54F003585A1 /* ShopperCartViewModels.swift in Sources */,
+				387FD41F29009E37009C9D58 /* Supplier.swift in Sources */,
+				387FD4282900A6D9009C9D58 /* Order.swift in Sources */,
+				387FD42F2900B3EA009C9D58 /* UserService.swift in Sources */,
+				38AFE5B229024659003585A1 /* ShopperHomeViewModels.swift in Sources */,
+				387FD41A290098F0009C9D58 /* Shopper.swift in Sources */,
+				387FD43F2900D96A009C9D58 /* LoginView.swift in Sources */,
 				3850A20F28FF3E1E00C22844 /* locallygrownApp.swift in Sources */,
+				387FD42A2900A75A009C9D58 /* ShoppingCartItem.swift in Sources */,
+				3813D79B29010831004AB4E9 /* ShopperHomeView.swift in Sources */,
+				387FD42D2900AEF9009C9D58 /* UserDefaults+locallygrown.swift in Sources */,
+				387FD4322900C959009C9D58 /* ShopperAPIClient.swift in Sources */,
+				387FD4362900CAF5009C9D58 /* APIError.swift in Sources */,
+				387FD41D29009D53009C9D58 /* AppService.swift in Sources */,
+				38AFE5B629025915003585A1 /* MainView.swift in Sources */,
+				38AFE5C02904D899003585A1 /* ShopperOrderView.swift in Sources */,
+				387FD4182900988C009C9D58 /* User.swift in Sources */,
+				387FD4382900CB9B009C9D58 /* UserAPIClient.swift in Sources */,
+				38AFE5BC29045868003585A1 /* ShopperCartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +761,7 @@
 		};
 		3850A23028FF3E2300C22844 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D81CF2E8489CC73AEE9DAFA5 /* Pods-locallygrown.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -442,6 +791,7 @@
 		};
 		3850A23128FF3E2300C22844 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9B9B01C22C260229C431FD92 /* Pods-locallygrown.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -471,6 +821,7 @@
 		};
 		3850A23328FF3E2300C22844 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0C6BBABFA06AC247372E43E /* Pods-locallygrownTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -496,6 +847,7 @@
 		};
 		3850A23428FF3E2300C22844 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C4978CB2D7269A177AE472F /* Pods-locallygrownTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -521,6 +873,7 @@
 		};
 		3850A23628FF3E2300C22844 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7800A26228E10965E9C8C22D /* Pods-locallygrown-locallygrownUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -544,6 +897,7 @@
 		};
 		3850A23728FF3E2300C22844 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 784FA78B58DE288238425AFD /* Pods-locallygrown-locallygrownUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
