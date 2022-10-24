@@ -16,8 +16,6 @@ struct ShopperHomeViewFarm {
     var farmId: String
     var name: String
     var pictureURL: String
-    var about: String
-    var address: String
     var suppliers: [ShopperHomeViewSupplier]
     var categories: String
 }

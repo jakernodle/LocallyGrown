@@ -12,6 +12,12 @@ struct FarmDepositInfo : Codable {
     var accountNumber: Int
 }
 
+struct FarmReviews: Codable {
+    var userId: String
+    var ratingOutOfFive: Int
+    var reviewText: String
+}
+
 struct Farm : Codable {
     var id: String
     
@@ -19,6 +25,9 @@ struct Farm : Codable {
     var pictureURL: String
     var about: String
     var address: String
+    
+    var reviews: [FarmReviews]?
+    var averageRating: Float? //not a computed value since this could get costly, calculate on the backend
     
     var products: [Product]
     var farmers: [Supplier]
@@ -38,6 +47,6 @@ struct Farm : Codable {
             homeViewSuppliers.append(farmer.toShopperHomeViewSupplier())
         }
         
-        return ShopperHomeViewFarm(farmId: id, name: name, pictureURL: pictureURL, about: about, address: address, suppliers: homeViewSuppliers, categories: productCategoriesDescription)
+        return ShopperHomeViewFarm(farmId: id, name: name, pictureURL: pictureURL, suppliers: homeViewSuppliers, categories: productCategoriesDescription)
     }
 }

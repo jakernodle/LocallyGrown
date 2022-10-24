@@ -11,7 +11,8 @@ struct Supplier: User, Codable {
     var name: String
     var email: String
     var pictureURL: String?
-    var farm: Farm?
+    
+    var farmId: String?
     
     func toShopperHomeViewSupplier() -> ShopperHomeViewSupplier {
         return ShopperHomeViewSupplier(name: name, pictureURL: pictureURL)
@@ -22,9 +23,9 @@ struct SupplierResponse: User, Codable {
     var name: String
     var email: String
     var pictureURL: String?
-    var farm: Farm?
+    var farmId: String
     
     func toSupplier() -> Supplier {
-        return Supplier(name: name, email: email, pictureURL: pictureURL, farm: farm)
+        return Supplier(name: name, email: email, pictureURL: pictureURL, farmId: farmId)
     }
 }

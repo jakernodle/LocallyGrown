@@ -14,13 +14,6 @@ struct ShopperOrderView: View {
     
     var body: some View {
         VStack {
-            Text("Orders")
-                .fontWeight(.bold)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .font(.largeTitle)
-                .padding(.horizontal, 20)
-                .padding(.top, 10)
-            
             List{
                 ForEach(carts, id: \.self) { item in
                     HStack {
@@ -54,6 +47,8 @@ struct ShopperOrderView: View {
             .frame(maxHeight: .infinity)
             .background(.white)
         }
+        .navigationBarTitle("Orders")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

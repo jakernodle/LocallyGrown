@@ -19,6 +19,7 @@ struct ShopperCartView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.largeTitle)
                 .padding(.horizontal, 20)
+                .padding(.top, 6)
             
             List{
                 ForEach(carts, id: \.self) { item in

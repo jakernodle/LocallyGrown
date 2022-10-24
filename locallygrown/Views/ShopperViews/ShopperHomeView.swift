@@ -162,10 +162,10 @@ struct ProductCategoriesCollection: View {
 
 struct FarmsList: View {
     
-    var testFarm: Farm = Farm(id: "1", name: "Happy Farms", pictureURL: "https://foodtank.com/wp-content/uploads/2020/04/COVID-19-Relief_Small-Farms-.jpg", about: "A family farm passed down for 65 generations.", address: "1926 w lk dr", products: [Product(name: "Carrot", pictureURL: "", category: ProductCategory.produce(id: "produce"), pricing: Pricing(cost: 2.25, units: UnitType.perLb), season: ProductSeason(seasonStart: Date(timeIntervalSinceReferenceDate: -1234567.0), seasonEnd: Date()), isOffered: true),Product(name: "Beef", pictureURL: "", category: ProductCategory.meat(id: "meat"), pricing: Pricing(cost: 2.25, units: UnitType.perLb), season: ProductSeason(seasonStart: Date(timeIntervalSinceReferenceDate: -1234567.0), seasonEnd: Date()), isOffered: true)], farmers: [Supplier(name: "Steve", email: "steve@gmail.com", pictureURL: "https://pbs.twimg.com/profile_images/895157268811046914/VHx01Y-N_400x400.jpg", farm: nil)], paymentInfo: nil)
+    var testFarm: Farm = Farm(id: "1", name: "Happy Farms", pictureURL: "https://foodtank.com/wp-content/uploads/2020/04/COVID-19-Relief_Small-Farms-.jpg", about: "A family farm passed down for 65 generations.", address: "1926 w lk dr", products: [Product(name: "Carrot", pictureURL: "", category: ProductCategory.produce(id: "produce"), pricing: Pricing(cost: 2.25, units: UnitType.perLb), season: ProductSeason(seasonStart: Date(timeIntervalSinceReferenceDate: -1234567.0), seasonEnd: Date()), isOffered: true),Product(name: "Beef", pictureURL: "", category: ProductCategory.meat(id: "meat"), pricing: Pricing(cost: 2.25, units: UnitType.perLb), season: ProductSeason(seasonStart: Date(timeIntervalSinceReferenceDate: -1234567.0), seasonEnd: Date()), isOffered: true)], farmers: [Supplier(name: "Steve", email: "steve@gmail.com", pictureURL: "https://pbs.twimg.com/profile_images/895157268811046914/VHx01Y-N_400x400.jpg", farmId: "1")], paymentInfo: nil)
     
     var body: some View {
-        ForEach((0...2), id: \.self) {_ in
+        ForEach((0...4), id: \.self) {_ in
             Spacer()
                 .frame(height: 10)
             VStack {
