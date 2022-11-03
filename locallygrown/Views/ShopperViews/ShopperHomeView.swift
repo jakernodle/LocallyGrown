@@ -10,20 +10,47 @@ import Kingfisher
 
 struct ShopperHomeView: View {
     
+    @ObservedObject var viewModel = ShopperHomeViewModel(params: [:], service: ShopperService())
+
     var body: some View {
+        
         ZStack {
             Color(UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.06))
                 .ignoresSafeArea(.all)
             VStack(spacing: 0) {
                 SearchBar()
-                ScrollView {
-                    LazyVGrid(columns: [GridItem(.flexible())], spacing: 0){
-                        ProductCategoriesCollection()
-                        FarmsList()
-                        //Text("Not seeing someone you're looking for?")
+                switch viewModel.state {
+                case .idle:
+                    // Render a clear color and start the loading process
+                    // when the view first appears, which should make the
+                    // view model transition into its loading state:
+                    Color.clear.onAppear(perform: viewModel.load)
+                case .loading:
+
+                    ScrollView {
+                        LazyVGrid(columns: [GridItem(.flexible())], spacing: 0){
+                            ProductCategoriesCollection()
+                            ProgressView()
+                                .padding()
+                        }
                     }
+                    .frame(height: .infinity)
+                
+                case .failed(let error):
+
+                    //ErrorView(error: error, retryHandler: viewModel.load)
+                    let _ = print(error)
+                case .loaded(let farms):
+
+                    ScrollView {
+                        LazyVGrid(columns: [GridItem(.flexible())], spacing: 0){
+                            ProductCategoriesCollection()
+                            FarmsListView(farms: farms)
+                            //Text("Not seeing someone you're looking for?")
+                        }
+                    }
+                    .frame(height: .infinity)
                 }
-                .frame(height: .infinity)
             }
         }
     }
@@ -160,55 +187,66 @@ struct ProductCategoriesCollection: View {
     }
 }
 
-struct FarmsList: View {
+struct FarmsListView: View {
     
-    var testFarm: Farm = Farm(id: "1", name: "Happy Farms", pictureURL: "https://foodtank.com/wp-content/uploads/2020/04/COVID-19-Relief_Small-Farms-.jpg", about: "A family farm passed down for 65 generations.", address: "1926 w lk dr", products: [Product(name: "Carrot", pictureURL: "", category: ProductCategory.produce(id: "produce"), pricing: Pricing(cost: 2.25, units: UnitType.perLb), season: ProductSeason(seasonStart: Date(timeIntervalSinceReferenceDate: -1234567.0), seasonEnd: Date()), isOffered: true),Product(name: "Beef", pictureURL: "", category: ProductCategory.meat(id: "meat"), pricing: Pricing(cost: 2.25, units: UnitType.perLb), season: ProductSeason(seasonStart: Date(timeIntervalSinceReferenceDate: -1234567.0), seasonEnd: Date()), isOffered: true)], farmers: [Supplier(name: "Steve", email: "steve@gmail.com", pictureURL: "https://pbs.twimg.com/profile_images/895157268811046914/VHx01Y-N_400x400.jpg", farmId: "1")], paymentInfo: nil)
+    //var testFarm: Farm = Farm(id: "1", name: "Happy Farms", pictureURL: "https://foodtank.com/wp-content/uploads/2020/04/COVID-19-Relief_Small-Farms-.jpg", about: "A family farm passed down for 65 generations.", address: "1926 w lk dr", products: [Product(name: "Carrot", pictureURL: "", category: ProductCategory.produce(id: "produce"), pricing: Pricing(cost: 2.25, units: UnitType.perLb), season: ProductSeason(seasonStart: Date(timeIntervalSinceReferenceDate: -1234567.0), seasonEnd: Date()), isOffered: true),Product(name: "Beef", pictureURL: "", category: ProductCategory.meat(id: "meat"), pricing: Pricing(cost: 2.25, units: UnitType.perLb), season: ProductSeason(seasonStart: Date(timeIntervalSinceReferenceDate: -1234567.0), seasonEnd: Date()), isOffered: true)], farmers: [Supplier(name: "Steve", email: "steve@gmail.com", pictureURL: "https://pbs.twimg.com/profile_images/895157268811046914/VHx01Y-N_400x400.jpg", farmId: "1")], paymentInfo: nil)
+     
+    @State var showFarmView = false
+
+    var farms: [ShopperHomeViewFarmListViewObject]
     
     var body: some View {
-        ForEach((0...4), id: \.self) {_ in
+        ForEach(farms, id:\.self) {farm in
             Spacer()
                 .frame(height: 10)
-            VStack {
-                KFImage(URL(string: testFarm.pictureURL)!)
-                .frame(width: 50, height: 160)
-                .frame(maxWidth: .infinity)
-                .cornerRadius(10)
-                
-                HStack {
-                    KFImage(URL(string: testFarm.pictureURL)!)
-                        .frame(width: 28, height: 28)
-                        .clipShape(Circle())
-                        .overlay {
-                            Circle().stroke(.gray, lineWidth: 2)
-                        }
-                    VStack {
-                        Text(testFarm.name)
-                        .font(.subheadline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+            Button(action: {
+                showFarmView.toggle()
+            }) {
+                VStack {
+                    KFImage(URL(string: farm.pictureURL)!)
+                    .frame(width: 50, height: 160)
+                    .frame(maxWidth: .infinity)
+                    .cornerRadius(10)
                     
-                    
-                        Text(testFarm.productCategoriesDescription)
-                        .font(.footnote)
-                        .foregroundColor(.gray)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                    Spacer()
-                    Button(action: {
+                    HStack {
+                        KFImage(URL(string: farm.pictureURL)!)
+                            .frame(width: 28, height: 28)
+                            .clipShape(Circle())
+                            .overlay {
+                                Circle().stroke(.gray, lineWidth: 2)
+                            }
+                        VStack {
+                            Text(farm.name)
+                            .font(.subheadline)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                         
-                    }){
-                        Image(systemName: "heart")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 24, height: 24)
-                            .tint(.green)     
+                        
+                            Text(farm.categories)
+                            .font(.footnote)
+                            .foregroundColor(.gray)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        Spacer()
+                        Button(action: {
+                            
+                        }){
+                            Image(systemName: "heart")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 24, height: 24)
+                                .tint(.green)
+                        }
+                        .frame(width: 28, height: 28)
                     }
-                    .frame(width: 28, height: 28)
                 }
-            }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 10)
-            .frame(maxWidth: .infinity)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 10)
+                .frame(maxWidth: .infinity)
             .background(.white)
+            }
+            .sheet(isPresented: $showFarmView) {
+                ShopperFarmView(farmDataFromHomeView: farm)
+            }
         }//for each
     }
 }

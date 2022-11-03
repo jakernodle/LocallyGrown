@@ -13,6 +13,7 @@ enum OrderType : Codable {
 }
 
 struct Order : Codable {
+    var id: String
     var shopperId: String
     var farmId: String
     var sharedShoppers: [Shopper]

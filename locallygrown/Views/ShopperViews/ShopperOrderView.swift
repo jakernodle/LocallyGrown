@@ -28,7 +28,7 @@ struct ShopperOrderView: View {
                         VStack(alignment: .leading) {
                             Text(item.farmName)
                                 .font(.body)
-                                .fontWeight(.bold)
+                                .fontWeight(.semibold)
                             
                             Text("\(item.productsNumber) items - $\(item.formattedPrice)")
                                 .font(.footnote)

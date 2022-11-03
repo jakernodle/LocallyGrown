@@ -12,25 +12,35 @@ struct FarmDepositInfo : Codable {
     var accountNumber: Int
 }
 
-struct FarmReviews: Codable {
+struct FarmReview: Codable {
     var userId: String
+    var userName: String
     var ratingOutOfFive: Int
     var reviewText: String
 }
 
-struct Farm : Codable {
+struct FarmSupplierInfo: Codable, Hashable {
     var id: String
+    var name: String
+    var pictureURL: String
+}
+
+struct Farm : Codable {
+    var id: FarmId
     
     var name: String
     var pictureURL: String
     var about: String
     var address: String
     
-    var reviews: [FarmReviews]?
+    var reviews: [FarmReview]?
     var averageRating: Float? //not a computed value since this could get costly, calculate on the backend
+    var hasReviews: Bool {
+        reviews != nil && reviews!.count > 0
+    }
     
     var products: [Product]
-    var farmers: [Supplier]
+    var farmerInfo: [FarmSupplierInfo]
     var paymentInfo: FarmDepositInfo?
     
     var productCategoriesDescription:String {
@@ -41,12 +51,51 @@ struct Farm : Codable {
         return categories.map{String($0)}.joined(separator: ", ")
     }
     
-    func toShopperHomeViewFarm() -> ShopperHomeViewFarm {
-        var homeViewSuppliers: [ShopperHomeViewSupplier] = []
-        for farmer in farmers {
-            homeViewSuppliers.append(farmer.toShopperHomeViewSupplier())
+    var productCategoriesArray:[String] {
+        var categories:Set<String> = []
+        for product in products {
+            categories.insert(product.category.description)
         }
-        
-        return ShopperHomeViewFarm(farmId: id, name: name, pictureURL: pictureURL, suppliers: homeViewSuppliers, categories: productCategoriesDescription)
+        return Array(categories)
+    }
+    
+    var productMap:[String:[ProductBasicInfo]] {
+        var map:[String:[ProductBasicInfo]] = [:]
+        for product in products {
+            map[product.category.description, default: []].append(product.toProductBasicInfo())
+        }
+        return map
+    }
+    
+    func toShopperFarmViewFarm() -> ShopperFarmViewFarm {
+        return ShopperFarmViewFarm(id: id, pictureURL: pictureURL, name: name, rating: averageRating ?? 0, reviewsCount: reviews?.count ?? 0, about: about, productCategories: productCategoriesArray, productMap: productMap)
+    }
+}
+
+struct FarmResponse : Codable {
+    var id: String
+    
+    var name: String
+    var pictureURL: String
+    var about: String
+    var address: String
+    
+    var reviews: [FarmReview]?
+    var averageRating: Float? //not a computed value since this could get costly, calculate on the backend
+    
+    var products: [Product]
+    var farmerInfo: [FarmSupplierInfo]
+    var paymentInfo: FarmDepositInfo?
+    
+    var productCategoriesDescription:String {
+        var categories:Set<String> = []
+        for product in products {
+            categories.insert(product.category.description)
+        }
+        return categories.map{String($0)}.joined(separator: ", ")
+    }
+    
+    func toFarm() -> Farm {
+        return Farm(id: id, name: name, pictureURL: pictureURL, about: about, address: address, reviews: reviews, averageRating: averageRating, products: products, farmerInfo: farmerInfo, paymentInfo: paymentInfo)
     }
 }

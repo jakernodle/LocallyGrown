@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum UserServiceResponse: Error {
+enum UserServiceResponseCode: Error {
     //login
     case loginSuccess
     case loginFailed
@@ -30,7 +30,7 @@ class UserService {
     
     //save picture to bucket and get url
     
-    func login(params: [String: String], completion: @escaping (UserServiceResponse) -> Void){
+    func login(params: [String: String], completion: @escaping (UserServiceResponseCode) -> Void){
         userApiClient.login(credentials: params) { result in
             switch result {
             case .success(let response):
@@ -41,9 +41,9 @@ class UserService {
                 }else{
                     print("error: response is neither a Shopper or a Supplier")
                 }
-                completion(UserServiceResponse.loginSuccess)
+                completion(UserServiceResponseCode.loginSuccess)
             case .failure:
-                completion(UserServiceResponse.loginFailed)
+                completion(UserServiceResponseCode.loginFailed)
             }
         }
     }
@@ -53,14 +53,14 @@ class SupplierService: UserService {
     let supplierApiClient = SupplierAPIClient()
     
     //create supplier account
-    func supplierSignUp(params: [String: String], completion: @escaping (UserServiceResponse) -> Void){
+    func supplierSignUp(params: [String: String], completion: @escaping (UserServiceResponseCode) -> Void){
         supplierApiClient.signup(credentials: params) { result in
             switch result {
             case .success(let response):
                 LocallyGrownSupplier.shared.login(user: response)
-                completion(UserServiceResponse.signupSuccess)
+                completion(UserServiceResponseCode.signupSuccess)
             case .failure:
-                completion(UserServiceResponse.signupFailed)
+                completion(UserServiceResponseCode.signupFailed)
             }
         }
     }
@@ -76,29 +76,57 @@ class ShopperService: UserService {
     let shopperApiClient = ShopperAPIClient()
     
     //create shopper account
-    func shopperSignUp(params: [String: String], completion: @escaping (UserServiceResponse) -> Void) {
+    func shopperSignUp(params: [String: String], completion: @escaping (UserServiceResponseCode) -> Void) {
         shopperApiClient.signup(params: params) { result in
             switch result {
             case .success(let response):
                 LocallyGrownShopper.shared.login(user: response)
-                completion(UserServiceResponse.signupSuccess)
+                completion(UserServiceResponseCode.signupSuccess)
             case .failure:
-                completion(UserServiceResponse.signupFailed)
+                completion(UserServiceResponseCode.signupFailed)
             }
         }
     }
-    //view suppliers
+    //view all farms
+    func getFarms(params: [String: String], completion: @escaping (Result<[ShopperHomeViewFarmListViewObject], UserServiceResponseCode>) -> Void) {
+        shopperApiClient.getFarms(params: params) { result in
+            switch result {
+            case .success(let response):
+                completion(.success(response.farms))
+            case .failure:
+                completion(.failure(UserServiceResponseCode.signupFailed))
+            }
+        }
+    }
+    
+    //view farm with id
+    func getFarm(params: [String: String], completion: @escaping (Result<ShopperFarmViewFarm, UserServiceResponseCode>) -> Void) {
+        shopperApiClient.getFarm(params: params) { result in
+            switch result {
+            case .success(let response):
+                completion(.success(response.toShopperFarmViewFarm()))
+            case .failure:
+                completion(.failure(UserServiceResponseCode.signupFailed))
+            }
+        }
+    }
+    
+    //addProductToCart -> save it locally
+    func addToCart(farmId: FarmId, farmName: String, item: ShoppingCartItem){
+        LocallyGrownShopper.shared.addItemToCart(farmId: farmId, farmName: farmName, item: item)
+    }
+    
     //createOrder
     //editOrder
     //addFarmToFavorites
-    func addFarmToFavorites(farmId: String, completion: @escaping (UserServiceResponse) -> Void){
+    func addFarmToFavorites(farmId: String, completion: @escaping (UserServiceResponseCode) -> Void){
         shopperApiClient.addFarmToFavorites(params: ["id": farmId]) { result in
             switch result {
             case .success(let response):
-                LocallyGrownShopper.shared.loggedUser?.favoriteFarmIds.append(response)
-                completion(UserServiceResponse.addFarmToFavoritesSuccess)
+                LocallyGrownShopper.shared.addFarmToFavorites(farmId: response)
+                completion(UserServiceResponseCode.addFarmToFavoritesSuccess)
             case .failure:
-                completion(UserServiceResponse.addFarmToFavoritesFailed)
+                completion(UserServiceResponseCode.addFarmToFavoritesFailed)
             }
         }
     }

@@ -12,7 +12,9 @@ struct ShopperFavoritesView: View {
         VStack {
             ScrollView {
                 LazyVGrid(columns: [GridItem(.flexible())], spacing: 0){
-                    FarmsList()
+                    //FarmsListView()
+                    ProgressView()
+                        .padding()
                 }
             }
             .frame(height: .infinity)

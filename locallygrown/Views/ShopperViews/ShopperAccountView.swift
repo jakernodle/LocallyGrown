@@ -50,7 +50,7 @@ struct ShopperAccountView: View {
                                             .foregroundColor(.pink)
                                         Text("Favorites")
                                             .font(.footnote)
-                                            .fontWeight(.bold)
+                                            .fontWeight(.semibold)
                                             .foregroundColor(.black)
                                     }
                                     .padding(.vertical, 6)
@@ -72,7 +72,7 @@ struct ShopperAccountView: View {
                                             .foregroundColor(.green)
                                         Text("Orders")
                                             .font(.footnote)
-                                            .fontWeight(.bold)
+                                            .fontWeight(.semibold)
                                             .foregroundColor(.black)
                                     }
                                     .padding(.vertical, 6)

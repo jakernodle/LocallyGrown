@@ -34,18 +34,36 @@ struct ProductSeason : Codable {
 }
 
 struct Product : Codable {
+    var id: String
     var name: String
+    var description: String
     var pictureURL: String
 
     var category: ProductCategory
     var pricing: Pricing
     
-    var season: ProductSeason
+    //var season: ProductSeason
     var isOffered: Bool
     
     var isAvailible: Bool {
-        return isOffered && Date().isBetweeen(date: season.seasonStart, andDate: season.seasonEnd)
+        return isOffered //&& Date().isBetweeen(date: season.seasonStart, andDate: season.seasonEnd)
     }
+    
+    func toProductBasicInfo() -> ProductBasicInfo {
+        return ProductBasicInfo(id: id, name: name, description: description, price: pricing.cost, pictureURL: pictureURL, unitsDescription: pricing.units.description)
+    }
+}
+
+struct ProductBasicInfo: Codable, Hashable {
+    var id: String
+    var name: String
+    var description: String
+    var price: Float
+    var pictureURL: String
+    var formattedPrice: String {
+        return String(format: "%.2f", price)
+    }
+    var unitsDescription: String //ex. /lb.
 }
 
 extension Date {
