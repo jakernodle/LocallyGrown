@@ -7,6 +7,7 @@ target 'locallygrown' do
 
   # Pods for locallygrown
   pod 'Kingfisher', '~> 7.0'
+  pod 'GoogleSignIn'
 
   target 'locallygrownTests' do
     inherit! :search_paths

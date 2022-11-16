@@ -7,7 +7,15 @@
 
 import SwiftUI
 
+//191952635625-ncu40r9iqep4uqqjuu21ui7h3lmk7d27.apps.googleusercontent.com
+import GoogleSignIn
+
 struct SignupView: View {
+    
+    @Environment(\.presentationMode) private var presentationMode
+    
+    var viewModel = AuthenticationViewModel()
+    
     @State private var name: String = ""
     @State private var email: String = ""
     @State private var password: String = ""
@@ -56,8 +64,9 @@ struct SignupView: View {
                         .stroke(Color.black, lineWidth: 2)
                 )
                 .padding([.leading, .trailing, .bottom], 20)
+            
             Button(action: {
-                    print("signup button")
+                viewModel.signup(name: name, email: email, password: password)
             }) {
                 Text("Signup")
                     .font(.title2)
@@ -71,15 +80,65 @@ struct SignupView: View {
 
             
             Button(action: {
-                    print("signup button")
+            
             }) {
                 Text("Login")
                     .font(.body)
                     .foregroundColor(.blue)
                     .frame(maxWidth: .infinity)
             }
-            .padding(.bottom, 20)
+            
+            LabelledDivider(label: "or")
+            
+            Button(action: {
+                viewModel.continueWithGoogle()
+            }) {
+                HStack {
+                    Image("Google_G")
+                    Text("Continue with Google")
+                        .font(.title2)
+                        .foregroundColor(.white)
+                }
+                .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(Color(UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.27)))
+            .padding([.trailing, .leading], 20)
+            .padding(.bottom, 8)
         }
+        .onOpenURL { url in
+            GIDSignIn.sharedInstance.handle(url)
+        }
+        .onReceive(viewModel.viewDismissalModePublisher) { shouldDismiss in
+            if shouldDismiss {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }
+    }
+}
+
+struct LabelledDivider: View {
+
+    let label: String
+    let horizontalPadding: CGFloat
+    let color: Color
+
+    init(label: String, horizontalPadding: CGFloat = 20, color: Color = .gray) {
+        self.label = label
+        self.horizontalPadding = horizontalPadding
+        self.color = color
+    }
+
+    var body: some View {
+        HStack {
+            line
+            Text(label).foregroundColor(color)
+            line
+        }
+    }
+
+    var line: some View {
+        VStack { Divider().background(color) }.padding(horizontalPadding)
     }
 }
 

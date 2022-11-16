@@ -13,7 +13,7 @@ struct ShopperFarmView: View {
     @ObservedObject var viewModel = ShopperFarmViewModel(params: [:], service: ShopperService())
     
     var farmDataFromHomeView: ShopperHomeViewFarmListViewObject
-
+    
     var body: some View {
         switch viewModel.state {
         case .idle:
@@ -22,14 +22,16 @@ struct ShopperFarmView: View {
             // view model transition into its loading state:
             Color.clear.onAppear(perform: viewModel.load)
         case .loading:
-            ShopperFarmViewContent(showProgressView: true, content: ShopperFarmViewFarm(id: farmDataFromHomeView.farmId, pictureURL: farmDataFromHomeView.pictureURL, name: farmDataFromHomeView.name, rating: 0, reviewsCount: 0, about: "", productCategories: [], productMap: [:]))
+            let cart = Cart(farmInfo: CartFarmInfo(farmId: farmDataFromHomeView.farmId, farmName: farmDataFromHomeView.name, farmAddress: "", farmImageURL: farmDataFromHomeView.pictureURL), items: [:])
+            ShopperFarmViewContent(showProgressView: true, content: ShopperFarmViewFarm(id: farmDataFromHomeView.farmId, pictureURL: farmDataFromHomeView.pictureURL, name: farmDataFromHomeView.name, rating: 0, reviewsCount: 0, about: "", address: "", productCategories: [], productMap: [:], pickupOptions: []), cart: cart)
         case .failed(let error):
             //ErrorView(error: error, retryHandler: viewModel.load)
             Color.clear.onAppear(perform: viewModel.load)
             ProgressView()
             let _ = print(error)
         case .loaded(let farm):
-            ShopperFarmViewContent(showProgressView: false, content: ShopperFarmViewFarm(id: farmDataFromHomeView.farmId, pictureURL: farmDataFromHomeView.pictureURL, name: farmDataFromHomeView.name, rating: farm.rating, reviewsCount: farm.reviewsCount, about: farm.about, productCategories: farm.productCategories, productMap: farm.productMap))
+            let cart = Cart(farmInfo: CartFarmInfo(farmId: farmDataFromHomeView.farmId, farmName: farmDataFromHomeView.name, farmAddress: farm.address, farmImageURL: farmDataFromHomeView.pictureURL), items: [:])
+            ShopperFarmViewContent(showProgressView: false, content: ShopperFarmViewFarm(id: farmDataFromHomeView.farmId, pictureURL: farmDataFromHomeView.pictureURL, name: farmDataFromHomeView.name, rating: farm.rating, reviewsCount: farm.reviewsCount, about: farm.about, address: farm.address, productCategories: farm.productCategories, productMap: farm.productMap, pickupOptions: farm.pickupOptions), cart: cart)
         }
     }
 }
@@ -38,9 +40,12 @@ struct ShopperFarmViewContent: View {
      
     @Environment (\.presentationMode) var presentationMode
     @State var showProductView = false
+    @State var showCartView = false
+
     @State var numberOfItemsInCart = 0
     var showProgressView: Bool
     var content: ShopperFarmViewFarm
+    @State var cart: Cart
 
     var body: some View {
         ZStack(alignment: .bottomLeading) {
@@ -101,10 +106,28 @@ struct ShopperFarmViewContent: View {
                                     }) {
                                         HStack {
                                             VStack(alignment: .leading) {
-                                                Text(product.name)
-                                                    .font(.headline)
-                                                    .fontWeight(.semibold)
-                                                    .padding(.bottom, 2)
+                                                HStack{
+                                                    Text(product.name)
+                                                        .font(.headline)
+                                                        .fontWeight(.semibold)
+                                                        .padding(.bottom, 2)
+                                                    if(cart.hasProduct(productId: product.id)){
+                                                        HStack{
+                                                            Text("\(cart.amountOfProductString(productId: product.id))")
+                                                                .foregroundColor(.white)
+                                                                .font(.footnote)
+                                                                .fontWeight(.semibold)
+                                                                .padding(.trailing, -6)
+                                                                .padding(.leading, 2)
+                                                            Image(systemName: "cart.fill")
+                                                                .foregroundColor(.white)
+                                                                .padding(.vertical, 4)
+                                                        }
+                                                        .padding(.horizontal, 3)
+                                                        .background(.green)
+                                                        .cornerRadius(4)
+                                                    }
+                                                }
                                                 Text("$\(product.formattedPrice)\(product.unitsDescription)")
                                                     .font(.footnote)
                                                     .padding(.bottom, 2)
@@ -120,9 +143,16 @@ struct ShopperFarmViewContent: View {
                                         }
                                     }
                                     .sheet(isPresented: $showProductView) {
-                                        ShopperProductView(farmId: content.id ,farmName: content.name ,product: product)
+                                        ShopperProductView(hasProductInCart: cart.hasProduct(productId: product.id), farmInfo: CartFarmInfo(farmId: content.id, farmName: content.name, farmAddress: content.address, farmImageURL: content.pictureURL), product: product, amount: cart.amountOfProductForProductView(productId: product.id))
                                             .onDisappear {
                                                 numberOfItemsInCart = LocallyGrownShopper.shared.getCartSize(cartId: content.id)
+                                                print("get items")
+                                                if let items = LocallyGrownShopper.shared.getItemsInCart(cartId: content.id){
+                                                    cart.items = items
+                                                    print("get items")
+                                                    print(items)
+
+                                                }
                                             }
                                     }
                                 }
@@ -138,9 +168,9 @@ struct ShopperFarmViewContent: View {
                     Spacer()
                 }
             }//v
-            if (LocallyGrownShopper.shared.hasItemForCart(cartId: content.id)) {
+            if (numberOfItemsInCart > 0) {
                 Button(action: {
-                    
+                    showCartView.toggle()
                 }) {
                     Text("View cart (\(numberOfItemsInCart))")
                         .font(.title3)
@@ -152,11 +182,17 @@ struct ShopperFarmViewContent: View {
                     .buttonStyle(.borderedProminent)
                     .tint(.black)
                     .padding(20)
+                    .sheet(isPresented: $showCartView) {
+                        ShopperCartSheetView(cart: cart, pickupOptions: content.pickupOptions)
+                    }
             }
+            
         }//z
         .onAppear {
-            print("here")
             numberOfItemsInCart = LocallyGrownShopper.shared.getCartSize(cartId: content.id)
+            if let items = LocallyGrownShopper.shared.getItemsInCart(cartId: content.id){
+                cart.items = items
+            }
         }
     }//bod
 }

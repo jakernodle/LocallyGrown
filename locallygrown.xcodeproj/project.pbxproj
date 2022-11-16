@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2D1D68C21DF3C6B90D50E60B /* Pods_locallygrown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B64D7DBCFA83E47702CF104 /* Pods_locallygrown.framework */; };
+		380074BA29184FA800DC3406 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 380074B929184FA800DC3406 /* Launch Screen.storyboard */; };
+		380074C52919D9D600DC3406 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380074C42919D9D600DC3406 /* AuthenticationViewModel.swift */; };
 		3813D79929010527004AB4E9 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3813D79829010527004AB4E9 /* SignupView.swift */; };
 		3813D79B29010831004AB4E9 /* ShopperHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3813D79A29010830004AB4E9 /* ShopperHomeView.swift */; };
 		3850A20F28FF3E1E00C22844 /* locallygrownApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850A20E28FF3E1E00C22844 /* locallygrownApp.swift */; };
@@ -19,6 +21,10 @@
 		3850A22C28FF3E2300C22844 /* locallygrownUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850A22B28FF3E2300C22844 /* locallygrownUITestsLaunchTests.swift */; };
 		385C2D4A290649C000C6AEC2 /* ShopperFavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385C2D49290649BF00C6AEC2 /* ShopperFavoritesView.swift */; };
 		385C2D8C2908F86E00C6AEC2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385C2D8B2908F86E00C6AEC2 /* Constants.swift */; };
+		387361ED291EDCAF0008B3FD /* ShopperCartSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387361EC291EDCAF0008B3FD /* ShopperCartSheetView.swift */; };
+		387361EF29229FB00008B3FD /* ShopperCheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387361EE29229FAD0008B3FD /* ShopperCheckoutView.swift */; };
+		387361F1292435830008B3FD /* Delivery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387361F0292435800008B3FD /* Delivery.swift */; };
+		387361F32924AD9F0008B3FD /* TODO.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 387361F22924AD9F0008B3FD /* TODO.rtf */; };
 		387FD4182900988C009C9D58 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD4172900988C009C9D58 /* User.swift */; };
 		387FD41A290098F0009C9D58 /* Shopper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD419290098F0009C9D58 /* Shopper.swift */; };
 		387FD41D29009D53009C9D58 /* AppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD41C29009D53009C9D58 /* AppService.swift */; };
@@ -37,7 +43,8 @@
 		387FD43F2900D96A009C9D58 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD43E2900D96A009C9D58 /* LoginView.swift */; };
 		388E49132912CE8E002FE7A0 /* ShopperFarmViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388E49122912CE8C002FE7A0 /* ShopperFarmViewModels.swift */; };
 		388E491729131E8C002FE7A0 /* ShopperProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388E491629131E8C002FE7A0 /* ShopperProductView.swift */; };
-		38AFE5B229024659003585A1 /* ShopperHomeViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFE5B129024659003585A1 /* ShopperHomeViewModels.swift */; };
+		388E49192915792F002FE7A0 /* CleanFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388E49182915792B002FE7A0 /* CleanFloat.swift */; };
+		38AFE5B229024659003585A1 /* ShopperFarmListViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFE5B129024659003585A1 /* ShopperFarmListViewModels.swift */; };
 		38AFE5B429024C9A003585A1 /* ShopperFarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFE5B329024C9A003585A1 /* ShopperFarmView.swift */; };
 		38AFE5B629025915003585A1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFE5B529025915003585A1 /* MainView.swift */; };
 		38AFE5BA29027D25003585A1 /* ShopperAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFE5B929027D25003585A1 /* ShopperAccountView.swift */; };
@@ -69,9 +76,12 @@
 /* Begin PBXFileReference section */
 		04EC42CB017B5DEE0A6659C6 /* Pods_locallygrown_locallygrownUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_locallygrown_locallygrownUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C4978CB2D7269A177AE472F /* Pods-locallygrownTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locallygrownTests.release.xcconfig"; path = "Target Support Files/Pods-locallygrownTests/Pods-locallygrownTests.release.xcconfig"; sourceTree = "<group>"; };
+		380074B929184FA800DC3406 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		380074C32919D61800DC3406 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		380074C42919D9D600DC3406 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		3813D79829010527004AB4E9 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		3813D79A29010830004AB4E9 /* ShopperHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperHomeView.swift; sourceTree = "<group>"; };
-		3850A20B28FF3E1E00C22844 /* locallygrown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = locallygrown.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3850A20B28FF3E1E00C22844 /* Locally Grown..app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Locally Grown..app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3850A20E28FF3E1E00C22844 /* locallygrownApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locallygrownApp.swift; sourceTree = "<group>"; };
 		3850A21028FF3E1E00C22844 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3850A21228FF3E2200C22844 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -83,6 +93,10 @@
 		3850A22B28FF3E2300C22844 /* locallygrownUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locallygrownUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		385C2D49290649BF00C6AEC2 /* ShopperFavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperFavoritesView.swift; sourceTree = "<group>"; };
 		385C2D8B2908F86E00C6AEC2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		387361EC291EDCAF0008B3FD /* ShopperCartSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperCartSheetView.swift; sourceTree = "<group>"; };
+		387361EE29229FAD0008B3FD /* ShopperCheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperCheckoutView.swift; sourceTree = "<group>"; };
+		387361F0292435800008B3FD /* Delivery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delivery.swift; sourceTree = "<group>"; };
+		387361F22924AD9F0008B3FD /* TODO.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = TODO.rtf; sourceTree = "<group>"; };
 		387FD4172900988C009C9D58 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		387FD419290098F0009C9D58 /* Shopper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shopper.swift; sourceTree = "<group>"; };
 		387FD41C29009D53009C9D58 /* AppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppService.swift; sourceTree = "<group>"; };
@@ -101,7 +115,8 @@
 		387FD43E2900D96A009C9D58 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		388E49122912CE8C002FE7A0 /* ShopperFarmViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperFarmViewModels.swift; sourceTree = "<group>"; };
 		388E491629131E8C002FE7A0 /* ShopperProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperProductView.swift; sourceTree = "<group>"; };
-		38AFE5B129024659003585A1 /* ShopperHomeViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperHomeViewModels.swift; sourceTree = "<group>"; };
+		388E49182915792B002FE7A0 /* CleanFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanFloat.swift; sourceTree = "<group>"; };
+		38AFE5B129024659003585A1 /* ShopperFarmListViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperFarmListViewModels.swift; sourceTree = "<group>"; };
 		38AFE5B329024C9A003585A1 /* ShopperFarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperFarmView.swift; sourceTree = "<group>"; };
 		38AFE5B529025915003585A1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		38AFE5B929027D25003585A1 /* ShopperAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperAccountView.swift; sourceTree = "<group>"; };
@@ -171,7 +186,7 @@
 		3850A20C28FF3E1E00C22844 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3850A20B28FF3E1E00C22844 /* locallygrown.app */,
+				3850A20B28FF3E1E00C22844 /* Locally Grown..app */,
 				3850A21B28FF3E2300C22844 /* locallygrownTests.xctest */,
 				3850A22528FF3E2300C22844 /* locallygrownUITests.xctest */,
 			);
@@ -181,6 +196,7 @@
 		3850A20D28FF3E1E00C22844 /* locallygrown */ = {
 			isa = PBXGroup;
 			children = (
+				380074C32919D61800DC3406 /* Info.plist */,
 				387FD4302900C93E009C9D58 /* API */,
 				387FD42B2900AED9009C9D58 /* Extensions */,
 				387FD41B29009D3B009C9D58 /* Managers */,
@@ -192,6 +208,8 @@
 				385C2D8B2908F86E00C6AEC2 /* Constants.swift */,
 				3850A21228FF3E2200C22844 /* Assets.xcassets */,
 				3850A21428FF3E2200C22844 /* Preview Content */,
+				380074B929184FA800DC3406 /* Launch Screen.storyboard */,
+				387361F22924AD9F0008B3FD /* TODO.rtf */,
 			);
 			path = locallygrown;
 			sourceTree = "<group>";
@@ -229,6 +247,7 @@
 				387FD42029009EF7009C9D58 /* Farm.swift */,
 				387FD42229009F1B009C9D58 /* Product.swift */,
 				387FD4242900A0A3009C9D58 /* Pricing.swift */,
+				387361F0292435800008B3FD /* Delivery.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -265,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				387FD42C2900AEF9009C9D58 /* UserDefaults+locallygrown.swift */,
+				388E49182915792B002FE7A0 /* CleanFloat.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -297,6 +317,8 @@
 				38AFE5BF2904D899003585A1 /* ShopperOrderView.swift */,
 				385C2D49290649BF00C6AEC2 /* ShopperFavoritesView.swift */,
 				388E491629131E8C002FE7A0 /* ShopperProductView.swift */,
+				387361EC291EDCAF0008B3FD /* ShopperCartSheetView.swift */,
+				387361EE29229FAD0008B3FD /* ShopperCheckoutView.swift */,
 			);
 			path = ShopperViews;
 			sourceTree = "<group>";
@@ -316,6 +338,7 @@
 		38AFE5AE290245CF003585A1 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				380074C42919D9D600DC3406 /* AuthenticationViewModel.swift */,
 				38AFE5B02902462F003585A1 /* ShopperViewModels */,
 				38AFE5AF29024624003585A1 /* SupplierViewModels */,
 			);
@@ -332,7 +355,7 @@
 		38AFE5B02902462F003585A1 /* ShopperViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				38AFE5B129024659003585A1 /* ShopperHomeViewModels.swift */,
+				38AFE5B129024659003585A1 /* ShopperFarmListViewModels.swift */,
 				38AFE5BD2904A54F003585A1 /* ShopperCartViewModels.swift */,
 				38AFE5C12904D94A003585A1 /* ShopperOrderViewModels.swift */,
 				388E49122912CE8C002FE7A0 /* ShopperFarmViewModels.swift */,
@@ -372,7 +395,7 @@
 			);
 			name = locallygrown;
 			productName = locallygrown;
-			productReference = 3850A20B28FF3E1E00C22844 /* locallygrown.app */;
+			productReference = 3850A20B28FF3E1E00C22844 /* Locally Grown..app */;
 			productType = "com.apple.product-type.application";
 		};
 		3850A21A28FF3E2300C22844 /* locallygrownTests */ = {
@@ -462,6 +485,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				387361F32924AD9F0008B3FD /* TODO.rtf in Resources */,
+				380074BA29184FA800DC3406 /* Launch Screen.storyboard in Resources */,
 				3850A21628FF3E2200C22844 /* Preview Assets.xcassets in Resources */,
 				3850A21328FF3E2200C22844 /* Assets.xcassets in Resources */,
 			);
@@ -591,14 +616,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				387361ED291EDCAF0008B3FD /* ShopperCartSheetView.swift in Sources */,
 				3813D79929010527004AB4E9 /* SignupView.swift in Sources */,
 				3850A21128FF3E1E00C22844 /* ContentView.swift in Sources */,
+				380074C52919D9D600DC3406 /* AuthenticationViewModel.swift in Sources */,
 				38AFE5B429024C9A003585A1 /* ShopperFarmView.swift in Sources */,
 				38AFE5C22904D94A003585A1 /* ShopperOrderViewModels.swift in Sources */,
 				387FD4342900C978009C9D58 /* SupplierAPIClient.swift in Sources */,
 				385C2D8C2908F86E00C6AEC2 /* Constants.swift in Sources */,
 				38AFE5BA29027D25003585A1 /* ShopperAccountView.swift in Sources */,
 				387FD42329009F1B009C9D58 /* Product.swift in Sources */,
+				387361F1292435830008B3FD /* Delivery.swift in Sources */,
 				387FD42129009EF7009C9D58 /* Farm.swift in Sources */,
 				385C2D4A290649C000C6AEC2 /* ShopperFavoritesView.swift in Sources */,
 				387FD4252900A0A3009C9D58 /* Pricing.swift in Sources */,
@@ -606,13 +634,15 @@
 				387FD41F29009E37009C9D58 /* Supplier.swift in Sources */,
 				387FD4282900A6D9009C9D58 /* Order.swift in Sources */,
 				387FD42F2900B3EA009C9D58 /* UserService.swift in Sources */,
-				38AFE5B229024659003585A1 /* ShopperHomeViewModels.swift in Sources */,
+				38AFE5B229024659003585A1 /* ShopperFarmListViewModels.swift in Sources */,
 				388E491729131E8C002FE7A0 /* ShopperProductView.swift in Sources */,
 				387FD41A290098F0009C9D58 /* Shopper.swift in Sources */,
 				387FD43F2900D96A009C9D58 /* LoginView.swift in Sources */,
 				3850A20F28FF3E1E00C22844 /* locallygrownApp.swift in Sources */,
+				387361EF29229FB00008B3FD /* ShopperCheckoutView.swift in Sources */,
 				387FD42A2900A75A009C9D58 /* ShoppingCart.swift in Sources */,
 				3813D79B29010831004AB4E9 /* ShopperHomeView.swift in Sources */,
+				388E49192915792F002FE7A0 /* CleanFloat.swift in Sources */,
 				387FD42D2900AEF9009C9D58 /* UserDefaults+locallygrown.swift in Sources */,
 				387FD4322900C959009C9D58 /* ShopperAPIClient.swift in Sources */,
 				387FD4362900CAF5009C9D58 /* APIError.swift in Sources */,
@@ -787,18 +817,21 @@
 				DEVELOPMENT_TEAM = SMWT565UUR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = locallygrown/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.JA.locallygrown;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Locally Grown.";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -817,18 +850,21 @@
 				DEVELOPMENT_TEAM = SMWT565UUR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = locallygrown/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.JA.locallygrown;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Locally Grown.";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

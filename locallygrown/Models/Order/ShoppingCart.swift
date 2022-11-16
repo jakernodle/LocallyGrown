@@ -7,23 +7,57 @@
 
 import Foundation
 
-struct Cart: Codable {
-    var farmName: String
+typealias ProductId = String
+typealias Units = Float
 
-    var items: [ShoppingCartItem]
+struct Cart: Codable {
+    var farmInfo: CartFarmInfo
+
+    var items: [ProductId:ShoppingCartItem]
     var itemsAmount: String {
         String(items.count)
     }
+    var isEmpty: Bool {
+        items.count > 0
+    }
+    
     var totalPrice: Float {
-        return items.reduce(0.0) { partialResult, ShoppingCartItem in
+        return items.values.reduce(0.0) { partialResult, ShoppingCartItem in
             partialResult + ShoppingCartItem.price
         }
+    }
+    
+    var formattedTotalPrice: String {
+        String(format: "%.2f", totalPrice)
+    }
+    
+    func hasProduct(productId:ProductId) -> Bool {
+        return items[productId] != nil
+    }
+    
+    func amountOfProductString(productId:ProductId) -> String {
+        //here we use the .clean Float extension to remove any trailing ".0's"
+        guard let product = items[productId] else { return "0" }
+        return product.unitsInCart.clean
+    }
+    
+    func amountOfProductForProductView(productId:ProductId) -> Float {
+        //here we use the .clean Float extension to remove any trailing ".0's"
+        guard let product = items[productId] else { return 1 }
+        return product.unitsInCart
+    }
+    
+    mutating func addToCart(productId:ProductId, item:ShoppingCartItem){
+        items[productId] = item
     }
 }
 
 struct ShoppingCartItem : Codable {
     var productInfo: ProductBasicInfo
     var unitsInCart: Float
+    var formattedUnitsInCart: String {
+        return unitsInCart.clean
+    }
     var price: Float {
         return unitsInCart * productInfo.price
     }

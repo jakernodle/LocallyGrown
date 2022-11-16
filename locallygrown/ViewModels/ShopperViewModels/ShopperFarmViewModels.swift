@@ -20,8 +20,10 @@ struct ShopperFarmViewFarm {
         reviewsCount > 0
     }
     var about: String
+    var address: String
     var productCategories: [String]
     var productMap: [String: [ProductBasicInfo]]
+    var pickupOptions: [PickupOption]
 }
 
 class ShopperFarmViewModel: ObservableObject {
@@ -37,10 +39,19 @@ class ShopperFarmViewModel: ObservableObject {
     private let params: [String: String]
     private let service: ShopperService
 
+    //var cart: Cart //TODO: initialize cart here instead of in the view
+    
     init(params: [String: String], service: ShopperService) {
         self.params = params
         self.service = service
+        
     }
+    
+    /*func getCartItems(cartId: String){
+        if let items = LocallyGrownShopper.shared.getItemsInCart(cartId: cartId){
+            cart.items = items
+        }
+    }*/
 
     func load() {
         
@@ -59,4 +70,5 @@ class ShopperFarmViewModel: ObservableObject {
             }
         })
     }
+    
 }

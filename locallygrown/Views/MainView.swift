@@ -9,7 +9,14 @@ import SwiftUI
 
 struct MainView: View {
     
+    @State var requiresLogin: Bool = !(LocallyGrownShopper.shared.isLoggedIn)
+    
     init() {
+        
+        print(LocallyGrownShopper.shared.isLoggedIn)
+        print(LocallyGrownShopper.shared.loggedUser)
+        print(LocallyGrownShopper.shared.loggedUserType)
+
         
         let appearance = UITabBarAppearance()
         appearance.shadowColor = .clear
@@ -36,6 +43,9 @@ struct MainView: View {
                 }
         }
         .accentColor(Color(UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.8)))
+        .fullScreenCover(isPresented: $requiresLogin) {
+            SignupView()
+        }
     }
 }
 

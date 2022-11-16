@@ -16,9 +16,15 @@ enum UserServiceResponseCode: Error {
     case signupSuccess
     case signupFailed
     
+    //farms
+    case getFarmsFailed
+    case getFarmSucess
+    
     //favorite
     case addFarmToFavoritesSuccess
     case addFarmToFavoritesFailed
+    case removeFarmFromFavoritesSuccess
+    case removeFarmFromFavoritesFailed
 }
 
 class UserService {
@@ -87,8 +93,9 @@ class ShopperService: UserService {
             }
         }
     }
+    
     //view all farms
-    func getFarms(params: [String: String], completion: @escaping (Result<[ShopperHomeViewFarmListViewObject], UserServiceResponseCode>) -> Void) {
+    func getFarms(params: [String: Any], completion: @escaping (Result<[ShopperHomeViewFarmListViewObject], UserServiceResponseCode>) -> Void) {
         shopperApiClient.getFarms(params: params) { result in
             switch result {
             case .success(let response):
@@ -112,21 +119,40 @@ class ShopperService: UserService {
     }
     
     //addProductToCart -> save it locally
-    func addToCart(farmId: FarmId, farmName: String, item: ShoppingCartItem){
-        LocallyGrownShopper.shared.addItemToCart(farmId: farmId, farmName: farmName, item: item)
+    func addToCart(farmInfo: CartFarmInfo, productId: ProductId, item: ShoppingCartItem){
+        LocallyGrownShopper.shared.addItemToCart(farmInfo: farmInfo, productId: productId, item: item)
+    }
+    
+    //remove from cart
+    func removeFromCart(farmId: FarmId, productId: ProductId){
+        LocallyGrownShopper.shared.removeItemFromCart(farmId: farmId, productId: productId)
     }
     
     //createOrder
     //editOrder
-    //addFarmToFavorites
-    func addFarmToFavorites(farmId: String, completion: @escaping (UserServiceResponseCode) -> Void){
-        shopperApiClient.addFarmToFavorites(params: ["id": farmId]) { result in
+    
+    func addToFavorites(farmId: FarmId){
+        LocallyGrownShopper.shared.addFarmToFavorites(farmId: farmId)
+        updateFavorites()
+    }
+    
+    func removeFromFavorites(farmId: FarmId){
+        LocallyGrownShopper.shared.removeFarmFromFavorites(farmId: farmId)
+        updateFavorites()
+    }
+    
+    //update Favorites
+    func updateFavorites(){
+        
+        let favorites = LocallyGrownShopper.shared.getFavorites()
+        
+        shopperApiClient.updateFavorites(params: ["favorites": favorites]) { result in
             switch result {
             case .success(let response):
-                LocallyGrownShopper.shared.addFarmToFavorites(farmId: response)
-                completion(UserServiceResponseCode.addFarmToFavoritesSuccess)
+                print(response)
+                break
             case .failure:
-                completion(UserServiceResponseCode.addFarmToFavoritesFailed)
+                print("failed to update user favorites in backend") //TODO: idk do something
             }
         }
     }

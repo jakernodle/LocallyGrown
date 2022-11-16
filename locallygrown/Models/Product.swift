@@ -64,6 +64,7 @@ struct ProductBasicInfo: Codable, Hashable {
         return String(format: "%.2f", price)
     }
     var unitsDescription: String //ex. /lb.
+    
 }
 
 extension Date {

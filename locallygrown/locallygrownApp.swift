@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct locallygrownApp: App {
+        
     var body: some Scene {
         WindowGroup {
             MainView()

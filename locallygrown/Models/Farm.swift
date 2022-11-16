@@ -43,6 +43,8 @@ struct Farm : Codable {
     var farmerInfo: [FarmSupplierInfo]
     var paymentInfo: FarmDepositInfo?
     
+    var pickUpOptions: [PickupOption]
+    
     var productCategoriesDescription:String {
         var categories:Set<String> = []
         for product in products {
@@ -68,7 +70,7 @@ struct Farm : Codable {
     }
     
     func toShopperFarmViewFarm() -> ShopperFarmViewFarm {
-        return ShopperFarmViewFarm(id: id, pictureURL: pictureURL, name: name, rating: averageRating ?? 0, reviewsCount: reviews?.count ?? 0, about: about, productCategories: productCategoriesArray, productMap: productMap)
+        return ShopperFarmViewFarm(id: id, pictureURL: pictureURL, name: name, rating: averageRating ?? 0, reviewsCount: reviews?.count ?? 0, about: about, address: address, productCategories: productCategoriesArray, productMap: productMap, pickupOptions: pickUpOptions)
     }
 }
 
@@ -87,6 +89,8 @@ struct FarmResponse : Codable {
     var farmerInfo: [FarmSupplierInfo]
     var paymentInfo: FarmDepositInfo?
     
+    var pickUpOptions: [PickupOption]
+    
     var productCategoriesDescription:String {
         var categories:Set<String> = []
         for product in products {
@@ -96,6 +100,6 @@ struct FarmResponse : Codable {
     }
     
     func toFarm() -> Farm {
-        return Farm(id: id, name: name, pictureURL: pictureURL, about: about, address: address, reviews: reviews, averageRating: averageRating, products: products, farmerInfo: farmerInfo, paymentInfo: paymentInfo)
+        return Farm(id: id, name: name, pictureURL: pictureURL, about: about, address: address, reviews: reviews, averageRating: averageRating, products: products, farmerInfo: farmerInfo, paymentInfo: paymentInfo, pickUpOptions: pickUpOptions)
     }
 }

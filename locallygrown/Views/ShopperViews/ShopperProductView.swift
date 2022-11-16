@@ -12,11 +12,12 @@ struct ShopperProductView: View {
     
     @Environment (\.presentationMode) var presentationMode
     
-    var farmId: FarmId
-    var farmName: String
+    var hasProductInCart: Bool
+    
+    var farmInfo: CartFarmInfo
     
     var product: ProductBasicInfo
-    @State private var amount: Float = 1.0
+    @State var amount: Float
     
     var totalPrice: Float {
         amount * product.price
@@ -104,21 +105,41 @@ struct ShopperProductView: View {
                 }
                 .padding(.horizontal, 20)
                 .frame(maxHeight: .infinity)
-                
-                Button(action: {
-                    ShopperService().addToCart(farmId: farmId, farmName: farmName, item: ShoppingCartItem(productInfo: product, unitsInCart: amount))
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    Text("Add to cart - \(formattedPrice)")
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 6)
+                VStack {
+                    if (hasProductInCart){
+                        Button(action: {
+                            ShopperService().removeFromCart(farmId: farmInfo.farmId, productId: product.id)
+                            presentationMode.wrappedValue.dismiss()
+                        }) {
+                            Text("Remove from cart")
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 6)
+                        }
+                            .buttonStyle(.borderedProminent)
+                            .tint(.red)
+                            .padding(.vertical, 8)
+
+                    }
+                    
+                    Button(action: {
+                        ShopperService().addToCart(farmInfo: farmInfo, productId: product.id, item: ShoppingCartItem(productInfo: product, unitsInCart: amount))
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Text(hasProductInCart ? "Update cart - $\(formattedPrice)": "Add to cart - $\(formattedPrice)")
+                            .font(.title3)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 6)
+                    }
+                        .buttonStyle(.borderedProminent)
+                        .tint(.black)
+                        .padding(.vertical, 8)
                 }
-                    .buttonStyle(.borderedProminent)
-                    .tint(.black)
-                    .padding(20)
+                .padding(.horizontal, 20)
             }//z
         }//v
     }//bod
@@ -128,6 +149,6 @@ struct ShopperProductView_Previews: PreviewProvider {
     static var previews: some View {
         
         let prod = ProductBasicInfo(id: "1", name: "Preview test", description: "blah blah blah", price: 4.99, pictureURL: "https://foodtank.com/wp-content/uploads/2020/04/COVID-19-Relief_Small-Farms-.jpg", unitsDescription: "")
-        ShopperProductView(farmId:"1", farmName: "test",product: prod)
+        ShopperProductView(hasProductInCart: true, farmInfo: CartFarmInfo(farmId: "1", farmName: "Poopy Test Name", farmAddress: "1926 west lake drive, burlington nc", farmImageURL: "https://foodtank.com/wp-content/uploads/2020/04/COVID-19-Relief_Small-Farms-.jpg"), product: prod, amount: 3)
     }
 }

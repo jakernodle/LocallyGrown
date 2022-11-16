@@ -8,10 +8,27 @@
 import SwiftUI
 import Kingfisher
 
+class ShopperAccountViewModel {
+    
+    var name: String
+    var pictureURL: String
+    
+    init() {
+        self.name = LocallyGrownShopper.shared.loggedUser?.name ?? "Shopper"
+        self.pictureURL = LocallyGrownShopper.shared.loggedUser?.pictureURL ?? ""
+    }
+    
+    func getUserInfo() {
+        self.name = LocallyGrownShopper.shared.loggedUser?.name ?? "Shopper"
+        self.pictureURL = LocallyGrownShopper.shared.loggedUser?.pictureURL ?? ""
+    }
+}
+
 struct ShopperAccountView: View {
     
-    @State var showOrderView = false
-    @State var showFavoritesView = false
+    var viewModel = ShopperAccountViewModel()
+    @State var name: String = "Shopper"
+    @State var pictureUrl: String = ""
 
     var body: some View {
         NavigationView {
@@ -21,19 +38,32 @@ struct ShopperAccountView: View {
                 VStack {
                     VStack {
                         HStack {
-                            Text("Hey, JohnAnge")
+                            Text("Hey, \(name)")
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .font(.largeTitle)
                                 .padding(.top, 6)
 
                             Spacer()
-                            KFImage(URL(string: "https://pbs.twimg.com/profile_images/895157268811046914/VHx01Y-N_400x400.jpg")!)
-                                .frame(width: 40, height: 40)
-                                .clipShape(Circle())
-                                .overlay {
-                                    Circle().stroke(.gray, lineWidth: 2)
-                                }
+                            if let url = URL(string: pictureUrl){
+                                KFImage(url)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 40, height: 40)
+                                    .clipShape(Circle())
+                                    .overlay {
+                                        Circle().stroke(.gray, lineWidth: 2)
+                                    }
+                            }else{
+                                Image(systemName: "person.circle.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 40, height: 40)
+                                    .clipShape(Circle())
+                                    .overlay {
+                                        Circle().stroke(.gray, lineWidth: 2)
+                                    }
+                            }
                         }
                         .padding(.horizontal, 20)
                         
@@ -125,15 +155,14 @@ struct ShopperAccountView: View {
                     .frame(maxHeight: .infinity)
                     .background(.white)
                 }
-                .sheet(isPresented: $showOrderView) {
-                    ShopperOrderView()
-                }
-                .sheet(isPresented: $showFavoritesView) {
-                    ShopperFavoritesView()
-                }
             }
             .navigationBarTitle("Account")
             .navigationBarHidden(true)
+        }
+        .onAppear(){
+            viewModel.getUserInfo()
+            name = viewModel.name
+            pictureUrl = viewModel.pictureURL
         }
     }
 }

@@ -10,8 +10,8 @@ import Kingfisher
 
 struct ShopperCartView: View {
     
-    @State private var carts: [ShopperCartViewModel] = [ShopperCartViewModel(farmName: "Happy Farms", productsNumber: 2, totalPrice: 13.99)]
-
+    @State private var carts: [ShopperCartViewListObject] = []
+    
     var body: some View {
         VStack {
             Text("Carts")
@@ -33,7 +33,7 @@ struct ShopperCartView: View {
                             .padding(.horizontal, 6)
 
                         VStack(alignment: .leading) {
-                            Text(item.farmName)
+                            Text(item.farmInfo.farmName)
                                 .font(.body)
                                 .fontWeight(.semibold)
                             
@@ -51,10 +51,16 @@ struct ShopperCartView: View {
             .frame(maxHeight: .infinity)
             .background(.white)
         }
+        .onAppear {
+            carts = ShopperCartViewModel().getCartsForDisplay()
+        }
     }
     
     func delete(at offsets: IndexSet) {
-            //users.remove(atOffsets: offsets)
+        offsets.sorted(by: > ).forEach { (i) in
+            ShopperCartViewModel().deleteCart(farmId: carts[i].farmInfo.farmId)
+            carts.remove(at: i)
+        }
     }
 }
 

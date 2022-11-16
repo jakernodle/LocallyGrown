@@ -10,7 +10,7 @@ import Kingfisher
 
 struct ShopperHomeView: View {
     
-    @ObservedObject var viewModel = ShopperHomeViewModel(params: [:], service: ShopperService())
+    @ObservedObject var viewModel = ShopperFarmListViewModel()
 
     var body: some View {
         
@@ -19,7 +19,7 @@ struct ShopperHomeView: View {
                 .ignoresSafeArea(.all)
             VStack(spacing: 0) {
                 SearchBar()
-                switch viewModel.state {
+                switch viewModel.homeState {
                 case .idle:
                     // Render a clear color and start the loading process
                     // when the view first appears, which should make the
@@ -45,7 +45,7 @@ struct ShopperHomeView: View {
                     ScrollView {
                         LazyVGrid(columns: [GridItem(.flexible())], spacing: 0){
                             ProductCategoriesCollection()
-                            FarmsListView(farms: farms)
+                            FarmsListView(farms: farms, viewModel: viewModel)
                             //Text("Not seeing someone you're looking for?")
                         }
                     }
@@ -93,10 +93,11 @@ struct ProductCategoriesCollection: View {
                         Image("carrot-svgrepo-com")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .padding([.leading, .trailing], 6)
+                            .padding(.horizontal, 12)
                     }
                     .buttonStyle(.borderedProminent)
-                    .tint(Color(UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.06)))                    .padding([.leading, .trailing], 8)
+                    .tint(Color(UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.06)))
+                    .padding([.leading, .trailing], 8)
                     Text("Produce")
                         .font(.footnote)
                 }
@@ -107,7 +108,7 @@ struct ProductCategoriesCollection: View {
                         Image("cow-svgrepo-com")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .padding([.leading, .trailing], 6)
+                            .padding(.horizontal, 12)
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(Color(UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.06)))                    .padding([.leading, .trailing], 8)
@@ -121,7 +122,7 @@ struct ProductCategoriesCollection: View {
                         Image("sausage-meat-svgrepo-com")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .padding([.leading, .trailing], 6)
+                            .padding(.horizontal, 12)
                     }
                         .buttonStyle(.borderedProminent)
                         .tint(Color(UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.06)))                    .padding([.leading, .trailing], 8)
@@ -141,7 +142,7 @@ struct ProductCategoriesCollection: View {
                         Image("cake-svgrepo-com")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .padding([.leading, .trailing], 6)
+                            .padding(.horizontal, 12)
                     }
                         .buttonStyle(.borderedProminent)
                         .tint(Color(UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.06)))
@@ -156,7 +157,7 @@ struct ProductCategoriesCollection: View {
                         Image("bread-svgrepo-com")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .padding([.leading, .trailing], 6)
+                            .padding(.horizontal, 12)
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(Color(UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.06)))                    .padding([.leading, .trailing], 8)
@@ -170,7 +171,7 @@ struct ProductCategoriesCollection: View {
                         Image("honey-svgrepo-com")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .padding([.leading, .trailing], 6)
+                            .padding(.horizontal, 12)
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(Color(UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.06)))
@@ -192,8 +193,10 @@ struct FarmsListView: View {
     //var testFarm: Farm = Farm(id: "1", name: "Happy Farms", pictureURL: "https://foodtank.com/wp-content/uploads/2020/04/COVID-19-Relief_Small-Farms-.jpg", about: "A family farm passed down for 65 generations.", address: "1926 w lk dr", products: [Product(name: "Carrot", pictureURL: "", category: ProductCategory.produce(id: "produce"), pricing: Pricing(cost: 2.25, units: UnitType.perLb), season: ProductSeason(seasonStart: Date(timeIntervalSinceReferenceDate: -1234567.0), seasonEnd: Date()), isOffered: true),Product(name: "Beef", pictureURL: "", category: ProductCategory.meat(id: "meat"), pricing: Pricing(cost: 2.25, units: UnitType.perLb), season: ProductSeason(seasonStart: Date(timeIntervalSinceReferenceDate: -1234567.0), seasonEnd: Date()), isOffered: true)], farmers: [Supplier(name: "Steve", email: "steve@gmail.com", pictureURL: "https://pbs.twimg.com/profile_images/895157268811046914/VHx01Y-N_400x400.jpg", farmId: "1")], paymentInfo: nil)
      
     @State var showFarmView = false
-
+    
     var farms: [ShopperHomeViewFarmListViewObject]
+    
+    @ObservedObject var viewModel: ShopperFarmListViewModel
     
     var body: some View {
         ForEach(farms, id:\.self) {farm in
@@ -227,27 +230,42 @@ struct FarmsListView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                         }
                         Spacer()
-                        Button(action: {
-                            
-                        }){
-                            Image(systemName: "heart")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 24, height: 24)
-                                .tint(.green)
-                        }
-                        .frame(width: 28, height: 28)
+                        FarmListViewLikeButton(isLiked: viewModel.isLiked(farmId: farm.farmId), farmId: farm.farmId, viewModel: viewModel)
                     }
                 }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 10)
                 .frame(maxWidth: .infinity)
-            .background(.white)
+                .background(.white)
             }
             .sheet(isPresented: $showFarmView) {
                 ShopperFarmView(farmDataFromHomeView: farm)
+                    .onDisappear{
+                        LocallyGrownShopper.shared.cleanCart(farmId: farm.farmId)
+                    }
             }
         }//for each
+    }
+}
+
+struct FarmListViewLikeButton: View {
+    
+    @State var isLiked: Bool
+    var farmId: FarmId
+    var viewModel: ShopperFarmListViewModel
+    
+    var body: some View {
+        Button(action: {
+            viewModel.toggleFavorite(farmId: farmId)
+            isLiked.toggle()
+        }){
+            Image(systemName: isLiked == true ? "heart.fill" : "heart")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 24, height: 24)
+                .tint(.green)
+        }
+        .frame(width: 28, height: 28)
     }
 }
 

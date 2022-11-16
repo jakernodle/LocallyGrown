@@ -18,7 +18,7 @@ struct Shopper : User, Codable {
     var name: String
     var email: String
     var pictureURL: String?
-    var favoriteFarmIds: [FarmId]
+    var favoriteFarmIds: Set<FarmId> //here we use a set because the .contains function (used for highlighting a farms like button when its been previously liked) is o(1)
     var paymentInfo: ShopperPaymentInfo?
     var orders: [Order]?
     
@@ -32,7 +32,7 @@ struct ShopperResponse: Codable {
     var name: String
     var email: String
     var pictureURL: String?
-    var favoriteFarmIds: [FarmId]
+    var favoriteFarmIds: Set<FarmId>
     var paymentInfo: ShopperPaymentInfo?
     
     func toShopper() -> Shopper {
