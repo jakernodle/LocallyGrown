@@ -41,6 +41,7 @@
 		387FD4362900CAF5009C9D58 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD4352900CAF5009C9D58 /* APIError.swift */; };
 		387FD4382900CB9B009C9D58 /* UserAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD4372900CB9B009C9D58 /* UserAPIClient.swift */; };
 		387FD43F2900D96A009C9D58 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD43E2900D96A009C9D58 /* LoginView.swift */; };
+		387FE24929256754002D5D67 /* ShopperScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FE24829256754002D5D67 /* ShopperScheduleView.swift */; };
 		388E49132912CE8E002FE7A0 /* ShopperFarmViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388E49122912CE8C002FE7A0 /* ShopperFarmViewModels.swift */; };
 		388E491729131E8C002FE7A0 /* ShopperProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388E491629131E8C002FE7A0 /* ShopperProductView.swift */; };
 		388E49192915792F002FE7A0 /* CleanFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388E49182915792B002FE7A0 /* CleanFloat.swift */; };
@@ -113,6 +114,7 @@
 		387FD4352900CAF5009C9D58 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		387FD4372900CB9B009C9D58 /* UserAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPIClient.swift; sourceTree = "<group>"; };
 		387FD43E2900D96A009C9D58 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		387FE24829256754002D5D67 /* ShopperScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperScheduleView.swift; sourceTree = "<group>"; };
 		388E49122912CE8C002FE7A0 /* ShopperFarmViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperFarmViewModels.swift; sourceTree = "<group>"; };
 		388E491629131E8C002FE7A0 /* ShopperProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperProductView.swift; sourceTree = "<group>"; };
 		388E49182915792B002FE7A0 /* CleanFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanFloat.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 				388E491629131E8C002FE7A0 /* ShopperProductView.swift */,
 				387361EC291EDCAF0008B3FD /* ShopperCartSheetView.swift */,
 				387361EE29229FAD0008B3FD /* ShopperCheckoutView.swift */,
+				387FE24829256754002D5D67 /* ShopperScheduleView.swift */,
 			);
 			path = ShopperViews;
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 				385C2D4A290649C000C6AEC2 /* ShopperFavoritesView.swift in Sources */,
 				387FD4252900A0A3009C9D58 /* Pricing.swift in Sources */,
 				38AFE5BE2904A54F003585A1 /* ShopperCartViewModels.swift in Sources */,
+				387FE24929256754002D5D67 /* ShopperScheduleView.swift in Sources */,
 				387FD41F29009E37009C9D58 /* Supplier.swift in Sources */,
 				387FD4282900A6D9009C9D58 /* Order.swift in Sources */,
 				387FD42F2900B3EA009C9D58 /* UserService.swift in Sources */,

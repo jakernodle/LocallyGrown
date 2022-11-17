@@ -123,71 +123,118 @@ struct PickerView: View {
     }
 }
 
+struct PickupAndScheduleTimeButton: View {
+    
+    var action: () -> Void
+    var selected: Bool
+    var title: String
+    
+    var body: some View {
+        if selected == true {
+            Button(action: {
+                
+            }) {
+                Text(title)
+                    .font(.title3)
+                    .foregroundColor(.black)
+                    .padding(.vertical, 6)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+                .buttonStyle(.borderedProminent)
+                .overlay(RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.black, lineWidth: 2))
+                .tint(Color(UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.06)))
+                .padding(.vertical, 4)
+                .listRowSeparator(.hidden)
+        }else{
+            Button(action: {
+                action()
+            }) {
+                Text(title)
+                    .font(.title3)
+                    .foregroundColor(.black)
+                    .padding(.vertical, 6)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+                .buttonStyle(.borderedProminent)
+                .tint(Color(UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.06)))
+                .padding(.vertical, 4)
+                .listRowSeparator(.hidden)
+        }
+    }
+}
+
 struct ShopperCheckoutView: View {
     
     @ObservedObject var viewModel: ShopperCheckoutViewModel
+    
+    @State var showScheduleView: Bool = false
+    @State var selectedOption: PickupOption? = nil
+    
+    var pickupOptions: PickupOptions
+    
     @State private var selected = "Pickup"
     @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
-
-    var pickupOptions: [PickupOption]
     
     var body: some View {
         VStack {
             PickerView(selected: $selected)
-            
-            if selected == "Pickup" {
-                Map(coordinateRegion: $region)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 200)
-                    .cornerRadius(8)
-                    .padding(.vertical, 12)
-                
-                Text("Pickup Type")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.black)
-                    .padding(.vertical, 6)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                ForEach(pickupOptions, id: \.self ) { option in
-                    
-                    if option.type == PickupType.standard {
-                        Button(action: {
-                            
-                        }) {
-                            Text("Standard Pickup")
-                                .font(.title3)
-                                .foregroundColor(.black)
-                                .padding(.vertical, 6)
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top, 6)
+            ZStack(alignment: .bottomLeading) {
+                if selected == "Pickup" {
+                    VStack {
+                        Map(coordinateRegion: $region)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 200)
+                            .cornerRadius(8)
+                            .padding(.vertical, 12)
+                        
+                        Text("Pickup Type")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.black)
+                            .padding(.vertical, 6)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        if pickupOptions.standardPickup != nil {
+                            PickupAndScheduleTimeButton(action: {
+                                selectedOption = pickupOptions.standardPickup!
+                                showScheduleView.toggle()
+                            }, selected: selectedOption == pickupOptions.standardPickup, title: "Standard Pickup")
                         }
-                            .buttonStyle(.borderedProminent)
-                            .tint(Color(UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.06)))
-                            .padding(.vertical, 4)
-                            .listRowSeparator(.hidden)
-                    } else if option.type == PickupType.market {
-                        Button(action: {
-                            
-                        }) {
-                            Text("Farmers Market Pickup")
-                                .font(.title3)
-                                .foregroundColor(.black)
-                                .padding(.vertical, 6)
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                        if pickupOptions.marketPickups.count > 0 {
+                            ForEach(pickupOptions.marketPickups, id: \.self) { marketPickup in
+                                PickupAndScheduleTimeButton(action: {
+                                    selectedOption = marketPickup
+                                    showScheduleView.toggle()
+                                }, selected: selectedOption == marketPickup, title: "Pickup at \(String(describing: marketPickup.locationName))")
+                            }
                         }
-                            .buttonStyle(.borderedProminent)
-                            .tint(Color(UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.06)))
-                            .padding(.vertical, 4)
-                            .listRowSeparator(.hidden)
+
+                        Spacer()
                     }
+                    .frame(maxHeight: .infinity)
+                }else if selected == "Local Dropoff" {
+                    Text("0")
+
+                }else if selected == "Delivery" {
+                    Text("1")
+
                 }
+                
+                Button(action: {
                     
-            }else if selected == "Local Dropoff" {
-                Text("0")
-
-            }else if selected == "Delivery" {
-                Text("1")
-
+                }) {
+                    Text("Place Order")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 6)
+                }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.green)
+                    .padding(.vertical, 8)
             }
         }
         .padding(.horizontal, 20)
@@ -200,11 +247,16 @@ struct ShopperCheckoutView: View {
                 self.region = viewModel.region!
             }
         }
+        .sheet(isPresented: $showScheduleView) {
+            if selectedOption != nil {
+                ShopperScheduleView(viewModel: ShopperScheduleViewModel(option: selectedOption!), title: "Schedule")
+            }
+        }
     }
 }
 
 struct ShopperCheckoutView_Previews: PreviewProvider {
     static var previews: some View {
-        ShopperCheckoutView(viewModel: ShopperCheckoutViewModel(address: "1924 west lake drive, burlington nc"), pickupOptions: [Constants.localDelivery, Constants.standardPickup, Constants.marketPickup])
+        ShopperCheckoutView(viewModel: ShopperCheckoutViewModel(address: "1924 west lake drive, burlington nc"), pickupOptions: Constants.options)
     }
 }

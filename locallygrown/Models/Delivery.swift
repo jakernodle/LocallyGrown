@@ -8,14 +8,26 @@
 import Foundation
 
 
-enum Day: String, Codable {
-    case monday = "Mon"
-    case tuesday = "Tues"
-    case wednesday = "Wed"
-    case thursday = "Thurs"
-    case friday = "Fri"
-    case saturday = "Sat"
-    case sunday = "Sun"
+enum Day: Int, Codable {
+    case sunday = 1
+    case monday = 2
+    case tuesday = 3
+    case wednesday = 4
+    case thursday = 5
+    case friday = 6
+    case saturday = 7
+    
+    var description : String {
+        switch self {
+        case .sunday: return "Sun"
+        case .monday: return "Mon"
+        case .tuesday: return "Tues"
+        case .wednesday: return "Wed"
+        case .thursday: return "Thurs"
+        case .friday: return "Fri"
+        case .saturday: return "Sat"
+        }
+    }
 }
 
 enum RecurancePeriod: String, Codable {
@@ -30,14 +42,30 @@ enum PickupType: String, Codable {
     case localDelivery = "Local Delivery"
 }
 
+struct Time: Codable, Hashable {
+    var hour: Int
+    var minute: Int
+}
+
+struct DayAndTime: Codable, Hashable {
+    var day: Day
+    var pickupAvailibilityStartTime: Time
+    var pickupAvailibilityEndTime: Time
+    var pickupRecurancePeriod: RecurancePeriod
+}
+
 struct PickupOption: Codable, Hashable {
-    var type: PickupType
     var locationName: String?
     var address: String
-    var pickupAvailibilityDays: [Day]
-    var pickupRecurancePeriod: RecurancePeriod
-    var pickupAvailibilityStartTime: String
-    var pickupAvailibilityEndTime: String
+    var daysAndTimes: [DayAndTime]
+    var startDate: Date
+    var endDate: Date?
+}
+
+struct PickupOptions: Codable, Hashable {
+    var standardPickup: PickupOption?
+    var marketPickups: [PickupOption] = []
+    var localDropoffs: [PickupOption] = []
 }
 
 

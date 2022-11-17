@@ -20,13 +20,34 @@ class Constants {
     
     static let farmerInfo = FarmSupplierInfo(id: "1", name: "Steve", pictureURL: "https://otbsalessolutions.com/wp-content/uploads/2021/08/Farmer-standing-in-field.jpg")
     
-    static let standardPickup = PickupOption(type: PickupType.standard, address: "1926 west lake drive, burlington nc", pickupAvailibilityDays: [Day.thursday, Day.friday], pickupRecurancePeriod: RecurancePeriod.biWeekly, pickupAvailibilityStartTime: "10:00AM", pickupAvailibilityEndTime: "5:00PM")
+    static let marketDayAndTime = DayAndTime(day: Day.sunday, pickupAvailibilityStartTime: Time(hour: 10, minute: 30), pickupAvailibilityEndTime: Time(hour: 14, minute: 0), pickupRecurancePeriod: RecurancePeriod.weekly)
+    static let marketDayAndTime2 = DayAndTime(day: Day.saturday, pickupAvailibilityStartTime: Time(hour: 10, minute: 30), pickupAvailibilityEndTime: Time(hour: 14, minute: 0), pickupRecurancePeriod: RecurancePeriod.weekly)
     
-    static let marketPickup = PickupOption(type: PickupType.market, address: "1926 west lake drive, burlington nc", pickupAvailibilityDays: [Day.sunday], pickupRecurancePeriod: RecurancePeriod.weekly, pickupAvailibilityStartTime: "10:00AM", pickupAvailibilityEndTime: "2:00PM")
+    static let standardDayAndTime1 = DayAndTime(day: Day.friday, pickupAvailibilityStartTime: Time(hour: 11, minute: 30), pickupAvailibilityEndTime: Time(hour: 16, minute: 0), pickupRecurancePeriod: RecurancePeriod.weekly)
+    static let standardDayAndTime2 = DayAndTime(day: Day.thursday, pickupAvailibilityStartTime: Time(hour: 14, minute: 30), pickupAvailibilityEndTime: Time(hour: 16, minute: 0), pickupRecurancePeriod: RecurancePeriod.weekly)
     
-    static let localDelivery = PickupOption(type: PickupType.localDelivery, address: "1926 west lake drive, burlington nc", pickupAvailibilityDays: [Day.wednesday], pickupRecurancePeriod: RecurancePeriod.weekly, pickupAvailibilityStartTime: "10:00AM", pickupAvailibilityEndTime: "10:30PM")
+    static let localDeliveryDayAndTime1 = DayAndTime(day: Day.thursday, pickupAvailibilityStartTime: Time(hour: 10, minute: 30), pickupAvailibilityEndTime: Time(hour: 11, minute: 0), pickupRecurancePeriod: RecurancePeriod.weekly)
+    static let localDeliveryDayAndTime2 = DayAndTime(day: Day.thursday, pickupAvailibilityStartTime: Time(hour: 11, minute: 00), pickupAvailibilityEndTime: Time(hour: 11, minute: 30), pickupRecurancePeriod: RecurancePeriod.weekly)
     
-    static let farmResponse = FarmResponse(id: "1", name: "Happy Farms", pictureURL: "https://foodtank.com/wp-content/uploads/2020/04/COVID-19-Relief_Small-Farms-.jpg", about: "Happy Farms came from a small town in a small area with good strong corn stalks and lots of guys with overals and trucker hats", address: "1926 west lake drive, Burlington NC, 27215", reviews: [FarmReview(userId: "1", userName: "JohnAnge", ratingOutOfFive: 5, reviewText: "I love this place.")], averageRating: 5, products: [product1, product2], farmerInfo: [farmerInfo], paymentInfo: nil, pickUpOptions: [standardPickup,marketPickup,localDelivery])
+    //test dates
+    static let dateFormatter = ISO8601DateFormatter()
+    static let earlydate = dateFormatter.date(from:"2022-04-14T10:44:00+0000")!
+    static let reasonabledate = dateFormatter.date(from:"2022-10-11T10:44:00+0000")!
+    static let latedate = dateFormatter.date(from:"2022-12-14T10:44:00+0000")!
+    static let laterdate = dateFormatter.date(from:"2023-02-14T10:44:00+0000")!
+    
+    static let standardPickup = PickupOption(address: "1926 west lake drive, burlington nc", daysAndTimes: [standardDayAndTime1,standardDayAndTime2], startDate: earlydate, endDate: latedate)
+    
+    static let marketPickup = PickupOption(locationName: "Burlington Farmers Market", address: "1926 west lake drive, burlington nc", daysAndTimes: [marketDayAndTime], startDate: reasonabledate)
+    
+    static let marketPickupElon = PickupOption(locationName: "Elon Farmers Market", address: "1926 west lake drive, burlington nc", daysAndTimes: [marketDayAndTime2], startDate: latedate)
+    
+    static let localDeliveryBur = PickupOption(address: "1926 west lake drive, burlington nc", daysAndTimes: [localDeliveryDayAndTime1], startDate: reasonabledate, endDate: laterdate)
+    static let localDeliveryMeb = PickupOption(address: "1926 west lake drive, burlington nc", daysAndTimes: [localDeliveryDayAndTime2], startDate: laterdate)
+    
+    static let options = PickupOptions (standardPickup: standardPickup, marketPickups: [marketPickup,marketPickupElon], localDropoffs: [localDeliveryBur,localDeliveryMeb])
+    
+    static let farmResponse = FarmResponse(id: "1", name: "Happy Farms", pictureURL: "https://foodtank.com/wp-content/uploads/2020/04/COVID-19-Relief_Small-Farms-.jpg", about: "Happy Farms came from a small town in a small area with good strong corn stalks and lots of guys with overals and trucker hats", address: "1926 west lake drive, Burlington NC, 27215", reviews: [FarmReview(userId: "1", userName: "JohnAnge", ratingOutOfFive: 5, reviewText: "I love this place.")], averageRating: 5, products: [product1, product2], farmerInfo: [farmerInfo], paymentInfo: nil, pickupOptions: options)
     
     
     

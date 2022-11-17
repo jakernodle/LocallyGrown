@@ -23,7 +23,7 @@ struct ShopperFarmViewFarm {
     var address: String
     var productCategories: [String]
     var productMap: [String: [ProductBasicInfo]]
-    var pickupOptions: [PickupOption]
+    var pickupOptions: PickupOptions
 }
 
 class ShopperFarmViewModel: ObservableObject {

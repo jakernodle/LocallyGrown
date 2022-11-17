@@ -31,7 +31,7 @@ struct ShopperCartSheetView: View {
     @State var pictureUrl: String = ""
     
     @State var cart: Cart
-    var pickupOptions: [PickupOption]
+    var pickupOptions: PickupOptions
     
     var body: some View {
         NavigationView {
@@ -150,6 +150,6 @@ struct ShopperCartSheetView: View {
 struct ShopperCartSheetView_Previews: PreviewProvider {
     static var previews: some View {
         let testCart = Cart(farmInfo: CartFarmInfo(farmId: "1", farmName: "Test", farmAddress: "1926 west lake drive, burlington NC", farmImageURL: "https://foodtank.com/wp-content/uploads/2020/04/COVID-19-Relief_Small-Farms-.jpg"), items: ["1" : ShoppingCartItem(productInfo: ProductBasicInfo(id: "1", name: "Carrots", description: "", price: 2.00, pictureURL: "", unitsDescription: "/lb"), unitsInCart: 2)])
-        ShopperCartSheetView(cart: testCart, pickupOptions: [Constants.localDelivery, Constants.marketPickup, Constants.standardPickup])
+        ShopperCartSheetView(cart: testCart, pickupOptions: Constants.options)
     }
 }
