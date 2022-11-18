@@ -63,7 +63,7 @@ struct ShopperFarmViewContent: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 40, height: 40)
-                            .tint(.gray)
+                            .tint(.black)
                     }
                         .padding()
                 }
@@ -183,7 +183,7 @@ struct ShopperFarmViewContent: View {
                     .tint(.black)
                     .padding(20)
                     .sheet(isPresented: $showCartView) {
-                        ShopperCartSheetView(cart: cart, pickupOptions: content.pickupOptions)
+                        ShopperCartSheetView(cart: cart)
                     }
             }
             

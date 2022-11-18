@@ -18,7 +18,11 @@ enum UserServiceResponseCode: Error {
     
     //farms
     case getFarmsFailed
-    case getFarmSucess
+    case getFarmSuccess
+    
+    //farm pickup options
+    case getFarmPickUpOptionFailed
+    case getFarmPickUpOptionSucceeded
     
     //favorite
     case addFarmToFavoritesSuccess
@@ -114,6 +118,18 @@ class ShopperService: UserService {
                 completion(.success(response.toShopperFarmViewFarm()))
             case .failure:
                 completion(.failure(UserServiceResponseCode.signupFailed))
+            }
+        }
+    }
+    
+    //get farm PickupDeliveryOptions
+    func getFarmPickupOptions(params: [String: String], completion: @escaping (Result<PickupOptions, UserServiceResponseCode>) -> Void) {
+        shopperApiClient.getFarmPickupOptions(params: params) { result in
+            switch result {
+            case .success(let response):
+                completion(.success(response))
+            case .failure:
+                completion(.failure(UserServiceResponseCode.getFarmPickUpOptionFailed))
             }
         }
     }

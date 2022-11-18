@@ -10,7 +10,7 @@ import Foundation
 typealias ProductId = String
 typealias Units = Float
 
-struct Cart: Codable {
+struct Cart: Codable, Hashable {
     var farmInfo: CartFarmInfo
 
     var items: [ProductId:ShoppingCartItem]
@@ -52,7 +52,7 @@ struct Cart: Codable {
     }
 }
 
-struct ShoppingCartItem : Codable {
+struct ShoppingCartItem : Codable, Hashable {
     var productInfo: ProductBasicInfo
     var unitsInCart: Float
     var formattedUnitsInCart: String {

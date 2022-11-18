@@ -25,6 +25,17 @@ struct ShopperCartViewListObject: Hashable {
 }
 
 class ShopperCartViewModel {
+    func getCarts() -> [Cart] {
+        var cartsForView: [Cart] = []
+
+        let carts = LocallyGrownShopper.shared.getCarts()
+        for (_ , cart) in carts {
+            cartsForView.append(cart)
+        }
+        
+        return cartsForView
+    }
+    
     func getCartsForDisplay() -> [ShopperCartViewListObject] {
         var cartsToDisplay: [ShopperCartViewListObject] = []
 

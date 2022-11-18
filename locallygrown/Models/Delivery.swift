@@ -33,7 +33,6 @@ enum Day: Int, Codable {
 enum RecurancePeriod: String, Codable {
     case weekly = "Weekly"
     case biWeekly = "Bi-Weekly"
-    case monthly = "Monthly"
 }
 
 enum PickupType: String, Codable {
@@ -45,21 +44,72 @@ enum PickupType: String, Codable {
 struct Time: Codable, Hashable {
     var hour: Int
     var minute: Int
+    var description:String {
+        var formattedMinute = "\(minute)"
+        if minute < 10 {
+            formattedMinute = "0\(minute)"
+        }
+        
+        if hour >= 12 {
+            if hour > 12 {
+                return "\(hour-12):\(formattedMinute) PM"
+            }else{
+                return "\(hour):\(formattedMinute) PM"
+            }
+        }else{
+            if hour == 0 {
+                return "12:\(formattedMinute) AM"
+            }else {
+                return "\(hour):\(formattedMinute) AM"
+            }
+        }
+    }
+    
+    static func < (lhs: Time, rhs: Time) -> Bool {
+        //convert hour and minute(adding a leading 0 for numbers<10) in string, convert to int, compare
+        var leftMinute = "\(lhs.minute)"
+        if lhs.minute < 10 {
+            leftMinute = "0\(lhs.minute)"
+        }
+        
+        var rightMinute = "\(rhs.minute)"
+        if rhs.minute < 10 {
+            rightMinute = "0\(rhs.minute)"
+        }
+        
+        guard let left = Int("\(lhs.hour)\(leftMinute)") else { return false }
+        guard let right = Int("\(rhs.hour)\(rightMinute)") else { return false }
+        
+        return left < right
+    }
+    
+    mutating func incrementThirtyMinutes(){
+        if minute >= 30 {
+            if hour >= 23 {
+                hour = 0
+            }else {
+                hour += 1
+            }
+            minute -= 30
+        }else{
+            minute += 30
+        }
+    }
 }
 
-struct DayAndTime: Codable, Hashable {
+struct RecurringAvailibileDayAndTime: Codable, Hashable {
     var day: Day
     var pickupAvailibilityStartTime: Time
     var pickupAvailibilityEndTime: Time
     var pickupRecurancePeriod: RecurancePeriod
+    var startDate: Date
+    var endDate: Date?
 }
 
 struct PickupOption: Codable, Hashable {
     var locationName: String?
     var address: String
-    var daysAndTimes: [DayAndTime]
-    var startDate: Date
-    var endDate: Date?
+    var availibleDays: [RecurringAvailibileDayAndTime]
 }
 
 struct PickupOptions: Codable, Hashable {

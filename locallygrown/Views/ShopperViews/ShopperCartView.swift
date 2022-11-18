@@ -10,7 +10,8 @@ import Kingfisher
 
 struct ShopperCartView: View {
     
-    @State private var carts: [ShopperCartViewListObject] = []
+    @State var showCartView: Bool = false
+    @State private var carts: [Cart] = []
     
     var body: some View {
         VStack {
@@ -22,28 +23,35 @@ struct ShopperCartView: View {
                 .padding(.top, 6)
             
             List{
-                ForEach(carts, id: \.self) { item in
-                    HStack {
-                        KFImage(URL(string: "https://pbs.twimg.com/profile_images/895157268811046914/VHx01Y-N_400x400.jpg")!)
-                            .frame(width: 34, height: 34)
-                            .clipShape(Circle())
-                            .overlay {
-                                Circle().stroke(.gray, lineWidth: 2)
-                            }
-                            .padding(.horizontal, 6)
+                ForEach(carts, id: \.self) { cart in
+                    Button(action: {
+                        showCartView.toggle()
+                    }) {
+                        HStack {
+                            KFImage(URL(string: "https://pbs.twimg.com/profile_images/895157268811046914/VHx01Y-N_400x400.jpg")!)
+                                .frame(width: 34, height: 34)
+                                .clipShape(Circle())
+                                .overlay {
+                                    Circle().stroke(.gray, lineWidth: 2)
+                                }
+                                .padding(.horizontal, 6)
 
-                        VStack(alignment: .leading) {
-                            Text(item.farmInfo.farmName)
-                                .font(.body)
-                                .fontWeight(.semibold)
-                            
-                            Text("\(item.productsNumber) items - $\(item.formattedPrice)")
-                                .font(.footnote)
-                                .foregroundColor(.gray)
+                            VStack(alignment: .leading) {
+                                Text(cart.farmInfo.farmName)
+                                    .font(.body)
+                                    .fontWeight(.semibold)
+                                
+                                Text("\(cart.itemsAmount) items - $\(cart.formattedTotalPrice)")
+                                    .font(.footnote)
+                                    .foregroundColor(.gray)
+                            }
                         }
+                        .padding(.top, 10)
                     }
                     .listRowSeparator(.hidden)
-                    .padding(.top, 10)
+                    .sheet(isPresented: $showCartView) {
+                        ShopperCartSheetView(cart: cart)
+                    }
                 }
                     .onDelete(perform: delete)
             }
@@ -52,7 +60,7 @@ struct ShopperCartView: View {
             .background(.white)
         }
         .onAppear {
-            carts = ShopperCartViewModel().getCartsForDisplay()
+            carts = ShopperCartViewModel().getCarts()
         }
     }
     

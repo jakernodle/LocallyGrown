@@ -25,21 +25,36 @@ class ShopperCartSheetViewModel {
 }
 
 struct ShopperCartSheetView: View {
-    
+    @Environment (\.presentationMode) var presentationMode
+
     var viewModel = ShopperAccountViewModel()
     @State var name: String = "Shopper"
     @State var pictureUrl: String = ""
     
     @State var cart: Cart
-    var pickupOptions: PickupOptions
     
     var body: some View {
         NavigationView {
             VStack{
-                Text(cart.farmInfo.farmName)
-                    .font(.title)
-                    .fontWeight(.semibold)
+                ZStack(alignment: .topLeading) {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "xmark")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 20, height: 20)
+                            .tint(.black)
+                    }
                     .padding(.top, 20)
+                    .padding(.leading, 20)
+                    
+                    Text(cart.farmInfo.farmName)
+                        .font(.title)
+                        .fontWeight(.semibold)
+                        .padding(.top, 20)
+                        .frame(maxWidth:.infinity, alignment: .center)
+                }
                 
                 Divider()
                     .frame(maxHeight:2)
@@ -123,7 +138,7 @@ struct ShopperCartSheetView: View {
                 Divider()
                     .frame(maxHeight:2)
                 
-                NavigationLink(destination: ShopperCheckoutView(viewModel: ShopperCheckoutViewModel(address: cart.farmInfo.farmAddress), pickupOptions: pickupOptions)) {
+                NavigationLink(destination: ShopperCheckoutView(viewModel: ShopperCheckoutViewModel(address: cart.farmInfo.farmAddress, farmId: cart.farmInfo.farmId), cart: cart)) {
                     Text("Go to checkout")
                         .font(.title3)
                         .fontWeight(.bold)
@@ -144,12 +159,13 @@ struct ShopperCartSheetView: View {
             .navigationBarTitle("")
             .navigationBarHidden(true)
         }
+        .accentColor(.black)
     }
 }
 
 struct ShopperCartSheetView_Previews: PreviewProvider {
     static var previews: some View {
         let testCart = Cart(farmInfo: CartFarmInfo(farmId: "1", farmName: "Test", farmAddress: "1926 west lake drive, burlington NC", farmImageURL: "https://foodtank.com/wp-content/uploads/2020/04/COVID-19-Relief_Small-Farms-.jpg"), items: ["1" : ShoppingCartItem(productInfo: ProductBasicInfo(id: "1", name: "Carrots", description: "", price: 2.00, pictureURL: "", unitsDescription: "/lb"), unitsInCart: 2)])
-        ShopperCartSheetView(cart: testCart, pickupOptions: Constants.options)
+        ShopperCartSheetView(cart: testCart)
     }
 }

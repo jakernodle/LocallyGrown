@@ -38,6 +38,13 @@ class ShopperAPIClient {
             completion(.success(Constants.farmResponse.toFarm()))
         })
     }
+    
+    func getFarmPickupOptions(params: [String: String], completion: @escaping (Result<PickupOptions, RemoteApiError>) -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+            print("recieved response from getFarmPickupOptions after async delay")
+            completion(.success(Constants.options))
+        })
+    }
     //Saving carts to the db isnt of top importance at the moment, local should be fine for now
     /*func addItemToCart(params: [String: String], completion: @escaping (Result<ShoppingCartItem, RemoteApiError>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {

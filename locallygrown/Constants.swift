@@ -20,30 +20,31 @@ class Constants {
     
     static let farmerInfo = FarmSupplierInfo(id: "1", name: "Steve", pictureURL: "https://otbsalessolutions.com/wp-content/uploads/2021/08/Farmer-standing-in-field.jpg")
     
-    static let marketDayAndTime = DayAndTime(day: Day.sunday, pickupAvailibilityStartTime: Time(hour: 10, minute: 30), pickupAvailibilityEndTime: Time(hour: 14, minute: 0), pickupRecurancePeriod: RecurancePeriod.weekly)
-    static let marketDayAndTime2 = DayAndTime(day: Day.saturday, pickupAvailibilityStartTime: Time(hour: 10, minute: 30), pickupAvailibilityEndTime: Time(hour: 14, minute: 0), pickupRecurancePeriod: RecurancePeriod.weekly)
+    static let marketDayAndTime = RecurringAvailibileDayAndTime(day: Day.friday, pickupAvailibilityStartTime: Time(hour: 10, minute: 30), pickupAvailibilityEndTime: Time(hour: 14, minute: 0), pickupRecurancePeriod: RecurancePeriod.weekly, startDate: reasonabledateFri)
+    static let marketDayAndTime2 = RecurringAvailibileDayAndTime(day: Day.wednesday, pickupAvailibilityStartTime: Time(hour: 10, minute: 30), pickupAvailibilityEndTime: Time(hour: 14, minute: 0), pickupRecurancePeriod: RecurancePeriod.weekly, startDate: latedateWed)
     
-    static let standardDayAndTime1 = DayAndTime(day: Day.friday, pickupAvailibilityStartTime: Time(hour: 11, minute: 30), pickupAvailibilityEndTime: Time(hour: 16, minute: 0), pickupRecurancePeriod: RecurancePeriod.weekly)
-    static let standardDayAndTime2 = DayAndTime(day: Day.thursday, pickupAvailibilityStartTime: Time(hour: 14, minute: 30), pickupAvailibilityEndTime: Time(hour: 16, minute: 0), pickupRecurancePeriod: RecurancePeriod.weekly)
+    static let standardDayAndTime1 = RecurringAvailibileDayAndTime(day: Day.friday, pickupAvailibilityStartTime: Time(hour: 11, minute: 30), pickupAvailibilityEndTime: Time(hour: 16, minute: 0), pickupRecurancePeriod: RecurancePeriod.weekly, startDate: earlydateFri, endDate: latedateWed)
+    static let standardDayAndTime2 = RecurringAvailibileDayAndTime(day: Day.thursday, pickupAvailibilityStartTime: Time(hour: 14, minute: 30), pickupAvailibilityEndTime: Time(hour: 16, minute: 0), pickupRecurancePeriod: RecurancePeriod.biWeekly, startDate: earlydateThurs, endDate: latedateWed)
     
-    static let localDeliveryDayAndTime1 = DayAndTime(day: Day.thursday, pickupAvailibilityStartTime: Time(hour: 10, minute: 30), pickupAvailibilityEndTime: Time(hour: 11, minute: 0), pickupRecurancePeriod: RecurancePeriod.weekly)
-    static let localDeliveryDayAndTime2 = DayAndTime(day: Day.thursday, pickupAvailibilityStartTime: Time(hour: 11, minute: 00), pickupAvailibilityEndTime: Time(hour: 11, minute: 30), pickupRecurancePeriod: RecurancePeriod.weekly)
+    static let localDeliveryDayAndTime1 = RecurringAvailibileDayAndTime(day: Day.friday, pickupAvailibilityStartTime: Time(hour: 10, minute: 30), pickupAvailibilityEndTime: Time(hour: 11, minute: 0), pickupRecurancePeriod: RecurancePeriod.weekly, startDate: reasonabledateFri, endDate: laterdateSun)
+    static let localDeliveryDayAndTime2 = RecurringAvailibileDayAndTime(day: Day.sunday, pickupAvailibilityStartTime: Time(hour: 11, minute: 00), pickupAvailibilityEndTime: Time(hour: 11, minute: 30), pickupRecurancePeriod: RecurancePeriod.weekly, startDate: laterdateSun)
     
     //test dates
     static let dateFormatter = ISO8601DateFormatter()
-    static let earlydate = dateFormatter.date(from:"2022-04-14T10:44:00+0000")!
-    static let reasonabledate = dateFormatter.date(from:"2022-10-11T10:44:00+0000")!
-    static let latedate = dateFormatter.date(from:"2022-12-14T10:44:00+0000")!
-    static let laterdate = dateFormatter.date(from:"2023-02-14T10:44:00+0000")!
+    static let earlydateThurs = dateFormatter.date(from:"2022-04-14T10:44:00+0000")!
+    static let earlydateFri = dateFormatter.date(from:"2022-04-15T10:44:00+0000")!
+    static let reasonabledateFri = dateFormatter.date(from:"2022-10-11T10:44:00+0000")!
+    static let latedateWed = dateFormatter.date(from:"2022-12-14T10:44:00+0000")!
+    static let laterdateSun = dateFormatter.date(from:"2023-02-12T10:44:00+0000")!
     
-    static let standardPickup = PickupOption(address: "1926 west lake drive, burlington nc", daysAndTimes: [standardDayAndTime1,standardDayAndTime2], startDate: earlydate, endDate: latedate)
+    static let standardPickup = PickupOption(address: "1926 west lake drive, burlington nc", availibleDays: [standardDayAndTime1,standardDayAndTime2])
     
-    static let marketPickup = PickupOption(locationName: "Burlington Farmers Market", address: "1926 west lake drive, burlington nc", daysAndTimes: [marketDayAndTime], startDate: reasonabledate)
+    static let marketPickup = PickupOption(locationName: "Burlington Farmers Market", address: "1926 west lake drive, burlington nc", availibleDays: [marketDayAndTime])
     
-    static let marketPickupElon = PickupOption(locationName: "Elon Farmers Market", address: "1926 west lake drive, burlington nc", daysAndTimes: [marketDayAndTime2], startDate: latedate)
+    static let marketPickupElon = PickupOption(locationName: "Elon Farmers Market", address: "1926 west lake drive, burlington nc", availibleDays: [marketDayAndTime2])
     
-    static let localDeliveryBur = PickupOption(address: "1926 west lake drive, burlington nc", daysAndTimes: [localDeliveryDayAndTime1], startDate: reasonabledate, endDate: laterdate)
-    static let localDeliveryMeb = PickupOption(address: "1926 west lake drive, burlington nc", daysAndTimes: [localDeliveryDayAndTime2], startDate: laterdate)
+    static let localDeliveryBur = PickupOption(address: "1926 west lake drive, burlington nc", availibleDays: [localDeliveryDayAndTime1])
+    static let localDeliveryMeb = PickupOption(address: "1926 west lake drive, burlington nc", availibleDays: [localDeliveryDayAndTime2])
     
     static let options = PickupOptions (standardPickup: standardPickup, marketPickups: [marketPickup,marketPickupElon], localDropoffs: [localDeliveryBur,localDeliveryMeb])
     

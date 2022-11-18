@@ -10,17 +10,26 @@ import MapKit
 import Combine
 
 class ShopperCheckoutViewModel: ObservableObject {
+    enum State {
+        case idle
+        case loading
+        case failed(Error)
+        case loaded(PickupOptions)
+    }
+
+    @Published private(set) var state = State.idle
+    var farmId: FarmId
     
     var regionPublisher = PassthroughSubject<MKCoordinateRegion, Never>()
-    
     var region: MKCoordinateRegion? = nil {
         didSet {
             print("sending region")
             regionPublisher.send(region!)
         }
     }
-    
-    init(address: String){
+        
+    init(address: String, farmId: FarmId){
+        self.farmId = farmId
         self.getMapRegion(address: address)
     }
     
@@ -50,62 +59,169 @@ class ShopperCheckoutViewModel: ObservableObject {
         }
     }
     
-    /*func getUberAuth() {
-        guard let url = URL(string: "https://login.uber.com/oauth/v2/token") else { return }
-        var req = URLRequest(url: url)
-        req.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        //req.setValue("application/json", forHTTPHeaderField: "Accept")
-        req.httpMethod = "POST"
-        let parameters: [String: Any] = [
-            "client_id": "0wbt00fOroCuUQqJVXLDVPuJ3DAPyp_e",
-            "client_secret": "HvJq3ISsw9iLAXIP1JeY0mH8h4IgjsgjqmC-nvK_",
-            "grant_type": "client_credentials",
-            "scope":"eats.deliveries"
-        ]
-        //req.httpBody = parameters
+    func getFarmPickupOptions(){
+        state = .loading
         
-        do {
-            // convert parameters to Data and assign dictionary to httpBody of request
-            req.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
-        } catch let error {
-            print(error.localizedDescription)
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: req) { data, response, error in
-            guard
-                let data = data,
-                let response = response as? HTTPURLResponse,
-                error == nil
-            else {                                                               // check for fundamental networking error
-                print("error", error ?? URLError(.badServerResponse))
-                return
-            }
-            print(data)
-            guard (200 ... 299) ~= response.statusCode else {                    // check for http errors
-                print("statusCode should be 2xx, but is \(response.statusCode)")
-                print("response = \(response)")
-                return
-            }
-            
-            // do whatever you want with the `data`, e.g.:
-            
-            //do {
-                //let responseObject = try JSONDecoder().decode(ResponseObject<Foo>.self, from: data)
-            print("no problem")
-            /*} catch {
-                print(error) // parsing error
-                
-                if let responseString = String(data: data, encoding: .utf8) {
-                    print("responseString = \(responseString)")
-                } else {
-                    print("unable to parse response as string")
-                }
-            }*/
-        }
+        ShopperService().getFarmPickupOptions(params: ["farmId":self.farmId], completion: { result in
+            switch result {
+            case .success(let farm):
+                print(farm)
+                self.state = .loaded(farm)
+            case .failure(let error):
+                print("error loading farms") //TODO: Print error message to user
+                print(error)
 
-        task.resume()
-    }*/
+                self.state = .failed(error)
+            }
+        })
+    }
+    
+    
+}
+
+struct ShopperCheckoutView: View {
+    
+    @ObservedObject var viewModel: ShopperCheckoutViewModel
+    
+    //@State var showScheduleView: Bool = false
+    //@State var selectedOption: PickupOption? = nil
+    //@State var selectedDateTime: String? = nil
+    
+    //var pickupOptions: PickupOptions
+    var cart: Cart
+    
+    //@State private var selected = "Pickup"
+    //@State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+    
+    var body: some View {
+        switch viewModel.state {
+        case .idle:
+            // Render a clear color and start the loading process
+            // when the view first appears, which should make the
+            // view model transition into its loading state:
+            Color.clear.onAppear(perform: viewModel.getFarmPickupOptions)
+        case .loading:
+            ShopperCheckoutContentView(viewModel: viewModel, showProgressView: true)
+        case .failed(let error):
+            //ErrorView(error: error, retryHandler: viewModel.load)
+            Color.clear.onAppear(perform: viewModel.getFarmPickupOptions)
+            ProgressView()
+            let _ = print(error)
+        case .loaded(let options):
+            ShopperCheckoutContentView(viewModel: viewModel, showProgressView: false, pickupOptions: options)
+        }
+    }
+}
+
+struct ShopperCheckoutContentView: View {
+    
+    var viewModel: ShopperCheckoutViewModel
+    
+    @State var showScheduleView: Bool = false
+    @State var selectedOption: PickupOption? = nil
+    @State var selectedDateTime: String? = nil
+    
+    @State private var selected = "Pickup"
+    @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+    
+    var showProgressView: Bool
+    var pickupOptions: PickupOptions?
+    
+    var body: some View {
+        VStack {
+            PickerView(selected: $selected)
+                .padding(.top, 6)
+            if showProgressView == false {
+                ZStack(alignment: .bottomLeading) {
+                    if selected == "Pickup" {
+                        VStack {
+                            Map(coordinateRegion: $region)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 200)
+                                .cornerRadius(8)
+                                .padding(.vertical, 12)
+                            
+                            Text("Pickup Type")
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.black)
+                                .padding(.vertical, 6)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            if pickupOptions?.standardPickup != nil {
+                                PickupScheduleTimeButton(action: {
+                                    if selectedOption != pickupOptions?.standardPickup {
+                                        selectedDateTime = nil
+                                    }
+                                    selectedOption = pickupOptions?.standardPickup!
+                                    showScheduleView.toggle()
+                                }, selected: selectedOption == pickupOptions?.standardPickup, selectedDateTime: selectedDateTime,  title: "Standard Pickup")
+                            }
+                            if pickupOptions?.marketPickups.count ?? 0 > 0 {
+                                ForEach(pickupOptions!.marketPickups, id: \.self) { marketPickup in
+                                    PickupScheduleTimeButton(action: {
+                                        if selectedOption != marketPickup {
+                                            selectedDateTime = nil
+                                        }
+                                        selectedOption = marketPickup
+                                        showScheduleView.toggle()
+                                    }, selected: selectedOption == marketPickup, selectedDateTime: selectedDateTime, title: "Pickup at \(String(describing: marketPickup.locationName ?? "market"))")
+                                }
+                            }
+
+                            Spacer()
+                        }
+                        .frame(maxHeight: .infinity)
+                    }else if selected == "Local Dropoff" {
+                        Spacer()
+
+                        Text("Test something else losers. No content yet")
+                        Spacer()
+
+                    }else if selected == "Delivery" {
+                        Spacer()
+
+                        Text("Test something else losers. No content yet")
+                        Spacer()
+
+                    }
+                    
+                    Button(action: {
+                        
+                    }) {
+                        Text("Place Order")
+                            .font(.title3)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 6)
+                    }
+                        .buttonStyle(.borderedProminent)
+                        .tint(.green)
+                        .padding(.vertical, 8)
+                }
+            }else{
+                ProgressView()
+                    .padding()
+                Spacer()
+            }
+        }
+        .padding(.horizontal, 20)
+        .navigationBarTitle("Checkout")
+        .onReceive(viewModel.regionPublisher) { newRegion in
+            self.region = newRegion
+        }
+        .onAppear() {
+            if viewModel.region != nil {
+                self.region = viewModel.region!
+            }
+        }
+        .sheet(isPresented: $showScheduleView) {
+            if selectedOption != nil {
+                ShopperScheduleView(viewModel: ShopperScheduleViewModel(option: selectedOption!), selectedDateTime: $selectedDateTime, title: "Schedule")
+            }
+        }
+    }
 }
 
 struct PickerView: View {
@@ -123,22 +239,31 @@ struct PickerView: View {
     }
 }
 
-struct PickupAndScheduleTimeButton: View {
+struct PickupScheduleTimeButton: View {
     
     var action: () -> Void
     var selected: Bool
+    var selectedDateTime: String?
     var title: String
-    
+        
     var body: some View {
         if selected == true {
             Button(action: {
-                
+                action()
             }) {
-                Text(title)
-                    .font(.title3)
-                    .foregroundColor(.black)
-                    .padding(.vertical, 6)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                VStack {
+                    Text(title)
+                        .font(.body)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.black)
+                        .padding(.top, 1)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Text(selectedDateTime ?? "No time selected")
+                        .font(.footnote)
+                        .foregroundColor(.black)
+                        .padding(.bottom, 1)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
             }
                 .buttonStyle(.borderedProminent)
                 .overlay(RoundedRectangle(cornerRadius: 8)
@@ -151,7 +276,7 @@ struct PickupAndScheduleTimeButton: View {
                 action()
             }) {
                 Text(title)
-                    .font(.title3)
+                    .font(.body)
                     .foregroundColor(.black)
                     .padding(.vertical, 6)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -164,99 +289,8 @@ struct PickupAndScheduleTimeButton: View {
     }
 }
 
-struct ShopperCheckoutView: View {
-    
-    @ObservedObject var viewModel: ShopperCheckoutViewModel
-    
-    @State var showScheduleView: Bool = false
-    @State var selectedOption: PickupOption? = nil
-    
-    var pickupOptions: PickupOptions
-    
-    @State private var selected = "Pickup"
-    @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
-    
-    var body: some View {
-        VStack {
-            PickerView(selected: $selected)
-                .padding(.top, 6)
-            ZStack(alignment: .bottomLeading) {
-                if selected == "Pickup" {
-                    VStack {
-                        Map(coordinateRegion: $region)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 200)
-                            .cornerRadius(8)
-                            .padding(.vertical, 12)
-                        
-                        Text("Pickup Type")
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.black)
-                            .padding(.vertical, 6)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        if pickupOptions.standardPickup != nil {
-                            PickupAndScheduleTimeButton(action: {
-                                selectedOption = pickupOptions.standardPickup!
-                                showScheduleView.toggle()
-                            }, selected: selectedOption == pickupOptions.standardPickup, title: "Standard Pickup")
-                        }
-                        if pickupOptions.marketPickups.count > 0 {
-                            ForEach(pickupOptions.marketPickups, id: \.self) { marketPickup in
-                                PickupAndScheduleTimeButton(action: {
-                                    selectedOption = marketPickup
-                                    showScheduleView.toggle()
-                                }, selected: selectedOption == marketPickup, title: "Pickup at \(String(describing: marketPickup.locationName))")
-                            }
-                        }
-
-                        Spacer()
-                    }
-                    .frame(maxHeight: .infinity)
-                }else if selected == "Local Dropoff" {
-                    Text("0")
-
-                }else if selected == "Delivery" {
-                    Text("1")
-
-                }
-                
-                Button(action: {
-                    
-                }) {
-                    Text("Place Order")
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 6)
-                }
-                    .buttonStyle(.borderedProminent)
-                    .tint(.green)
-                    .padding(.vertical, 8)
-            }
-        }
-        .padding(.horizontal, 20)
-        .navigationBarTitle("Checkout")
-        .onReceive(viewModel.regionPublisher) { newRegion in
-            self.region = newRegion
-        }
-        .onAppear() {
-            if viewModel.region != nil {
-                self.region = viewModel.region!
-            }
-        }
-        .sheet(isPresented: $showScheduleView) {
-            if selectedOption != nil {
-                ShopperScheduleView(viewModel: ShopperScheduleViewModel(option: selectedOption!), title: "Schedule")
-            }
-        }
-    }
-}
-
-struct ShopperCheckoutView_Previews: PreviewProvider {
+/*struct ShopperCheckoutView_Previews: PreviewProvider {
     static var previews: some View {
         ShopperCheckoutView(viewModel: ShopperCheckoutViewModel(address: "1924 west lake drive, burlington nc"), pickupOptions: Constants.options)
     }
-}
+}*/
