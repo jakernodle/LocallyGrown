@@ -45,6 +45,13 @@ class ShopperAPIClient {
             completion(.success(Constants.options))
         })
     }
+    
+    func addPaymentOption(params: [String: Any], completion: @escaping (Result<CreditCard, RemoteApiError>) -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+            print("recieved response from addPaymentOption")
+            completion(.success(Constants.creditCard))
+        })
+    }
     //Saving carts to the db isnt of top importance at the moment, local should be fine for now
     /*func addItemToCart(params: [String: String], completion: @escaping (Result<ShoppingCartItem, RemoteApiError>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {

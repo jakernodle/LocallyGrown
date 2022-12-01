@@ -127,13 +127,15 @@ struct ShopperAccountView: View {
                         .listRowSeparator(.hidden)
                         .padding(.top, 10)
                         
-                        HStack {
-                            Image(systemName: "creditcard.fill")
-                                .foregroundColor(.black)
-                            Text("Payment")
+                        NavigationLink(destination: PaymentOptionsView()) {
+                            HStack {
+                                Image(systemName: "creditcard.fill")
+                                    .foregroundColor(.black)
+                                Text("Payment")
+                            }
+                            .listRowSeparator(.hidden)
+                            .padding(.top, 10)
                         }
-                        .listRowSeparator(.hidden)
-                        .padding(.top, 10)
                         
                         HStack {
                             Image(systemName: "message.fill")

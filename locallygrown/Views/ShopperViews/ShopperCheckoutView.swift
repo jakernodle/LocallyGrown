@@ -8,6 +8,7 @@
 import SwiftUI
 import MapKit
 import Combine
+import Kingfisher
 
 class ShopperCheckoutViewModel: ObservableObject {
     enum State {
@@ -27,8 +28,11 @@ class ShopperCheckoutViewModel: ObservableObject {
             regionPublisher.send(region!)
         }
     }
+    
+    var pictureURL: String
         
     init(address: String, farmId: FarmId){
+        self.pictureURL = LocallyGrownShopper.shared.loggedUser?.pictureURL ?? ""
         self.farmId = farmId
         self.getMapRegion(address: address)
     }
@@ -76,7 +80,9 @@ class ShopperCheckoutViewModel: ObservableObject {
         })
     }
     
-    
+    func getUserInfo() {
+        self.pictureURL = LocallyGrownShopper.shared.loggedUser?.pictureURL ?? ""
+    }
 }
 
 struct ShopperCheckoutView: View {
@@ -101,14 +107,14 @@ struct ShopperCheckoutView: View {
             // view model transition into its loading state:
             Color.clear.onAppear(perform: viewModel.getFarmPickupOptions)
         case .loading:
-            ShopperCheckoutContentView(viewModel: viewModel, showProgressView: true)
+            ShopperCheckoutContentView(viewModel: viewModel, showProgressView: true, subtotal: cart.formattedTotalPrice)
         case .failed(let error):
             //ErrorView(error: error, retryHandler: viewModel.load)
             Color.clear.onAppear(perform: viewModel.getFarmPickupOptions)
             ProgressView()
             let _ = print(error)
         case .loaded(let options):
-            ShopperCheckoutContentView(viewModel: viewModel, showProgressView: false, pickupOptions: options)
+            ShopperCheckoutContentView(viewModel: viewModel, showProgressView: false, pickupOptions: options, subtotal: cart.formattedTotalPrice)
         }
     }
 }
@@ -126,6 +132,7 @@ struct ShopperCheckoutContentView: View {
     
     var showProgressView: Bool
     var pickupOptions: PickupOptions?
+    var subtotal: String
     
     var body: some View {
         VStack {
@@ -133,57 +140,91 @@ struct ShopperCheckoutContentView: View {
                 .padding(.top, 6)
             if showProgressView == false {
                 ZStack(alignment: .bottomLeading) {
-                    if selected == "Pickup" {
-                        VStack {
-                            Map(coordinateRegion: $region)
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 200)
-                                .cornerRadius(8)
-                                .padding(.vertical, 12)
-                            
-                            Text("Pickup Type")
-                                .font(.title2)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.black)
-                                .padding(.vertical, 6)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            
-                            if pickupOptions?.standardPickup != nil {
-                                PickupScheduleTimeButton(action: {
-                                    if selectedOption != pickupOptions?.standardPickup {
-                                        selectedDateTime = nil
-                                    }
-                                    selectedOption = pickupOptions?.standardPickup!
-                                    showScheduleView.toggle()
-                                }, selected: selectedOption == pickupOptions?.standardPickup, selectedDateTime: selectedDateTime,  title: "Standard Pickup")
-                            }
-                            if pickupOptions?.marketPickups.count ?? 0 > 0 {
-                                ForEach(pickupOptions!.marketPickups, id: \.self) { marketPickup in
+                    ScrollView(showsIndicators: false) {
+                        if selected == "Pickup" {
+                            VStack {
+                                Map(coordinateRegion: $region)
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 200)
+                                    .cornerRadius(8)
+                                    .padding(.vertical, 12)
+                                
+                                Text("Pickup Type")
+                                    .font(.title2)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.black)
+                                    .padding(.vertical, 6)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                                if pickupOptions?.standardPickup != nil {
                                     PickupScheduleTimeButton(action: {
-                                        if selectedOption != marketPickup {
+                                        if selectedOption != pickupOptions?.standardPickup {
                                             selectedDateTime = nil
                                         }
-                                        selectedOption = marketPickup
+                                        selectedOption = pickupOptions?.standardPickup!
                                         showScheduleView.toggle()
-                                    }, selected: selectedOption == marketPickup, selectedDateTime: selectedDateTime, title: "Pickup at \(String(describing: marketPickup.locationName ?? "market"))")
+                                    }, selected: selectedOption == pickupOptions?.standardPickup, selectedDateTime: selectedDateTime,  title: "Standard Pickup")
                                 }
+                                if pickupOptions?.marketPickups.count ?? 0 > 0 {
+                                    ForEach(pickupOptions!.marketPickups, id: \.self) { marketPickup in
+                                        PickupScheduleTimeButton(action: {
+                                            if selectedOption != marketPickup {
+                                                selectedDateTime = nil
+                                            }
+                                            selectedOption = marketPickup
+                                            showScheduleView.toggle()
+                                        }, selected: selectedOption == marketPickup, selectedDateTime: selectedDateTime, title: "Pickup at \(String(describing: marketPickup.locationName ?? "market"))")
+                                    }
+                                }
+                                Divider()
+                                    .frame(maxHeight:2)
+                                    .padding(.top)
+                                
+                                PriceView(subtotal: subtotal)
+                                
+                                HStack{
+                                    if let url = URL(string: viewModel.pictureURL){
+                                        KFImage(url)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 40, height: 40)
+                                            .clipShape(Circle())
+                                            .overlay {
+                                                Circle().stroke(.gray, lineWidth: 2)
+                                            }
+                                            .padding(.horizontal, 2)
+                                    }else{
+                                        Image(systemName: "person.circle.fill")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 40, height: 40)
+                                            .clipShape(Circle())
+                                            .overlay {
+                                                Circle().stroke(.gray, lineWidth: 2)
+                                            }
+                                    }
+                                    Text(LocallyGrownShopper.shared.loggedUser?.paymentInfo.selectedCard?.formattedCardNumber ?? "Add Card")
+                                    Spacer()
+                                }
+                                .frame(maxWidth: .infinity)
+                                .padding(.bottom, 80)
+                                
+                                Spacer()
                             }
-
+                            .frame(maxHeight: .infinity)
+                        }else if selected == "Local Dropoff" {
                             Spacer()
+
+                            Text("Test something else losers. No content yet")
+                            Spacer()
+
+                        }else if selected == "Delivery" {
+                            Spacer()
+
+                            Text("Test something else losers. No content yet")
+                            Spacer()
+
                         }
-                        .frame(maxHeight: .infinity)
-                    }else if selected == "Local Dropoff" {
-                        Spacer()
-
-                        Text("Test something else losers. No content yet")
-                        Spacer()
-
-                    }else if selected == "Delivery" {
-                        Spacer()
-
-                        Text("Test something else losers. No content yet")
-                        Spacer()
-
                     }
                     
                     Button(action: {
@@ -215,6 +256,7 @@ struct ShopperCheckoutContentView: View {
             if viewModel.region != nil {
                 self.region = viewModel.region!
             }
+            viewModel.getUserInfo()
         }
         .sheet(isPresented: $showScheduleView) {
             if selectedOption != nil {
@@ -266,8 +308,8 @@ struct PickupScheduleTimeButton: View {
                 }
             }
                 .buttonStyle(.borderedProminent)
-                .overlay(RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.black, lineWidth: 2))
+                //.overlay(RoundedRectangle(cornerRadius: 8)
+                //                    .stroke(Color.black, lineWidth: 2))
                 .tint(Color(UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.06)))
                 .padding(.vertical, 4)
                 .listRowSeparator(.hidden)
@@ -285,6 +327,52 @@ struct PickupScheduleTimeButton: View {
                 .tint(Color(UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.06)))
                 .padding(.vertical, 4)
                 .listRowSeparator(.hidden)
+        }
+    }
+}
+
+struct PriceView: View {
+    
+    var subtotal: String
+    
+    var body: some View {
+        VStack {
+            HStack {
+                Text("Subtotal")
+                    .font(.headline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                Spacer()
+                Text("$\(subtotal)")
+                    .font(.headline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+            }
+            .padding(.vertical, 4)
+            
+            HStack {
+                Text("Service Charge")
+                    .font(.headline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+                Spacer()
+                Text("$2.00")
+                    .font(.headline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.gray)
+            }
+            .padding(.vertical, 4)
+            
+            HStack {
+                Text("Total")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                Spacer()
+                Text("$2.00")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+            }
+            .padding(.vertical, 4)
         }
     }
 }

@@ -48,6 +48,24 @@ class LocallyGrownShopper: LocallyGrown {
         loggedUser = user
     }
     
+    func addCardToAccount(card: CreditCard){
+        if loggedUser?.paymentInfo.cards.count == 0 {
+            loggedUser?.paymentInfo.selectedCard = card
+        }
+        loggedUser?.paymentInfo.cards.append(card)
+    }
+    
+    func setSelectedCard(card: CreditCard){
+        loggedUser?.paymentInfo.selectedCard = card
+    }
+    
+    func removeCard(index: Int){
+        if loggedUser?.paymentInfo.selectedCard?.id == loggedUser?.paymentInfo.cards[index].id {
+            loggedUser?.paymentInfo.selectedCard = nil
+        }
+        loggedUser?.paymentInfo.cards.remove(at: index)
+    }
+    
     func addItemToCart(farmInfo: CartFarmInfo, productId: ProductId, item: ShoppingCartItem){
         if(loggedUser?.carts?[farmInfo.farmId] != nil){
             loggedUser?.carts?[farmInfo.farmId]!.items[productId] = item

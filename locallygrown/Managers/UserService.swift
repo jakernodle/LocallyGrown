@@ -144,6 +144,20 @@ class ShopperService: UserService {
         LocallyGrownShopper.shared.removeItemFromCart(farmId: farmId, productId: productId)
     }
     
+    //add card to account
+    func addPaymentOption(params: [String: Any], completion: @escaping (Result<Void, Error>) -> Void) {
+        shopperApiClient.addPaymentOption(params: params) { result in
+            switch result {
+            case .success(let response):
+                LocallyGrownShopper.shared.addCardToAccount(card: response)
+                print(LocallyGrownShopper.shared.loggedUser?.paymentInfo)
+                completion(.success(()))
+            case .failure:
+                completion(.failure(UserServiceResponseCode.signupFailed))
+            }
+        }
+    }
+    
     //createOrder
     //editOrder
     

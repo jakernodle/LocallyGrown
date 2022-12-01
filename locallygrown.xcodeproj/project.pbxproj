@@ -12,6 +12,7 @@
 		380074C52919D9D600DC3406 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 380074C42919D9D600DC3406 /* AuthenticationViewModel.swift */; };
 		3813D79929010527004AB4E9 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3813D79829010527004AB4E9 /* SignupView.swift */; };
 		3813D79B29010831004AB4E9 /* ShopperHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3813D79A29010830004AB4E9 /* ShopperHomeView.swift */; };
+		381D572429381A330070F66F /* PaymentOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381D572329381A330070F66F /* PaymentOptionsView.swift */; };
 		3850A20F28FF3E1E00C22844 /* locallygrownApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850A20E28FF3E1E00C22844 /* locallygrownApp.swift */; };
 		3850A21128FF3E1E00C22844 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850A21028FF3E1E00C22844 /* ContentView.swift */; };
 		3850A21328FF3E2200C22844 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3850A21228FF3E2200C22844 /* Assets.xcassets */; };
@@ -45,6 +46,9 @@
 		388E49132912CE8E002FE7A0 /* ShopperFarmViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388E49122912CE8C002FE7A0 /* ShopperFarmViewModels.swift */; };
 		388E491729131E8C002FE7A0 /* ShopperProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388E491629131E8C002FE7A0 /* ShopperProductView.swift */; };
 		388E49192915792F002FE7A0 /* CleanFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388E49182915792B002FE7A0 /* CleanFloat.swift */; };
+		38A61757292D900A00EBDA21 /* AddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A61756292D900900EBDA21 /* AddCardView.swift */; };
+		38A61759292DD35800EBDA21 /* PaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A61758292DD35700EBDA21 /* PaymentInfo.swift */; };
+		38A6175B292DD5A800EBDA21 /* CartService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A6175A292DD5A700EBDA21 /* CartService.swift */; };
 		38AFE5B229024659003585A1 /* ShopperFarmListViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFE5B129024659003585A1 /* ShopperFarmListViewModels.swift */; };
 		38AFE5B429024C9A003585A1 /* ShopperFarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFE5B329024C9A003585A1 /* ShopperFarmView.swift */; };
 		38AFE5B629025915003585A1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFE5B529025915003585A1 /* MainView.swift */; };
@@ -82,6 +86,7 @@
 		380074C42919D9D600DC3406 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		3813D79829010527004AB4E9 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		3813D79A29010830004AB4E9 /* ShopperHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperHomeView.swift; sourceTree = "<group>"; };
+		381D572329381A330070F66F /* PaymentOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentOptionsView.swift; sourceTree = "<group>"; };
 		3850A20B28FF3E1E00C22844 /* Locally Grown..app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Locally Grown..app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3850A20E28FF3E1E00C22844 /* locallygrownApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locallygrownApp.swift; sourceTree = "<group>"; };
 		3850A21028FF3E1E00C22844 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -118,6 +123,9 @@
 		388E49122912CE8C002FE7A0 /* ShopperFarmViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperFarmViewModels.swift; sourceTree = "<group>"; };
 		388E491629131E8C002FE7A0 /* ShopperProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperProductView.swift; sourceTree = "<group>"; };
 		388E49182915792B002FE7A0 /* CleanFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanFloat.swift; sourceTree = "<group>"; };
+		38A61756292D900900EBDA21 /* AddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardView.swift; sourceTree = "<group>"; };
+		38A61758292DD35700EBDA21 /* PaymentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInfo.swift; sourceTree = "<group>"; };
+		38A6175A292DD5A700EBDA21 /* CartService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartService.swift; sourceTree = "<group>"; };
 		38AFE5B129024659003585A1 /* ShopperFarmListViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperFarmListViewModels.swift; sourceTree = "<group>"; };
 		38AFE5B329024C9A003585A1 /* ShopperFarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperFarmView.swift; sourceTree = "<group>"; };
 		38AFE5B529025915003585A1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -250,6 +258,7 @@
 				387FD42229009F1B009C9D58 /* Product.swift */,
 				387FD4242900A0A3009C9D58 /* Pricing.swift */,
 				387361F0292435800008B3FD /* Delivery.swift */,
+				38A61758292DD35700EBDA21 /* PaymentInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -269,6 +278,7 @@
 			children = (
 				387FD41C29009D53009C9D58 /* AppService.swift */,
 				387FD42E2900B3EA009C9D58 /* UserService.swift */,
+				38A6175A292DD5A700EBDA21 /* CartService.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -312,6 +322,7 @@
 		387FD43A2900D888009C9D58 /* ShopperViews */ = {
 			isa = PBXGroup;
 			children = (
+				38A61755292D8FEA00EBDA21 /* Payment */,
 				3813D79A29010830004AB4E9 /* ShopperHomeView.swift */,
 				38AFE5B329024C9A003585A1 /* ShopperFarmView.swift */,
 				38AFE5B929027D25003585A1 /* ShopperAccountView.swift */,
@@ -336,6 +347,15 @@
 				38AFE5B529025915003585A1 /* MainView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		38A61755292D8FEA00EBDA21 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				38A61756292D900900EBDA21 /* AddCardView.swift */,
+				381D572329381A330070F66F /* PaymentOptionsView.swift */,
+			);
+			path = Payment;
 			sourceTree = "<group>";
 		};
 		38AFE5AE290245CF003585A1 /* ViewModels */ = {
@@ -620,11 +640,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				387361ED291EDCAF0008B3FD /* ShopperCartSheetView.swift in Sources */,
+				38A6175B292DD5A800EBDA21 /* CartService.swift in Sources */,
+				381D572429381A330070F66F /* PaymentOptionsView.swift in Sources */,
 				3813D79929010527004AB4E9 /* SignupView.swift in Sources */,
 				3850A21128FF3E1E00C22844 /* ContentView.swift in Sources */,
 				380074C52919D9D600DC3406 /* AuthenticationViewModel.swift in Sources */,
 				38AFE5B429024C9A003585A1 /* ShopperFarmView.swift in Sources */,
 				38AFE5C22904D94A003585A1 /* ShopperOrderViewModels.swift in Sources */,
+				38A61759292DD35800EBDA21 /* PaymentInfo.swift in Sources */,
 				387FD4342900C978009C9D58 /* SupplierAPIClient.swift in Sources */,
 				385C2D8C2908F86E00C6AEC2 /* Constants.swift in Sources */,
 				38AFE5BA29027D25003585A1 /* ShopperAccountView.swift in Sources */,
@@ -639,6 +662,7 @@
 				387FD4282900A6D9009C9D58 /* Order.swift in Sources */,
 				387FD42F2900B3EA009C9D58 /* UserService.swift in Sources */,
 				38AFE5B229024659003585A1 /* ShopperFarmListViewModels.swift in Sources */,
+				38A61757292D900A00EBDA21 /* AddCardView.swift in Sources */,
 				388E491729131E8C002FE7A0 /* ShopperProductView.swift in Sources */,
 				387FD41A290098F0009C9D58 /* Shopper.swift in Sources */,
 				387FD43F2900D96A009C9D58 /* LoginView.swift in Sources */,
@@ -816,7 +840,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"locallygrown/Preview Content\"";
 				DEVELOPMENT_TEAM = SMWT565UUR;
 				ENABLE_PREVIEWS = YES;
@@ -826,6 +850,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
@@ -849,7 +874,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"locallygrown/Preview Content\"";
 				DEVELOPMENT_TEAM = SMWT565UUR;
 				ENABLE_PREVIEWS = YES;
@@ -859,6 +884,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;

@@ -88,6 +88,6 @@ class AuthenticationViewModel: ObservableObject {
     }
     
     func createUser(name: String, email: String, pictureUrlString: String? = nil) -> Shopper {
-        return Shopper(id: "1", name: name, email: email, pictureURL: pictureUrlString, favoriteFarmIds: [], paymentInfo: nil, orders: [], carts: [:])
+        return Shopper(id: "1", name: name, email: email, pictureURL: pictureUrlString, favoriteFarmIds: [], orders: [], carts: [:])
     }
 }

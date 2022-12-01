@@ -48,11 +48,11 @@ class Constants {
     
     static let options = PickupOptions (standardPickup: standardPickup, marketPickups: [marketPickup,marketPickupElon], localDropoffs: [localDeliveryBur,localDeliveryMeb])
     
-    static let farmResponse = FarmResponse(id: "1", name: "Happy Farms", pictureURL: "https://foodtank.com/wp-content/uploads/2020/04/COVID-19-Relief_Small-Farms-.jpg", about: "Happy Farms came from a small town in a small area with good strong corn stalks and lots of guys with overals and trucker hats", address: "1926 west lake drive, Burlington NC, 27215", reviews: [FarmReview(userId: "1", userName: "JohnAnge", ratingOutOfFive: 5, reviewText: "I love this place.")], averageRating: 5, products: [product1, product2], farmerInfo: [farmerInfo], paymentInfo: nil, pickupOptions: options)
+    static let farmResponse = FarmResponse(id: "1", name: "Reverence Farms", pictureURL: "https://foodtank.com/wp-content/uploads/2020/04/COVID-19-Relief_Small-Farms-.jpg", about: "Reverence Farms came from a small town in a small area with good strong corn stalks and lots of guys with overals and trucker hats", address: "1926 west lake drive, Burlington NC, 27215", reviews: [FarmReview(userId: "1", userName: "JohnAnge", ratingOutOfFive: 5, reviewText: "I love this place.")], averageRating: 5, products: [product1, product2], farmerInfo: [farmerInfo], paymentInfo: nil, pickupOptions: options)
     
     
     
-    static let farmList = [ShopperHomeViewFarmListViewObject(farmId: "1", name: "Poopy Farms", pictureURL: "https://foodtank.com/wp-content/uploads/2020/04/COVID-19-Relief_Small-Farms-.jpg", suppliers: [farmerInfo], categories: "Produce, Meat")]
+    static let farmList = [ShopperHomeViewFarmListViewObject(farmId: "1", name: "Reverence Farms", pictureURL: "https://foodtank.com/wp-content/uploads/2020/04/COVID-19-Relief_Small-Farms-.jpg", suppliers: [farmerInfo], categories: "Produce, Meat")]
     
     static let farmListResponse = FarmListResponse(farms: farmList)
     
@@ -62,6 +62,7 @@ class Constants {
     
     //static let pastcart1 = Cart(items: [item, item2], farmName: "Poopy Farms", itemsAmount: <#T##String#>, totalPrice: <#T##Float#>)
     
-    static let testUser1: Shopper = Shopper(id: "1", name: "JohnAnge", email: "jakernodle@gmail.com", pictureURL: "https://lh3.googleusercontent.com/ogw/AOh-ky1qBybrjK8keXF0hmuO98ueuCLOq34eEpR-S0Enbvs=s32-c-mo", favoriteFarmIds: [], paymentInfo: nil, orders: [], carts: [:])
+    static let testUser1: Shopper = Shopper(id: "1", name: "JohnAnge", email: "jakernodle@gmail.com", pictureURL: "https://lh3.googleusercontent.com/ogw/AOh-ky1qBybrjK8keXF0hmuO98ueuCLOq34eEpR-S0Enbvs=s32-c-mo", favoriteFarmIds: [], orders: [], carts: [:])
     
+    static let creditCard: CreditCard = CreditCard(cardNumber: "4430473054719837", expDate: "11/24", cvv: "307", zipCode: "27215")
 }
