@@ -13,6 +13,7 @@
 		3813D79929010527004AB4E9 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3813D79829010527004AB4E9 /* SignupView.swift */; };
 		3813D79B29010831004AB4E9 /* ShopperHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3813D79A29010830004AB4E9 /* ShopperHomeView.swift */; };
 		381D572429381A330070F66F /* PaymentOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381D572329381A330070F66F /* PaymentOptionsView.swift */; };
+		381D5726293869840070F66F /* ShopperRefferalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381D5725293869840070F66F /* ShopperRefferalView.swift */; };
 		3850A20F28FF3E1E00C22844 /* locallygrownApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850A20E28FF3E1E00C22844 /* locallygrownApp.swift */; };
 		3850A21128FF3E1E00C22844 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3850A21028FF3E1E00C22844 /* ContentView.swift */; };
 		3850A21328FF3E2200C22844 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3850A21228FF3E2200C22844 /* Assets.xcassets */; };
@@ -87,6 +88,7 @@
 		3813D79829010527004AB4E9 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		3813D79A29010830004AB4E9 /* ShopperHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperHomeView.swift; sourceTree = "<group>"; };
 		381D572329381A330070F66F /* PaymentOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentOptionsView.swift; sourceTree = "<group>"; };
+		381D5725293869840070F66F /* ShopperRefferalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperRefferalView.swift; sourceTree = "<group>"; };
 		3850A20B28FF3E1E00C22844 /* Locally Grown..app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Locally Grown..app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3850A20E28FF3E1E00C22844 /* locallygrownApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locallygrownApp.swift; sourceTree = "<group>"; };
 		3850A21028FF3E1E00C22844 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				387361EC291EDCAF0008B3FD /* ShopperCartSheetView.swift */,
 				387361EE29229FAD0008B3FD /* ShopperCheckoutView.swift */,
 				387FE24829256754002D5D67 /* ShopperScheduleView.swift */,
+				381D5725293869840070F66F /* ShopperRefferalView.swift */,
 			);
 			path = ShopperViews;
 			sourceTree = "<group>";
@@ -662,6 +665,7 @@
 				387FD4282900A6D9009C9D58 /* Order.swift in Sources */,
 				387FD42F2900B3EA009C9D58 /* UserService.swift in Sources */,
 				38AFE5B229024659003585A1 /* ShopperFarmListViewModels.swift in Sources */,
+				381D5726293869840070F66F /* ShopperRefferalView.swift in Sources */,
 				38A61757292D900A00EBDA21 /* AddCardView.swift in Sources */,
 				388E491729131E8C002FE7A0 /* ShopperProductView.swift in Sources */,
 				387FD41A290098F0009C9D58 /* Shopper.swift in Sources */,
@@ -840,7 +844,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"locallygrown/Preview Content\"";
 				DEVELOPMENT_TEAM = SMWT565UUR;
 				ENABLE_PREVIEWS = YES;
@@ -851,7 +855,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -863,7 +867,7 @@
 				PRODUCT_NAME = "Locally Grown.";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -874,7 +878,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"locallygrown/Preview Content\"";
 				DEVELOPMENT_TEAM = SMWT565UUR;
 				ENABLE_PREVIEWS = YES;
@@ -885,7 +889,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -897,7 +901,7 @@
 				PRODUCT_NAME = "Locally Grown.";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

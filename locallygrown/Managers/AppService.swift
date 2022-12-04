@@ -67,16 +67,16 @@ class LocallyGrownShopper: LocallyGrown {
     }
     
     func addItemToCart(farmInfo: CartFarmInfo, productId: ProductId, item: ShoppingCartItem){
-        if(loggedUser?.carts?[farmInfo.farmId] != nil){
-            loggedUser?.carts?[farmInfo.farmId]!.items[productId] = item
+        if(loggedUser?.carts[farmInfo.farmId] != nil){
+            loggedUser?.carts[farmInfo.farmId]!.items[productId] = item
         }else{
             let cart = Cart(farmInfo: farmInfo, items: [productId:item])
-            loggedUser?.carts?[farmInfo.farmId] = cart
+            loggedUser?.carts[farmInfo.farmId] = cart
         }
     }
     
     func removeItemFromCart(farmId: FarmId, productId: ProductId){
-        loggedUser?.carts?[farmId]!.items[productId] = nil
+        loggedUser?.carts[farmId]!.items[productId] = nil
     }
     
     func getCarts() -> [FarmId:Cart] {
@@ -84,21 +84,21 @@ class LocallyGrownShopper: LocallyGrown {
     }
     
     func cleanCart(farmId: FarmId){
-        if loggedUser?.carts?[farmId]?.items.count == 0 {
-            loggedUser?.carts?.removeValue(forKey: farmId)
+        if loggedUser?.carts[farmId]?.items.count == 0 {
+            loggedUser?.carts.removeValue(forKey: farmId)
         }
     }
     
     func removeCart(farmId: FarmId){
-        loggedUser?.carts?.removeValue(forKey: farmId)
+        loggedUser?.carts.removeValue(forKey: farmId)
     }
     
     func getItemsInCart(cartId: FarmId) -> [ProductId:ShoppingCartItem]? {
-        return loggedUser?.carts?[cartId]?.items
+        return loggedUser?.carts[cartId]?.items
     }
     
     func formattedUnitsOfProductInCart(cartId: FarmId, productId: ProductId) -> String? {
-        guard let cart = loggedUser?.carts?[cartId] else { return nil } //TODO: throw cart doesnt exist error
+        guard let cart = loggedUser?.carts[cartId] else { return nil } //TODO: throw cart doesnt exist error
         guard let product = cart.items[productId] else { return nil }
         
         //here we use the .clean Float extension to remove any trailing ".0's"
@@ -106,7 +106,7 @@ class LocallyGrownShopper: LocallyGrown {
     }
     
     func getCartSize(cartId: FarmId) -> Int {
-        return (loggedUser?.carts?[cartId]?.items.count ?? 0)
+        return (loggedUser?.carts[cartId]?.items.count ?? 0)
     }
     
     func hasLikedFarmForId(farmId: FarmId) -> Bool{

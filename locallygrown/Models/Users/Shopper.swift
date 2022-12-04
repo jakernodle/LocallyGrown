@@ -19,7 +19,7 @@ struct Shopper : User, Codable {
     var orders: [Order]?
     
     var cartIds: Set<FarmId>?
-    var carts: [FarmId:Cart]?
+    var carts: [FarmId:Cart] = [:]
 }
 
 // from the api after login

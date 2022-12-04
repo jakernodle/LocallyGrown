@@ -52,10 +52,15 @@ struct ShopperFarmViewContent: View {
             VStack {
                 ZStack(alignment: .topLeading){
                     KFImage(URL(string: content.pictureURL))
-                        .frame(width: 50, height: 180)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: 180)
                         .frame(maxWidth: .infinity)
                         .cornerRadius(0)
-                    
+                        .overlay {
+                            Rectangle().stroke(.gray, lineWidth: 2)
+                        }
+
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
                     }) {
