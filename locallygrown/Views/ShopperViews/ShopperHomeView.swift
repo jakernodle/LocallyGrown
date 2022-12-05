@@ -9,11 +9,9 @@ import SwiftUI
 import Kingfisher
 
 struct ShopperHomeView: View {
-    
     @ObservedObject var viewModel = ShopperFarmListViewModel()
 
     var body: some View {
-        
         ZStack {
             Color(UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.06))
                 .ignoresSafeArea(.all)
@@ -26,7 +24,6 @@ struct ShopperHomeView: View {
                     // view model transition into its loading state:
                     Color.clear.onAppear(perform: viewModel.load)
                 case .loading:
-
                     ScrollView {
                         LazyVGrid(columns: [GridItem(.flexible())], spacing: 0){
                             ProductCategoriesCollection()
@@ -35,18 +32,16 @@ struct ShopperHomeView: View {
                         }
                     }
                     .frame(height: .infinity)
-                
                 case .failed(let error):
-
-                    //ErrorView(error: error, retryHandler: viewModel.load)
-                    let _ = print(error)
+                    let _  = print(error)
+                    //TODO: display error page
+                    Color.clear.onAppear(perform: viewModel.load)
+                    ProgressView()
                 case .loaded(let farms):
-
                     ScrollView {
                         LazyVGrid(columns: [GridItem(.flexible())], spacing: 0){
                             ProductCategoriesCollection()
                             FarmsListView(farms: farms, viewModel: viewModel)
-                            //Text("Not seeing someone you're looking for?")
                         }
                     }
                     .frame(height: .infinity)

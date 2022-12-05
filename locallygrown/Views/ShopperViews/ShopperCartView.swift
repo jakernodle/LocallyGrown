@@ -9,7 +9,6 @@ import SwiftUI
 import Kingfisher
 
 struct ShopperCartView: View {
-    
     @State var showCartView: Bool = false
     @State private var carts: [Cart] = []
     

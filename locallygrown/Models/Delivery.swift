@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 enum Day: Int, Codable {
     case sunday = 1
     case monday = 2
@@ -44,6 +43,7 @@ enum PickupType: String, Codable {
 struct Time: Codable, Hashable {
     var hour: Int
     var minute: Int
+    
     var description:String {
         var formattedMinute = "\(minute)"
         if minute < 10 {

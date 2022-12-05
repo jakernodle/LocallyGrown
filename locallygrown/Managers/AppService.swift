@@ -14,7 +14,6 @@ enum UserType: Int {
 }
 
 class LocallyGrown {
-    
     static let app = LocallyGrown()
     
     var loggedUserType: UserType? {
@@ -32,7 +31,6 @@ class LocallyGrown {
 }
 
 class LocallyGrownShopper: LocallyGrown {
-    
     static let shared = LocallyGrownShopper()
     
     var loggedUser: Shopper? {
@@ -66,49 +64,6 @@ class LocallyGrownShopper: LocallyGrown {
         loggedUser?.paymentInfo.cards.remove(at: index)
     }
     
-    func addItemToCart(farmInfo: CartFarmInfo, productId: ProductId, item: ShoppingCartItem){
-        if(loggedUser?.carts[farmInfo.farmId] != nil){
-            loggedUser?.carts[farmInfo.farmId]!.items[productId] = item
-        }else{
-            let cart = Cart(farmInfo: farmInfo, items: [productId:item])
-            loggedUser?.carts[farmInfo.farmId] = cart
-        }
-    }
-    
-    func removeItemFromCart(farmId: FarmId, productId: ProductId){
-        loggedUser?.carts[farmId]!.items[productId] = nil
-    }
-    
-    func getCarts() -> [FarmId:Cart] {
-        return loggedUser?.carts ?? [:]
-    }
-    
-    func cleanCart(farmId: FarmId){
-        if loggedUser?.carts[farmId]?.items.count == 0 {
-            loggedUser?.carts.removeValue(forKey: farmId)
-        }
-    }
-    
-    func removeCart(farmId: FarmId){
-        loggedUser?.carts.removeValue(forKey: farmId)
-    }
-    
-    func getItemsInCart(cartId: FarmId) -> [ProductId:ShoppingCartItem]? {
-        return loggedUser?.carts[cartId]?.items
-    }
-    
-    func formattedUnitsOfProductInCart(cartId: FarmId, productId: ProductId) -> String? {
-        guard let cart = loggedUser?.carts[cartId] else { return nil } //TODO: throw cart doesnt exist error
-        guard let product = cart.items[productId] else { return nil }
-        
-        //here we use the .clean Float extension to remove any trailing ".0's"
-        return product.unitsInCart.clean
-    }
-    
-    func getCartSize(cartId: FarmId) -> Int {
-        return (loggedUser?.carts[cartId]?.items.count ?? 0)
-    }
-    
     func hasLikedFarmForId(farmId: FarmId) -> Bool{
         guard let ids = loggedUser?.favoriteFarmIds else { return false }
         return ids.contains(farmId)
@@ -129,21 +84,15 @@ class LocallyGrownShopper: LocallyGrown {
     private override init() {
         super.init()
         loggedUserType = UserType(rawValue: UserDefaults.standard.integer(forKey: "userType"))
-        print("type")
-        print(loggedUserType)
         loggedUser = UserDefaults.standard.structData(Shopper.self, forKey: "loggedUser")
-        print("type")
-        print(loggedUserType)
-        print("loggedUser")
-        print(loggedUser)
-        //MARK: initilization for testing
+
+        //MARK: user initilization for testing UserDefaults
         //loggedUserType = UserType.shopper
         //loggedUser = Constants.testUser1
     }
 }
 
 class LocallyGrownSupplier: LocallyGrown {
-    
     static let shared = LocallyGrownSupplier()
     
     var loggedUser: Supplier? {

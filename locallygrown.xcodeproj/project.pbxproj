@@ -26,7 +26,7 @@
 		387361ED291EDCAF0008B3FD /* ShopperCartSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387361EC291EDCAF0008B3FD /* ShopperCartSheetView.swift */; };
 		387361EF29229FB00008B3FD /* ShopperCheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387361EE29229FAD0008B3FD /* ShopperCheckoutView.swift */; };
 		387361F1292435830008B3FD /* Delivery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387361F0292435800008B3FD /* Delivery.swift */; };
-		387361F32924AD9F0008B3FD /* TODO.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 387361F22924AD9F0008B3FD /* TODO.rtf */; };
+		387361F32924AD9F0008B3FD /* TODO, ideas, and extras.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 387361F22924AD9F0008B3FD /* TODO, ideas, and extras.rtf */; };
 		387FD4182900988C009C9D58 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD4172900988C009C9D58 /* User.swift */; };
 		387FD41A290098F0009C9D58 /* Shopper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD419290098F0009C9D58 /* Shopper.swift */; };
 		387FD41D29009D53009C9D58 /* AppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387FD41C29009D53009C9D58 /* AppService.swift */; };
@@ -58,6 +58,9 @@
 		38AFE5BE2904A54F003585A1 /* ShopperCartViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFE5BD2904A54F003585A1 /* ShopperCartViewModels.swift */; };
 		38AFE5C02904D899003585A1 /* ShopperOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFE5BF2904D899003585A1 /* ShopperOrderView.swift */; };
 		38AFE5C22904D94A003585A1 /* ShopperOrderViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFE5C12904D94A003585A1 /* ShopperOrderViewModels.swift */; };
+		38F0DF91293DBB4600969C9F /* ShopperAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F0DF90293DBB4600969C9F /* ShopperAccountViewModel.swift */; };
+		38F0DF93293DBBED00969C9F /* ShopperCartSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F0DF92293DBBED00969C9F /* ShopperCartSheetViewModel.swift */; };
+		38F0DF95293DBCF300969C9F /* ShopperCheckoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F0DF94293DBCF300969C9F /* ShopperCheckoutViewModel.swift */; };
 		B6D0859845FB86E3E4B2795A /* Pods_locallygrown_locallygrownUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04EC42CB017B5DEE0A6659C6 /* Pods_locallygrown_locallygrownUITests.framework */; };
 		EF9ED9393B4482754CF9E208 /* Pods_locallygrownTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67F9CF13874A0A2C0C93C3D0 /* Pods_locallygrownTests.framework */; };
 /* End PBXBuildFile section */
@@ -83,7 +86,6 @@
 		04EC42CB017B5DEE0A6659C6 /* Pods_locallygrown_locallygrownUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_locallygrown_locallygrownUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C4978CB2D7269A177AE472F /* Pods-locallygrownTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locallygrownTests.release.xcconfig"; path = "Target Support Files/Pods-locallygrownTests/Pods-locallygrownTests.release.xcconfig"; sourceTree = "<group>"; };
 		380074B929184FA800DC3406 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		380074C32919D61800DC3406 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		380074C42919D9D600DC3406 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		3813D79829010527004AB4E9 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		3813D79A29010830004AB4E9 /* ShopperHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperHomeView.swift; sourceTree = "<group>"; };
@@ -104,7 +106,7 @@
 		387361EC291EDCAF0008B3FD /* ShopperCartSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperCartSheetView.swift; sourceTree = "<group>"; };
 		387361EE29229FAD0008B3FD /* ShopperCheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperCheckoutView.swift; sourceTree = "<group>"; };
 		387361F0292435800008B3FD /* Delivery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delivery.swift; sourceTree = "<group>"; };
-		387361F22924AD9F0008B3FD /* TODO.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = TODO.rtf; sourceTree = "<group>"; };
+		387361F22924AD9F0008B3FD /* TODO, ideas, and extras.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "TODO, ideas, and extras.rtf"; sourceTree = "<group>"; };
 		387FD4172900988C009C9D58 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		387FD419290098F0009C9D58 /* Shopper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shopper.swift; sourceTree = "<group>"; };
 		387FD41C29009D53009C9D58 /* AppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppService.swift; sourceTree = "<group>"; };
@@ -136,6 +138,9 @@
 		38AFE5BD2904A54F003585A1 /* ShopperCartViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperCartViewModels.swift; sourceTree = "<group>"; };
 		38AFE5BF2904D899003585A1 /* ShopperOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperOrderView.swift; sourceTree = "<group>"; };
 		38AFE5C12904D94A003585A1 /* ShopperOrderViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperOrderViewModels.swift; sourceTree = "<group>"; };
+		38F0DF90293DBB4600969C9F /* ShopperAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperAccountViewModel.swift; sourceTree = "<group>"; };
+		38F0DF92293DBBED00969C9F /* ShopperCartSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperCartSheetViewModel.swift; sourceTree = "<group>"; };
+		38F0DF94293DBCF300969C9F /* ShopperCheckoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopperCheckoutViewModel.swift; sourceTree = "<group>"; };
 		67F9CF13874A0A2C0C93C3D0 /* Pods_locallygrownTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_locallygrownTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B64D7DBCFA83E47702CF104 /* Pods_locallygrown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_locallygrown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7800A26228E10965E9C8C22D /* Pods-locallygrown-locallygrownUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locallygrown-locallygrownUITests.debug.xcconfig"; path = "Target Support Files/Pods-locallygrown-locallygrownUITests/Pods-locallygrown-locallygrownUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -208,7 +213,6 @@
 		3850A20D28FF3E1E00C22844 /* locallygrown */ = {
 			isa = PBXGroup;
 			children = (
-				380074C32919D61800DC3406 /* Info.plist */,
 				387FD4302900C93E009C9D58 /* API */,
 				387FD42B2900AED9009C9D58 /* Extensions */,
 				387FD41B29009D3B009C9D58 /* Managers */,
@@ -221,7 +225,7 @@
 				3850A21228FF3E2200C22844 /* Assets.xcassets */,
 				3850A21428FF3E2200C22844 /* Preview Content */,
 				380074B929184FA800DC3406 /* Launch Screen.storyboard */,
-				387361F22924AD9F0008B3FD /* TODO.rtf */,
+				387361F22924AD9F0008B3FD /* TODO, ideas, and extras.rtf */,
 			);
 			path = locallygrown;
 			sourceTree = "<group>";
@@ -385,6 +389,9 @@
 				38AFE5BD2904A54F003585A1 /* ShopperCartViewModels.swift */,
 				38AFE5C12904D94A003585A1 /* ShopperOrderViewModels.swift */,
 				388E49122912CE8C002FE7A0 /* ShopperFarmViewModels.swift */,
+				38F0DF90293DBB4600969C9F /* ShopperAccountViewModel.swift */,
+				38F0DF92293DBBED00969C9F /* ShopperCartSheetViewModel.swift */,
+				38F0DF94293DBCF300969C9F /* ShopperCheckoutViewModel.swift */,
 			);
 			path = ShopperViewModels;
 			sourceTree = "<group>";
@@ -511,7 +518,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				387361F32924AD9F0008B3FD /* TODO.rtf in Resources */,
+				387361F32924AD9F0008B3FD /* TODO, ideas, and extras.rtf in Resources */,
 				380074BA29184FA800DC3406 /* Launch Screen.storyboard in Resources */,
 				3850A21628FF3E2200C22844 /* Preview Assets.xcassets in Resources */,
 				3850A21328FF3E2200C22844 /* Assets.xcassets in Resources */,
@@ -644,6 +651,7 @@
 			files = (
 				387361ED291EDCAF0008B3FD /* ShopperCartSheetView.swift in Sources */,
 				38A6175B292DD5A800EBDA21 /* CartService.swift in Sources */,
+				38F0DF91293DBB4600969C9F /* ShopperAccountViewModel.swift in Sources */,
 				381D572429381A330070F66F /* PaymentOptionsView.swift in Sources */,
 				3813D79929010527004AB4E9 /* SignupView.swift in Sources */,
 				3850A21128FF3E1E00C22844 /* ContentView.swift in Sources */,
@@ -679,8 +687,10 @@
 				387FD4322900C959009C9D58 /* ShopperAPIClient.swift in Sources */,
 				387FD4362900CAF5009C9D58 /* APIError.swift in Sources */,
 				388E49132912CE8E002FE7A0 /* ShopperFarmViewModels.swift in Sources */,
+				38F0DF95293DBCF300969C9F /* ShopperCheckoutViewModel.swift in Sources */,
 				387FD41D29009D53009C9D58 /* AppService.swift in Sources */,
 				38AFE5B629025915003585A1 /* MainView.swift in Sources */,
+				38F0DF93293DBBED00969C9F /* ShopperCartSheetViewModel.swift in Sources */,
 				38AFE5C02904D899003585A1 /* ShopperOrderView.swift in Sources */,
 				387FD4182900988C009C9D58 /* User.swift in Sources */,
 				387FD4382900CB9B009C9D58 /* UserAPIClient.swift in Sources */,

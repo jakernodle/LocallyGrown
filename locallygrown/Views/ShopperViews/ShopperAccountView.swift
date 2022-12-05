@@ -8,24 +8,7 @@
 import SwiftUI
 import Kingfisher
 
-class ShopperAccountViewModel {
-    
-    var name: String
-    var pictureURL: String
-    
-    init() {
-        self.name = LocallyGrownShopper.shared.loggedUser?.name ?? "Shopper"
-        self.pictureURL = LocallyGrownShopper.shared.loggedUser?.pictureURL ?? ""
-    }
-    
-    func getUserInfo() {
-        self.name = LocallyGrownShopper.shared.loggedUser?.name ?? "Shopper"
-        self.pictureURL = LocallyGrownShopper.shared.loggedUser?.pictureURL ?? ""
-    }
-}
-
 struct ShopperAccountView: View {
-    
     var viewModel = ShopperAccountViewModel()
     @State var name: String = "Shopper"
     @State var pictureUrl: String = ""

@@ -8,29 +8,12 @@
 import SwiftUI
 import Kingfisher
 
-class ShopperCartSheetViewModel {
-    
-    var name: String
-    var pictureURL: String
-    
-    init() {
-        self.name = LocallyGrownShopper.shared.loggedUser?.name ?? "Shopper"
-        self.pictureURL = LocallyGrownShopper.shared.loggedUser?.pictureURL ?? ""
-    }
-    
-    func getUserInfo() {
-        self.name = LocallyGrownShopper.shared.loggedUser?.name ?? "Shopper"
-        self.pictureURL = LocallyGrownShopper.shared.loggedUser?.pictureURL ?? ""
-    }
-}
-
 struct ShopperCartSheetView: View {
     @Environment (\.presentationMode) var presentationMode
 
     var viewModel = ShopperAccountViewModel()
     @State var name: String = "Shopper"
     @State var pictureUrl: String = ""
-    
     @State var cart: Cart
     
     var body: some View {

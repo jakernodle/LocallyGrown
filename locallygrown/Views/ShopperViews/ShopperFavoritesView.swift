@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ShopperFavoritesView: View {
-    
     @ObservedObject var viewModel = ShopperFarmListViewModel()
     
     var body: some View {
@@ -17,16 +16,17 @@ struct ShopperFavoritesView: View {
             case .idle:
                 Color.clear.onAppear(perform: viewModel.loadFavorites)
             case .loading:
-                let _ = print("here loading")
                 ScrollView {
                     ProgressView()
                         .padding()
                 }
                 .frame(height: .infinity)
             case .failed(let error):
-                let _ = print(error)
+                let _  = print(error)
+                //TODO: display error page
+                Color.clear.onAppear(perform: viewModel.loadFavorites)
+                ProgressView()
             case .loaded(let farms):
-                let _ = print("already loaded")
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.flexible())], spacing: 0){
                         FarmsListView(farms: farms, viewModel: viewModel)

@@ -7,54 +7,50 @@
 
 import Foundation
 
+struct Farm : Codable {
+    let id: FarmId
+    let name: String
+    let pictureURL: String
+    let about: String
+    let address: String
+    let reviewCount: Int
+    let averageRating: Float? //not a computed value since this could get costly, this will be calculate on the backend
+    let products: [Product]
+    let farmerInfo: [FarmSupplierInfo]
+    let paymentInfo: FarmDepositInfo?
+    let pickupOptions: PickupOptions
+    
+    func toShopperFarmViewFarm() -> ShopperFarmViewFarm {
+        return ShopperFarmViewFarm(id: id, pictureURL: pictureURL, name: name, rating: averageRating ?? 0, reviewsCount: reviewCount, about: about, address: address, productCategories: productCategoriesArray, productMap: productMap, pickupOptions: pickupOptions)
+    }
+}
+
 struct FarmDepositInfo : Codable {
     var routingNumber: Int
     var accountNumber: Int
 }
 
 struct FarmReview: Codable {
-    var userId: String
-    var userName: String
-    var ratingOutOfFive: Int
-    var reviewText: String
+    let userId: String
+    let name: String
+    let ratingOutOfFive: Int
+    let reviewText: String
 }
 
 struct FarmSupplierInfo: Codable, Hashable {
-    var id: String
-    var name: String
-    var pictureURL: String
+    let id: String
+    let name: String
+    //pictures can be nil
+    let pictureURL: String?
 }
 
-struct Farm : Codable {
-    var id: FarmId
-    
-    var name: String
-    var pictureURL: String
-    var about: String
-    var address: String
-    
-    var reviews: [FarmReview]?
-    var averageRating: Float? //not a computed value since this could get costly, calculate on the backend
+extension Farm {
     var hasReviews: Bool {
-        reviews != nil && reviews!.count > 0
-    }
-    
-    var products: [Product]
-    var farmerInfo: [FarmSupplierInfo]
-    var paymentInfo: FarmDepositInfo?
-    
-    var pickupOptions: PickupOptions
-    
-    var productCategoriesDescription:String {
-        //this is a set since there can be multiple products with category "meat", yet we only want meat to show once in the final string
-        var categories:Set<String> = []
-        for product in products {
-            categories.insert(product.category.description)
-        }
-        return categories.map{String($0)}.joined(separator: ", ")
+        reviewCount > 0
     }
     
     var productCategoriesArray:[String] {
+        // this is defined as a set since there can be multiple products with category "meat", yet we only want meat to show once in the final string
         var categories:Set<String> = []
         for product in products {
             categories.insert(product.category.description)
@@ -62,6 +58,12 @@ struct Farm : Codable {
         return Array(categories)
     }
     
+    var productCategoriesDescription:String {
+        return productCategoriesArray.map{String($0)}.joined(separator: ", ")
+    }
+    
+    // here we map an array of products to their respective product categories for display in a list with sections
+    // the section title is by the map's key, while the sections products are held in the array
     var productMap:[String:[ProductBasicInfo]] {
         var map:[String:[ProductBasicInfo]] = [:]
         for product in products {
@@ -69,38 +71,22 @@ struct Farm : Codable {
         }
         return map
     }
-    
-    func toShopperFarmViewFarm() -> ShopperFarmViewFarm {
-        return ShopperFarmViewFarm(id: id, pictureURL: pictureURL, name: name, rating: averageRating ?? 0, reviewsCount: reviews?.count ?? 0, about: about, address: address, productCategories: productCategoriesArray, productMap: productMap, pickupOptions: pickupOptions)
-    }
 }
 
 struct FarmResponse : Codable {
-    var id: String
-    
-    var name: String
-    var pictureURL: String
-    var about: String
-    var address: String
-    
-    var reviews: [FarmReview]?
-    var averageRating: Float? //not a computed value since this could get costly, calculate on the backend
-    
-    var products: [Product]
-    var farmerInfo: [FarmSupplierInfo]
-    var paymentInfo: FarmDepositInfo?
-    
-    var pickupOptions: PickupOptions
-    
-    var productCategoriesDescription:String {
-        var categories:Set<String> = []
-        for product in products {
-            categories.insert(product.category.description)
-        }
-        return categories.map{String($0)}.joined(separator: ", ")
-    }
+    let id: String
+    let name: String
+    let pictureURL: String
+    let about: String
+    let address: String
+    let reviewCount: Int
+    let averageRating: Float? //not a computed value since this could get costly, calculate on the backend
+    let products: [Product]
+    let farmerInfo: [FarmSupplierInfo]
+    let paymentInfo: FarmDepositInfo?
+    let pickupOptions: PickupOptions
     
     func toFarm() -> Farm {
-        return Farm(id: id, name: name, pictureURL: pictureURL, about: about, address: address, reviews: reviews, averageRating: averageRating, products: products, farmerInfo: farmerInfo, paymentInfo: paymentInfo, pickupOptions: pickupOptions)
+        return Farm(id: id, name: name, pictureURL: pictureURL, about: about, address: address, reviewCount: reviewCount, averageRating: averageRating, products: products, farmerInfo: farmerInfo, paymentInfo: paymentInfo, pickupOptions: pickupOptions)
     }
 }

@@ -8,17 +8,19 @@
 import Foundation
 
 struct CartFarmInfo: Hashable, Codable {
-    var farmId: FarmId
-    var farmName: String
-    var farmAddress: String
-    var farmImageURL: String
+    let farmId: FarmId
+    let farmName: String
+    let farmAddress: String
+    let farmImageURL: String
 }
 
 struct ShopperCartViewListObject: Hashable {
-    var farmInfo: CartFarmInfo
-    var productsNumber: Int
-    var totalPrice: Float
-    
+    let farmInfo: CartFarmInfo
+    let productsNumber: Int
+    let totalPrice: Float
+}
+
+extension ShopperCartViewListObject {
     var formattedPrice: String {
         return String(format: "%.2f", totalPrice)
     }

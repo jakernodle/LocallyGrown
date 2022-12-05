@@ -220,7 +220,6 @@ struct ShopperScheduleView: View {
 }
 
 struct ShopperScheduleSelectDayButton: View {
-    
     var action: () -> Void
     var selected: Bool
     var dayOfWeek: String
@@ -276,7 +275,6 @@ struct ShopperScheduleSelectDayButton: View {
 //struct ShopperScheduleView_Previews: PreviewProvider {
     //var string: String? = nil
     //static var previews: some View {
-        //TODO: how to preview with @binding?
         //ShopperScheduleView(viewModel: ShopperScheduleViewModel(option: Constants.standardPickup), selectedTime: Binding<string>, title: "Schedule")
     //}
 //}

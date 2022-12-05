@@ -9,13 +9,10 @@ import SwiftUI
 import Kingfisher
 
 struct ShopperProductView: View {
-    
     @Environment (\.presentationMode) var presentationMode
     
     var hasProductInCart: Bool
-    
     var farmInfo: CartFarmInfo
-    
     var product: ProductBasicInfo
     @State var amount: Float
     

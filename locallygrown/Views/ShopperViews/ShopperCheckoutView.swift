@@ -10,94 +10,10 @@ import MapKit
 import Combine
 import Kingfisher
 
-class ShopperCheckoutViewModel: ObservableObject {
-    enum State {
-        case idle
-        case loading
-        case failed(Error)
-        case loaded(PickupOptions)
-    }
-
-    @Published private(set) var state = State.idle
-    var farmId: FarmId
-    
-    var regionPublisher = PassthroughSubject<MKCoordinateRegion, Never>()
-    var region: MKCoordinateRegion? = nil {
-        didSet {
-            print("sending region")
-            regionPublisher.send(region!)
-        }
-    }
-    
-    var pictureURL: String
-        
-    init(address: String, farmId: FarmId){
-        self.pictureURL = LocallyGrownShopper.shared.loggedUser?.pictureURL ?? ""
-        self.farmId = farmId
-        self.getMapRegion(address: address)
-    }
-    
-    func getMapRegion(address: String) {
-        print("get map Region \(address)")
-
-        getFarmCoordinates(address: address) { coordinate2d in
-            if coordinate2d != nil {
-                print("coordinate2d found")
-                self.region = MKCoordinateRegion(center: coordinate2d!, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
-            }
-        }
-    }
-    
-    func getFarmCoordinates(address: String, completion: @escaping (CLLocationCoordinate2D?) -> Void) {
-        let geoCoder = CLGeocoder()
-        geoCoder.geocodeAddressString(address) { (placemarks, error) in
-            guard
-                let placemarks = placemarks,
-                let coordinate = placemarks.first?.location?.coordinate
-            else {
-                print("no location found for address")
-                completion(nil)
-                return
-            }
-            completion(CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude))
-        }
-    }
-    
-    func getFarmPickupOptions(){
-        state = .loading
-        
-        ShopperService().getFarmPickupOptions(params: ["farmId":self.farmId], completion: { result in
-            switch result {
-            case .success(let farm):
-                print(farm)
-                self.state = .loaded(farm)
-            case .failure(let error):
-                print("error loading farms") //TODO: Print error message to user
-                print(error)
-
-                self.state = .failed(error)
-            }
-        })
-    }
-    
-    func getUserInfo() {
-        self.pictureURL = LocallyGrownShopper.shared.loggedUser?.pictureURL ?? ""
-    }
-}
-
 struct ShopperCheckoutView: View {
-    
     @ObservedObject var viewModel: ShopperCheckoutViewModel
     
-    //@State var showScheduleView: Bool = false
-    //@State var selectedOption: PickupOption? = nil
-    //@State var selectedDateTime: String? = nil
-    
-    //var pickupOptions: PickupOptions
     var cart: Cart
-    
-    //@State private var selected = "Pickup"
-    //@State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
     
     var body: some View {
         switch viewModel.state {
@@ -109,10 +25,10 @@ struct ShopperCheckoutView: View {
         case .loading:
             ShopperCheckoutContentView(viewModel: viewModel, showProgressView: true, subtotal: cart.formattedTotalPrice)
         case .failed(let error):
-            //ErrorView(error: error, retryHandler: viewModel.load)
+            let _ = print(error)
+            //TODO: display error page
             Color.clear.onAppear(perform: viewModel.getFarmPickupOptions)
             ProgressView()
-            let _ = print(error)
         case .loaded(let options):
             ShopperCheckoutContentView(viewModel: viewModel, showProgressView: false, pickupOptions: options, subtotal: cart.formattedTotalPrice)
         }
@@ -120,16 +36,12 @@ struct ShopperCheckoutView: View {
 }
 
 struct ShopperCheckoutContentView: View {
-    
     var viewModel: ShopperCheckoutViewModel
-    
     @State var showScheduleView: Bool = false
     @State var selectedOption: PickupOption? = nil
     @State var selectedDateTime: String? = nil
-    
     @State private var selected = "Pickup"
     @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
-    
     var showProgressView: Bool
     var pickupOptions: PickupOptions?
     var subtotal: String
@@ -213,17 +125,9 @@ struct ShopperCheckoutContentView: View {
                             }
                             .frame(maxHeight: .infinity)
                         }else if selected == "Local Dropoff" {
-                            Spacer()
-
-                            Text("Test something else losers. No content yet")
-                            Spacer()
-
+                            //TODO: Dropoff view
                         }else if selected == "Delivery" {
-                            Spacer()
-
-                            Text("Test something else losers. No content yet")
-                            Spacer()
-
+                            //TODO: Dropoff view
                         }
                     }
                     
@@ -282,7 +186,6 @@ struct PickerView: View {
 }
 
 struct PickupScheduleTimeButton: View {
-    
     var action: () -> Void
     var selected: Bool
     var selectedDateTime: String?
@@ -332,7 +235,6 @@ struct PickupScheduleTimeButton: View {
 }
 
 struct PriceView: View {
-    
     var subtotal: String
     
     var body: some View {

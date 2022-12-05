@@ -11,9 +11,11 @@ typealias ProductId = String
 typealias Units = Float
 
 struct Cart: Codable, Hashable {
-    var farmInfo: CartFarmInfo
-
+    let farmInfo: CartFarmInfo
     var items: [ProductId:ShoppingCartItem]
+}
+
+extension Cart {
     var itemsAmount: String {
         String(items.count)
     }
@@ -55,6 +57,9 @@ struct Cart: Codable, Hashable {
 struct ShoppingCartItem : Codable, Hashable {
     var productInfo: ProductBasicInfo
     var unitsInCart: Float
+}
+
+extension ShoppingCartItem {
     var formattedUnitsInCart: String {
         return unitsInCart.clean
     }

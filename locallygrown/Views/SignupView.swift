@@ -6,12 +6,9 @@
 //
 
 import SwiftUI
-
-//191952635625-ncu40r9iqep4uqqjuu21ui7h3lmk7d27.apps.googleusercontent.com
 import GoogleSignIn
 
 struct SignupView: View {
-    
     @Environment(\.presentationMode) private var presentationMode
     
     var viewModel = AuthenticationViewModel()
@@ -118,7 +115,6 @@ struct SignupView: View {
 }
 
 struct LabelledDivider: View {
-
     let label: String
     let horizontalPadding: CGFloat
     let color: Color

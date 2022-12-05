@@ -17,7 +17,6 @@ enum ProductCategory: Codable {
     
     var description : String {
         switch self {
-        // Use Internationalization, as appropriate.
         case .produce: return "Produce"
         case .dairy: return "Dairy"
         case .meat: return "Meat"
@@ -29,25 +28,24 @@ enum ProductCategory: Codable {
 }
 
 struct ProductSeason : Codable {
-    var seasonStart: Date
-    var seasonEnd: Date
+    let seasonStart: Date
+    let seasonEnd: Date
 }
 
 struct Product : Codable {
-    var id: String
-    var name: String
-    var description: String
-    var pictureURL: String
-
-    var category: ProductCategory
-    var pricing: Pricing
+    let id: String
+    let name: String
+    let description: String
+    let pictureURL: String
+    let category: ProductCategory
+    let pricing: Pricing
+    let isOffered: Bool
     
+    //This feature is under consideration
     //var season: ProductSeason
-    var isOffered: Bool
-    
-    var isAvailible: Bool {
-        return isOffered //&& Date().isBetweeen(date: season.seasonStart, andDate: season.seasonEnd)
-    }
+    //var isAvailible: Bool {
+    //    return isOffered && Date().isBetweeen(date: season.seasonStart, andDate: season.seasonEnd)
+    //}
     
     func toProductBasicInfo() -> ProductBasicInfo {
         return ProductBasicInfo(id: id, name: name, description: description, price: pricing.cost, pictureURL: pictureURL, unitsDescription: pricing.units.description)
@@ -60,15 +58,18 @@ struct ProductBasicInfo: Codable, Hashable {
     var description: String
     var price: Float
     var pictureURL: String
+    var unitsDescription: String //ex. /lb.
+}
+
+extension ProductBasicInfo {
     var formattedPrice: String {
         return String(format: "%.2f", price)
     }
-    var unitsDescription: String //ex. /lb.
-    
 }
 
-extension Date {
-    func isBetweeen(date date1: Date, andDate date2: Date) -> Bool {
-        return date1.compare(self) == self.compare(date2)
-    }
-}
+//This feature is under consideration
+//extension Date {
+//    func isBetweeen(date date1: Date, andDate date2: Date) -> Bool {
+//        return date1.compare(self) == self.compare(date2)
+//    }
+//}

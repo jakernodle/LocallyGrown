@@ -9,8 +9,8 @@ import SwiftUI
 import Kingfisher
 
 struct ShopperOrderView: View {
-    
-    @State private var carts: [ShopperOrderViewModel] = [ShopperOrderViewModel(farmName: "Happy Farms", productsNumber: 2, totalPrice: 13.99, date: Date()),ShopperOrderViewModel(farmName: "Happy Farms", productsNumber: 2, totalPrice: 13.99, date: Date())]
+    // test data
+    @State private var carts: [ShopperOrderViewListItem] = [ShopperOrderViewListItem(farmName: "Happy Farms", productsNumber: 2, totalPrice: 13.99, date: Date()),ShopperOrderViewListItem(farmName: "Happy Farms", productsNumber: 2, totalPrice: 13.99, date: Date())]
     
     var body: some View {
         VStack {

@@ -7,20 +7,20 @@
 
 import Foundation
 
-struct ShopperHomeViewFarmListViewObject: Hashable, Decodable { //TODO: Should also make a response object of this struct
-    var farmId: FarmId
-    var name: String
-    var pictureURL: String
-    var suppliers: [FarmSupplierInfo]
-    var categories: String
+struct ShopperHomeViewFarmListViewObject: Hashable, Decodable {
+    let farmId: FarmId
+    let name: String
+    let pictureURL: String
+    let suppliers: [FarmSupplierInfo]
+    let categories: String
 }
 
 struct FarmList{
-    var farms: [ShopperHomeViewFarmListViewObject]
+    let farms: [ShopperHomeViewFarmListViewObject]
 }
 
 struct FarmListResponse {
-    var farms: [ShopperHomeViewFarmListViewObject]
+    let farms: [ShopperHomeViewFarmListViewObject]
     
     func toFarmList() -> FarmList {
         return FarmList(farms: farms)
@@ -36,6 +36,7 @@ enum LoadingState {
 
 class ShopperFarmListViewModel: ObservableObject {
 
+    // the feed for both the home view and the favorites view both display a ShopperFarmList, the only difference is the parameters of the API query
     @Published private(set) var homeState = LoadingState.idle
     @Published private(set) var favoritesState = LoadingState.idle
     
@@ -45,13 +46,8 @@ class ShopperFarmListViewModel: ObservableObject {
         ShopperService().getFarms(params: [:], completion: { result in
             switch result {
             case .success(let response):
-                //print(response)
-
                 self.homeState = .loaded(response)
             case .failure(let error):
-                print("error loading farms") //TODO: Print error message to user
-                print(error)
-
                 self.homeState = .failed(error)
             }
         })
@@ -83,10 +79,8 @@ class ShopperFarmListViewModel: ObservableObject {
     func toggleFavorite(farmId: FarmId) {
         if LocallyGrownShopper.shared.hasLikedFarmForId(farmId: farmId){
             ShopperService().removeFromFavorites(farmId: farmId)
-            //likedFarmIds.remove(farmId)
         }else{
             ShopperService().addToFavorites(farmId: farmId)
-            //likedFarmIds.insert(farmId)
         }
     }
 }

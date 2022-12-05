@@ -8,12 +8,14 @@
 import Foundation
 
 struct CreditCard : Codable, Hashable {
-    var id: String = UUID().uuidString //API - remove this
-    var cardNumber: String
-    var expDate: String
-    var cvv: String
-    var zipCode: String
-    
+    var id = UUID().uuidString // id is currently being initialized for testing purposes
+    let cardNumber: String
+    let expDate: String
+    let cvv: String
+    let zipCode: String
+}
+
+extension CreditCard {
     var formattedCardNumber: String {
         let last4 = cardNumber.suffix(4)
         let formatted = "**** " + last4

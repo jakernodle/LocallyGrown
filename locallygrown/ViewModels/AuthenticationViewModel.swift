@@ -10,7 +10,6 @@ import GoogleSignIn
 import Combine
 
 class AuthenticationViewModel: ObservableObject {
-    
     var viewDismissalModePublisher = PassthroughSubject<Bool, Never>()
     
     private var shouldDismissView = false {
@@ -35,12 +34,9 @@ class AuthenticationViewModel: ObservableObject {
     
     func signup(name: String, email: String, password: String){
         guard isValidEmail(testStr: email) else {
-            print("bad email")
             return
         }
-        
         guard isValidName(testStr: name) else {
-            print("bad name")
             return
         }
         
@@ -50,6 +46,7 @@ class AuthenticationViewModel: ObservableObject {
     }
     
     func continueWithGoogle(){
+        //first attempt to restore info from a previous google signin
         GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
             if let error = error {
                 print("error from google sign in: \(error.localizedDescription)")
@@ -60,6 +57,7 @@ class AuthenticationViewModel: ObservableObject {
                 LocallyGrownShopper.shared.login(user: user) //TODO: login user service
                 self.shouldDismissView = true
             }else{
+                //show google sign in view if previous sign in data is not availible
                 self.showSignIn()
             }
         }

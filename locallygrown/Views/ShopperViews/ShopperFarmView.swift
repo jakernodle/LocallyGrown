@@ -9,7 +9,6 @@ import SwiftUI
 import Kingfisher
 
 struct ShopperFarmView: View {
-    
     @ObservedObject var viewModel = ShopperFarmViewModel(params: [:], service: ShopperService())
     
     var farmDataFromHomeView: ShopperHomeViewFarmListViewObject
@@ -22,12 +21,16 @@ struct ShopperFarmView: View {
             // view model transition into its loading state:
             Color.clear.onAppear(perform: viewModel.load)
         case .loading:
+            //TODO: this switch case is too long, and should be abstracted to the view model
             let cart = Cart(farmInfo: CartFarmInfo(farmId: farmDataFromHomeView.farmId, farmName: farmDataFromHomeView.name, farmAddress: "", farmImageURL: farmDataFromHomeView.pictureURL), items: [:])
             ShopperFarmViewContent(showProgressView: true, content: ShopperFarmViewFarm(id: farmDataFromHomeView.farmId, pictureURL: farmDataFromHomeView.pictureURL, name: farmDataFromHomeView.name, rating: 0, reviewsCount: 0, about: "", address: "", productCategories: [], productMap: [:], pickupOptions: PickupOptions(standardPickup: nil, marketPickups: [], localDropoffs: [])), cart: cart)
         case .failed(let error):
+            let _  = print(error)
+            //TODO: display error page
             Color.clear.onAppear(perform: viewModel.load)
             ProgressView()
         case .loaded(let farm):
+            //TODO: this switch case is too long, and should be abstracted to the view model
             let cart = Cart(farmInfo: CartFarmInfo(farmId: farmDataFromHomeView.farmId, farmName: farmDataFromHomeView.name, farmAddress: farm.address, farmImageURL: farmDataFromHomeView.pictureURL), items: [:])
             ShopperFarmViewContent(showProgressView: false, content: ShopperFarmViewFarm(id: farmDataFromHomeView.farmId, pictureURL: farmDataFromHomeView.pictureURL, name: farmDataFromHomeView.name, rating: farm.rating, reviewsCount: farm.reviewsCount, about: farm.about, address: farm.address, productCategories: farm.productCategories, productMap: farm.productMap, pickupOptions: farm.pickupOptions), cart: cart)
         }
@@ -35,11 +38,10 @@ struct ShopperFarmView: View {
 }
 
 struct ShopperFarmViewContent: View {
-     
     @Environment (\.presentationMode) var presentationMode
+    
     @State var showProductView = false
     @State var showCartView = false
-
     @State var numberOfItemsInCart = 0
     var showProgressView: Bool
     var content: ShopperFarmViewFarm

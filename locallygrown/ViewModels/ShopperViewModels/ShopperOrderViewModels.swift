@@ -7,12 +7,14 @@
 
 import Foundation
 
-struct ShopperOrderViewModel: Hashable {
+struct ShopperOrderViewListItem: Hashable {
     var farmName: String
     var productsNumber: Int
     var totalPrice: Float
     var date: Date
-    
+}
+
+extension ShopperOrderViewListItem {
     var formattedPrice: String {
         return String(format: "%.2f", totalPrice)
     }
