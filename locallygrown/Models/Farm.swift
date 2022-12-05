@@ -46,6 +46,7 @@ struct Farm : Codable {
     var pickupOptions: PickupOptions
     
     var productCategoriesDescription:String {
+        //this is a set since there can be multiple products with category "meat", yet we only want meat to show once in the final string
         var categories:Set<String> = []
         for product in products {
             categories.insert(product.category.description)

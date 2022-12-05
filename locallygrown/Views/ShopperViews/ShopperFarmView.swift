@@ -25,10 +25,8 @@ struct ShopperFarmView: View {
             let cart = Cart(farmInfo: CartFarmInfo(farmId: farmDataFromHomeView.farmId, farmName: farmDataFromHomeView.name, farmAddress: "", farmImageURL: farmDataFromHomeView.pictureURL), items: [:])
             ShopperFarmViewContent(showProgressView: true, content: ShopperFarmViewFarm(id: farmDataFromHomeView.farmId, pictureURL: farmDataFromHomeView.pictureURL, name: farmDataFromHomeView.name, rating: 0, reviewsCount: 0, about: "", address: "", productCategories: [], productMap: [:], pickupOptions: PickupOptions(standardPickup: nil, marketPickups: [], localDropoffs: [])), cart: cart)
         case .failed(let error):
-            //ErrorView(error: error, retryHandler: viewModel.load)
             Color.clear.onAppear(perform: viewModel.load)
             ProgressView()
-            let _ = print(error)
         case .loaded(let farm):
             let cart = Cart(farmInfo: CartFarmInfo(farmId: farmDataFromHomeView.farmId, farmName: farmDataFromHomeView.name, farmAddress: farm.address, farmImageURL: farmDataFromHomeView.pictureURL), items: [:])
             ShopperFarmViewContent(showProgressView: false, content: ShopperFarmViewFarm(id: farmDataFromHomeView.farmId, pictureURL: farmDataFromHomeView.pictureURL, name: farmDataFromHomeView.name, rating: farm.rating, reviewsCount: farm.reviewsCount, about: farm.about, address: farm.address, productCategories: farm.productCategories, productMap: farm.productMap, pickupOptions: farm.pickupOptions), cart: cart)
